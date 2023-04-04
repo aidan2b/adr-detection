@@ -26,7 +26,11 @@ jobs:
       
       - name: Run pipeline
         run: |
-          python run_pipeline.py --MEDICATION_NAME ${{ github.event.inputs.medication }}
+          python run_pipeline.py
+        env:
+          MEDICATION_NAME: ${{ github.event.inputs.medication }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
 
   deploy_shiny:
     name: Deploy to shinyapps.io
