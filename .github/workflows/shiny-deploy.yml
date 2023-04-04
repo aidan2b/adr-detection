@@ -56,6 +56,7 @@ jobs:
       
       - name: Deploy to shinyapps.io
         run: |
+          R -e 'require(c("remotes", "covr", "rsconnect", "RColorBrewer", "Rcpp", "RcppTOML", "base64enc", "bslib", "cachem", "cli", "colorspace", "commonmark", "cpp11", "crosstalk", "data.table", "dplyr", "evaluate", "fansi", "farver", "fontawesome", "generics", "ggplot2", "glue", "here", "highr", "htmlwidgets", "httpuv", "knitr", "later", "plotly", "png", "promises", "purrr", "reticulate", "shiny", "shinyWidgets", "tidyr", "tibble", "htmltools"))'
           R -e 'rsconnect::setAccountInfo(name = "aidan2b", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
           R -e 'rsconnect::deployApp(appDir = "shiny_app/", appName = "adr-detection", account = "aidan2b")'
         env:
