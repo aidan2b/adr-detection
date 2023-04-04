@@ -59,17 +59,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v2
+      
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libxml2-dev libssl-dev
+          
       - name: Install R packages
         run: |
           R -e 'install.packages(c("remotes", "covr", "rsconnect"))'
+          
       - name: Deploy to shinyapps.io
         run: |
-          R -e 'rsconnect::setAccountInfo(name = "<ACCOUNT_NAME>", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
-          R -e 'rsconnect::deployApp(appDir = "shinyapp/", appName = "your_app_name", account = "<ACCOUNT_NAME>")'
+          R -e 'rsconnect::setAccountInfo(name = "my_shinyapps_account", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
+          R -e 'rsconnect::deployApp(appDir = "shinyapp/", appName = "your_app_name", account = "my_shinyapps_account")'
         env:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+
