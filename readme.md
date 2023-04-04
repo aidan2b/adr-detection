@@ -1,17 +1,15 @@
-Your code includes several key components in a pipeline for collecting and analyzing Reddit comments about medications. Here's a brief description of each class and their primary functions:
+This project evaluates social media data for post-market surveillance of medications (pharmacovigilance) by comparing it to the FDA Adverse Event Reporting System (FAERS). The primary goal is to identify potential adverse drug reactions (ADRs) mentioned in Reddit comments, and then link these ADRs to specific medications.
 
-RedditPull: 
-	This class is responsible for collecting comments from Reddit using the PRAW and Pushshift APIs. It also preprocesses the comments by removing links, numbers, punctuation, and splitting the comments into smaller chunks.
+The pipeline consists of several steps:
 
-ADRClassifier: 
-	This class uses a pretrained model to classify whether a comment contains an adverse drug reaction (ADR) or not. It includes custom Dataset and DataLoader classes for handling the input data.
+Data collection: Using the PushshiftAPI and PRAW, the pipeline collects Reddit comments mentioning a specific medication within a specified time range (e.g., a year). The comments are then preprocessed to remove links, numbers, and punctuation.
 
-ADRLabeler: 
-	This class is responsible for labeling the drug name and words or phrases indicating an ADR using a SequenceTagger model.
+Text classification: A pre-trained RoBERTa model is used to classify the preprocessed Reddit comments as containing an ADR or not. The model has been fine-tuned on a labeled dataset for ADR detection.
 
-ADRLinker: 
-	This class links drugs and ADRs syntactically, creating a final output DataFrame that summarizes the relationships between drugs and their ADRs.
+Named Entity Recognition: The comments classified as containing an ADR are passed through a pre-trained Flair NER model, which identifies and labels drug names and ADR-related phrases within the text.
 
-The run_pipeline function runs each step in the pipeline, starting with pulling comments from Reddit and ending with linking drugs and ADRs. The output is saved as a CSV file named linked_data.csv.
+Dependency parsing and drug-ADR linking: SpaCy's dependency parser is utilized to find the shortest syntactic path between drug names and ADR phrases, linking them together as pairs.
 
-To execute the pipeline, the main part of your script takes a medication name as input and calls the run_pipeline function with the given medication.
+Aggregation and output: The pipeline creates a summary of the linked drug-ADR pairs, counting the number of occurrences for each pair. The results are saved in a CSV file, which can be analyzed for potential trends or insights.
+
+The code is organized into several classes and functions that handle specific tasks, such as pulling data from Reddit, preprocessing text, classifying comments, labeling entities, and linking drug-ADR pairs. The pipeline can be easily customized and run for different medications by changing the input parameters.
