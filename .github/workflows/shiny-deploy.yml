@@ -10,7 +10,7 @@ on:
 jobs:
   run_pipeline:
     name: Run Pipeline
-    runs-on: [self-hosted, cml, gpu]  # Update this line to use self-hosted runner with GPU
+    runs-on: [self-hosted, cml, gpu]  
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -49,7 +49,7 @@ jobs:
 
   deploy_shiny:
     name: Deploy to shinyapps.io
-    runs-on: ubuntu-latest  # Keep this line as is to use GitHub-hosted runner
+    runs-on: ubuntu-latest  
     needs: run_pipeline
     steps:
       - uses: actions/checkout@v2
