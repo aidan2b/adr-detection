@@ -1,0 +1,13 @@
+name: shiny_app
+title: shiny_app
+username:
+account: aidan2b
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8717468
+bundleId: 7030381
+url: https://aidan2b.shinyapps.io/shiny_app/
+when: 1680211185.69477
+lastSyncTime: 1680211185.69479
+asMultiple: FALSE
+asStatic: FALSE

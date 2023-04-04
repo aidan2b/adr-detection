@@ -1,0 +1,13 @@
+flair
+typing
+pmaw
+praw
+pandas
+torch
+numpy
+flask
+datetime
+spacy
+transformers
+tqdm
+nltk
