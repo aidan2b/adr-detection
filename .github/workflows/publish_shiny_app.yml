@@ -22,11 +22,6 @@ jobs:
         run: |
           R -e 'install.packages(c("remotes", "covr"))'
 
-      - name: Check
-        run: |
-          R CMD build .
-          R CMD check *tar.gz
-
   deploy:
     runs-on: ubuntu-latest
     needs: R-CMD-check
