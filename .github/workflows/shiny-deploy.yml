@@ -56,6 +56,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Load R packages
+        run: |
+          library(remotes)
+          library(covr)
+          library(rsconnect)
+          library(RColorBrewer)
+          library(Rcpp)
+          library(RcppTOML)
+          library(base64enc)
+          library(bslib)
+          library(cachem)
+          library(cli)
+          library(colorspace)
+          library(commonmark)
+          library(cpp11)
+          
       - name: Deploy to shinyapps.io
         run: |
           R -e 'rsconnect::setAccountInfo(name = "aidan2b", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
