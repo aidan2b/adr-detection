@@ -48,17 +48,56 @@ jobs:
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
 
   deploy_shiny:
-    name: Deploy to shinyapps.io
-    runs-on: [self-hosted, cml, gpu]  
-    needs: run_pipeline
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Deploy to shinyapps.io
-        run: |
-          R -e 'require(c("remotes", "covr", "rsconnect", "RColorBrewer", "Rcpp", "RcppTOML", "base64enc", "bslib", "cachem", "cli", "colorspace", "commonmark", "cpp11", "crosstalk", "data.table", "dplyr", "evaluate", "fansi", "farver", "fontawesome", "generics", "ggplot2", "glue", "here", "highr", "htmlwidgets", "httpuv", "knitr", "later", "plotly", "png", "promises", "purrr", "reticulate", "shiny", "shinyWidgets", "tidyr", "tibble", "htmltools"))'
-          R -e 'rsconnect::setAccountInfo(name = "aidan2b", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
-          R -e 'rsconnect::deployApp(appDir = "shiny_app/", appName = "adr-detection", account = "aidan2b")'
-        env:
-          SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
-          SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+  name: Deploy to shinyapps.io
+  runs-on: [self-hosted, cml, gpu]  
+  needs: run_pipeline
+  steps:
+    - uses: actions/checkout@v2
+    
+    - name: Deploy to shinyapps.io
+      run: |
+        R -e 'require(remotes)'
+        R -e 'require(covr)'
+        R -e 'require(rsconnect)'
+        R -e 'require(RColorBrewer)'
+        R -e 'require(Rcpp)'
+        R -e 'require(RcppTOML)'
+        R -e 'require(base64enc)'
+        R -e 'require(bslib)'
+        R -e 'require(cachem)'
+        R -e 'require(cli)'
+        R -e 'require(colorspace)'
+        R -e 'require(commonmark)'
+        R -e 'require(cpp11)'
+        R -e 'require(crosstalk)'
+        R -e 'require(data.table)'
+        R -e 'require(dplyr)'
+        R -e 'require(evaluate)'
+        R -e 'require(fansi)'
+        R -e 'require(farver)'
+        R -e 'require(fontawesome)'
+        R -e 'require(generics)'
+        R -e 'require(ggplot2)'
+        R -e 'require(glue)'
+        R -e 'require(here)'
+        R -e 'require(highr)'
+        R -e 'require(htmlwidgets)'
+        R -e 'require(httpuv)'
+        R -e 'require(knitr)'
+        R -e 'require(later)'
+        R -e 'require(plotly)'
+        R -e 'require(png)'
+        R -e 'require(promises)'
+        R -e 'require(purrr)'
+        R -e 'require(reticulate)'
+        R -e 'require(shiny)'
+        R -e 'require(shinyWidgets)'
+        R -e 'require(tidyr)'
+        R -e 'require(tibble)'
+        R -e 'require(htmltools)'
+        R -e 'rsconnect::setAccountInfo(name = "aidan2b", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
+        R -e 'rsconnect::deployApp(appDir = "shiny_app/", appName = "adr-detection", account = "aidan2b")'
+      env:
+        SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
+        SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+
