@@ -1,0 +1,11 @@
+name: adr-detection
+title:
+username:
+account: aidan2b
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8758314
+bundleId: 7045954
+url: https://aidan2b.shinyapps.io/adr-detection/
+when: 1680580337.15967
+lastSyncTime: 1680580337.15968
