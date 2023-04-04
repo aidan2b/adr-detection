@@ -47,7 +47,7 @@ jobs:
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
 
-    deploy_shiny:
+  deploy_shiny:
       name: Deploy to shinyapps.io
       runs-on: [self-hosted, cml, gpu]  
       needs: run_pipeline
@@ -99,5 +99,5 @@ jobs:
             R -e 'rsconnect::deployApp(appDir = "shiny_app/", appName = "adr-detection", account = "aidan2b")'
           env:
             SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
-            SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+            SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}  
 
