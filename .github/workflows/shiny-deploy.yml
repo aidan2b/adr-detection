@@ -27,6 +27,11 @@ jobs:
           git lfs fetch
           git lfs pull
       
+      - name: List model directory and file size
+        run: |
+          ls -lh models/roberta-classifier
+          ls -lh models/flair-ner
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
