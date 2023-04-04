@@ -48,7 +48,7 @@ class RedditPull:
 
             comments = api_praw.search_comments(
                 q=self.medication,
-                limit=1000,
+                limit=100,
                 after=start_date,
                 before=end_date
             )
