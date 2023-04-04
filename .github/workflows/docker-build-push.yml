@@ -1,5 +1,4 @@
-name: Build, Push, and Deploy
-
+name: docker-build-push
 on:
   workflow_dispatch:
     inputs:
@@ -77,3 +76,4 @@ jobs:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
 
+i want a separate workflow that i can run that runs the run_pipeline.py file, then deploys that to the shinyapp.io 
