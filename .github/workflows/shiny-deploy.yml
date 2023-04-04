@@ -10,7 +10,8 @@ on:
 jobs:
   run_pipeline:
     name: Run Pipeline
-    runs-on: [self-hosted, cml, gpu]  
+    runs-on: [self-hosted, cml, gpu]  # Update this line to use self-hosted runner with GPU
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
