@@ -56,10 +56,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up R environment
+        run: |
+          echo 'R_LIBS_USER=~/R/library' >> $GITHUB_ENV
+
       - name: Install R packages
         run: |
-          R -e 'install.packages(c("remotes", "covr", "rsconnect", "RColorBrewer", "Rcpp", "RcppTOML", "base64enc", "bslib", "cachem", "cli", "colorspace", "commonmark", "cpp11"))'
-                
+          R -e 'install.packages(c("remotes", "covr", "rsconnect", "RColorBrewer", "Rcpp", "RcppTOML", "base64enc", "bslib", "cachem", "cli", "colorspace", "commonmark", "cpp11"), repos="http://cran.rstudio.com/", lib="~/R/library", dependencies=TRUE)'
+        
       - name: Deploy to shinyapps.io
         run: |
           R -e 'rsconnect::setAccountInfo(name = "aidan2b", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
