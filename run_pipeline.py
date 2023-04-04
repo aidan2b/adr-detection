@@ -210,8 +210,13 @@ class ADRClassifier():
     def main(self, input_df):
         
         model_path = "models/roberta-classifier/best_model_with_gpt.pt"
-        model = self.load_model(model_path).to('cuda')  # Add 'self.' before load_model
-        print(f"Model loaded onto {torch.cuda.get_device_name(0)}")       
+        # Check if GPU is available and use it, otherwise use CPU
+        if torch.cuda.is_available():
+            model = self.load_model(model_path).to('cuda')
+            print(f"Model loaded onto {torch.cuda.get_device_name(0)}")
+        else:
+            model = self.load_model(model_path).to('cpu')
+            print("Model loaded onto CPU")       
 
         MAX_LEN = 128
         BATCH_SIZE = 16

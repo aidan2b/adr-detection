@@ -10,7 +10,7 @@ on:
 jobs:
   run_pipeline:
     name: Run Pipeline
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, cml, gpu]  # Update this line to use self-hosted runner with GPU
     steps:
       - name: Install Git LFS
         run: |
@@ -52,7 +52,7 @@ jobs:
 
   deploy_shiny:
     name: Deploy to shinyapps.io
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Keep this line as is to use GitHub-hosted runner
     needs: run_pipeline
     steps:
       - uses: actions/checkout@v2

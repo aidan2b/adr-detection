@@ -1,73 +1,54 @@
-name: docker-build-push
+name: run-pipeline-and-deploy
+
 on:
   workflow_dispatch:
     inputs:
-      image_tag:
-        description: 'Docker image tag (e.g., latest, v1, v1-large)'
+      medication:
+        description: 'Enter medication name:'
         required: true
 
 jobs:
-  docker_push:
-    name: Push Docker image to multiple registries
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
+  run_pipeline:
+    name: Run Pipeline on GPU Runner
+    runs-on: [self-hosted, cml, gpu]
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
-      
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      
-      - name: Log in to the Container registry
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: |
-            aidan2b/adr-detection
-            ghcr.io/${{ github.repository }}
-          tags: ${{ github.event.inputs.image_tag }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      
-      - name: Build and push Docker images
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            REDDIT_CLIENT_ID=${{ secrets.REDDIT_CLIENT_ID }}
-            REDDIT_CLIENT_SECRET=${{ secrets.REDDIT_CLIENT_SECRET }}
+          python-version: 3.8
 
-  R-CMD-check-deploy:
-    name: R-CMD-check and Deploy to shinyapps.io
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run pipeline
+        run: |
+          python run_pipeline.py
+        env:
+          MEDICATION_NAME: ${{ github.event.inputs.medication }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+
+  deploy_shiny:
+    name: Deploy to shinyapps.io
     runs-on: ubuntu-latest
-    needs: docker_push
+    needs: run_pipeline
     steps:
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@v2
-      
-      - name: Install dependencies
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Install R dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libxml2-dev libssl-dev
-          
-      - name: Install R packages
-        run: |
           R -e 'install.packages(c("remotes", "covr", "rsconnect"))'
-          
+
       - name: Deploy to shinyapps.io
         run: |
           R -e 'rsconnect::setAccountInfo(name = "my_shinyapps_account", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
@@ -75,5 +56,3 @@ jobs:
         env:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
-
-i want a separate workflow that i can run that runs the run_pipeline.py file, then deploys that to the shinyapp.io 

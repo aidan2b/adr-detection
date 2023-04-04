@@ -1,5 +1,5 @@
-# Use the official PyTorch image as the base image
-FROM pytorch/pytorch:latest
+# Use the iterativeai/cml image with GPU support as the base image
+FROM iterativeai/cml:0-dvc2-base1-gpu
 
 # Set the working directory
 WORKDIR /
