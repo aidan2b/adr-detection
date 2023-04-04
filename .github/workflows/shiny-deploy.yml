@@ -52,7 +52,7 @@ jobs:
     runs-on: [self-hosted, cml, gpu]  
     needs: run_pipeline
     container:
-      image: my-r-image
+      image: aidan2b/adr-detection:v1
     steps:
       - uses: actions/checkout@v2
       
