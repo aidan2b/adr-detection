@@ -65,7 +65,7 @@ jobs:
           
       - name: Deploy to shinyapps.io
         run: |
-          R -e 'rsconnect::setAccountInfo(name = "my_shinyapps_account", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
+          R -e 'rsconnect::setAccountInfo(name = "aidan2b", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
           R -e 'rsconnect::deployApp(appDir = "shinyapp/", appName = "adr-detection", account = "aidan2b")'
         env:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
