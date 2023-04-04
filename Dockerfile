@@ -17,6 +17,12 @@ ENTRYPOINT ["python", "run_pipeline.py"]
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
+ARG REDDIT_CLIENT_ID
+ARG REDDIT_CLIENT_SECRET
+
+ENV REDDIT_CLIENT_ID=$REDDIT_CLIENT_ID
+ENV REDDIT_CLIENT_SECRET=$REDDIT_CLIENT_SECRET
+
 # Define environment variable
 ENV MEDICATION_NAME=""
 

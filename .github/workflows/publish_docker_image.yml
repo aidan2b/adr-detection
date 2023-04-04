@@ -52,3 +52,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            REDDIT_CLIENT_ID=${{ secrets.REDDIT_CLIENT_ID }}
+            REDDIT_CLIENT_SECRET=${{ secrets.REDDIT_CLIENT_SECRET }}

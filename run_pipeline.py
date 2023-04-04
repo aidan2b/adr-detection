@@ -28,8 +28,8 @@ class RedditPull:
 
     def reddit_pull(self):
         reddit = praw.Reddit(
-            client_id='nRPrGU-9AWMxwpq2LHU_lA',
-            client_secret='YtQF-062bFkCyCY4YDne1FJmX3uM8A',
+            client_id=os.environ['REDDIT_CLIENT_ID'],
+            client_secret=os.environ['REDDIT_CLIENT_SECRET'],
             user_agent='test-app'
         )
 
