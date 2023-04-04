@@ -21,6 +21,13 @@ RUN apt-get update -qq && \
         libpq-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Install R
+RUN echo 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/' > /etc/apt/sources.list.d/cran.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends r-base
+
 RUN R -e "install.packages(c('remotes', 'covr', 'rsconnect', 'RColorBrewer', 'Rcpp', 'RcppTOML', 'base64enc', 'bslib', 'cachem', 'cli', 'colorspace', 'commonmark', 'cpp11', 'crosstalk', 'data.table', 'dplyr', 'evaluate', 'fansi', 'farver', 'fontawesome', 'generics', 'ggplot2', 'glue', 'here', 'highr', 'htmlwidgets', 'httpuv', 'knitr', 'later', 'plotly', 'png', 'promises', 'purrr', 'reticulate', 'shiny', 'shinyWidgets', 'tidyr', 'tibble', 'htmltools'), repos='https://cran.rstudio.com/')"
 
 # Define the entry point for the container
