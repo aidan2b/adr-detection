@@ -51,9 +51,11 @@ jobs:
     name: Deploy to shinyapps.io
     runs-on: [self-hosted, cml, gpu]  
     needs: run_pipeline
+    env:
+      R_VERSION: 4.1
     steps:
       - uses: actions/checkout@v2
-               
+
       - name: Deploy to shinyapps.io
         run: |
           R -e 'rsconnect::setAccountInfo(name = "aidan2b", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
