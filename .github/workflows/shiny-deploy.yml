@@ -62,7 +62,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libxml2-dev libssl-dev
           R -e 'install.packages(c("remotes", "covr", "rsconnect", "RColorBrewer", "Rcpp", "RcppTOML", "base64enc", "bslib", "cachem", "cli", "colorspace", "commonmark", "cpp11"))'
-          R -e 'install.packages(c("crosstalk", "data.table", "dplyr", "evaluate", "fansi", "farver", "fontawesome", "generics", "ggplot2", "glue"))'
+          R -e 'install.packages(c("crosstalk", "data.table", "dplyr", "evaluate", "fansi", "farver", "fontawesome", "generics", "ggplot2", "glue", "here", "highr", "htmlwidgets", "httpuv", "knitr", "later", "plotly", "png", "promises", "purrr", "shiny", "shinyWidgets", "tidyr", "tibble", "htmltools"))'
 
       - name: Deploy to shinyapps.io
         run: |
