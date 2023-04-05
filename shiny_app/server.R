@@ -8,7 +8,7 @@ library(httr)
 library(readr)
 library(reticulate)
 
-function(input, output, session) {
+shinyServer(function(input, output, session) {
   
   github_token <- Sys.getenv("MY_GITHUB_TOKEN")
   
@@ -75,4 +75,4 @@ function(input, output, session) {
              yaxis = list(title = "ADR"),
              title = paste0("Top 20 ADR occurrences for ", input$drug))
   })
-}
+})
