@@ -49,13 +49,34 @@ jobs:
 
   deploy_shiny:
     name: Deploy to shinyapps.io
-    runs-on: [self-hosted, cml, gpu]  
+    runs-on: ubuntu-latest  
     needs: run_pipeline
-    container:
-      image: aidan2b/adr-detection:v1
     steps:
       - uses: actions/checkout@v2
-      
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq && \
+          sudo apt-get -y --no-install-recommends install \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libssh2-1-dev \
+            libpq-dev && \
+          sudo apt-get clean && \
+          sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Install R
+        run: |
+          sudo echo 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/' > /etc/apt/sources.list.d/cran.list && \
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
+          sudo apt-get update && \
+          sudo apt-get install -y --no-install-recommends r-base
+
+      - name: Install R packages
+        run: |
+          R -e "install.packages(c('remotes', 'covr', 'rsconnect', 'RColorBrewer', 'Rcpp', 'RcppTOML', 'base64enc', 'bslib', 'cachem', 'cli', 'colorspace', 'commonmark', 'cpp11', 'crosstalk', 'data.table', 'dplyr', 'evaluate', 'fansi', 'farver', 'fontawesome', 'generics', 'ggplot2', 'glue', 'here', 'highr', 'htmlwidgets', 'httpuv', 'knitr', 'later', 'plotly', 'png', 'promises', 'purrr', 'reticulate', 'shiny', 'shinyWidgets', 'tidyr', 'tibble', 'htmltools'), repos='https://cran.rstudio.com/')"
+
       - name: Deploy to shinyapps.io
         run: |
           R -e 'rsconnect::setAccountInfo(name = "aidan2b", token = Sys.getenv("SHINYAPPS_TOKEN"), secret = Sys.getenv("SHINYAPPS_SECRET"))'
