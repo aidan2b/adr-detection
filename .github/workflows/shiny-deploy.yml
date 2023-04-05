@@ -55,6 +55,10 @@ jobs:
     needs: run_pipeline
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Pull linked_data.csv for shinyapps.io
+        run: |
+          git pull
 
       - name: Deploy to shinyapps.io
         run: |

@@ -10,9 +10,8 @@ library(reticulate)
 
 function(input, output, session) {
   
-  # Fetch data from Flask app
   fetched_data <- reactive({
-    data <- readr::read_csv("https://raw.githubusercontent.com/aidan2b/adr-detection/shiny_app/linked_data.csv")
+    data <- read.csv('linked_data.csv')
     print(head(data)) # Print the first few rows of the fetched data
     data
   })
