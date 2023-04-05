@@ -20,7 +20,7 @@ function(input, output, session) {
     medication_name <- input$medication
 
     # Set up GitHub API authentication
-    token <- Sys.getenv("GITHUB_TOKEN")
+    token <- Sys.getenv("MY_GITHUB_TOKEN")
     auth_header <- add_headers(Authorization = paste("token", token))
 
     # Create the JSON payload for the workflow_dispatch event
