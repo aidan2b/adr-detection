@@ -1,4 +1,7 @@
 # adr-detection
+
+Shiny Dashboard: https://aidan2b.shinyapps.io/adr-detection/
+
 This project evaluates social media data for post-market surveillance of medications (pharmacovigilance) by comparing it to the FDA Adverse Event Reporting System (FAERS). The primary goal is to identify potential adverse drug reactions (ADRs) mentioned in Reddit comments, and then link these ADRs to specific medications.
 
 The pipeline consists of several steps:
