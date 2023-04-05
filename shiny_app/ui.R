@@ -6,13 +6,13 @@ library(jsonlite)
 library(purrr)
 
 fluidPage(
+  textInput("medication", "Enter medication name:"),
+
+  actionButton("submit", "Submit"),
   
-  # create a dropdown to select the drug
   selectInput(inputId = "drug", label = "Select a drug mentioned:", choices = NULL),
   
-  # create a multiple selection input to deselect ADRs
   selectInput(inputId = "adr_exclusions", label = "Deselect ADRs:", choices = NULL, multiple = TRUE, selectize = TRUE),
   
-  # create a plot to show the ADR occurrences
   plotlyOutput(outputId = "plot")
 )
