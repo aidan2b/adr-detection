@@ -400,7 +400,7 @@ def run_pipeline(medication):
 
     print("Finished labeling. Linking drugs and ADRs syntactically...")
     linked_data = ADRLinker(input_df=labeled_data, model_path="models/flair-ner/best-model.pt")
-    linked_data.extract(output_path="adr-detection/shiny_app/linked_data.csv")
+    linked_data.extract(output_path="shiny_app/linked_data.csv")
 
     print("Finished linking drugs and ADRs.")
 
