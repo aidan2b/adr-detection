@@ -7,36 +7,38 @@ library(purrr)
 library(httr)
 library(readr)
 library(reticulate)
+library(gh)
 
 function(input, output, session) {
   
+  # Fetch the data and store it in a reactive variable
   fetched_data <- reactive({
     data <- read.csv('linked_data.csv')
     print(head(data)) # Print the first few rows of the fetched data
     data
   })
 
+  # Trigger the GitHub Actions workflow when the submit button is clicked
   observeEvent(input$submit, {
     medication_name <- input$medication
 
-    # Set up GitHub API authentication
-    token <- Sys.getenv("GITHUB_TOKEN")
-    auth_header <- add_headers(Authorization = paste("token", token))
+    # Get the workflow ID using the GitHub API
+    workflow_info <- gh::gh(
+      "GET /repos/:owner/:repo/actions/workflows",
+      owner = "aidan2b",
+      repo = "adr-detection"
+    )
 
-    # Create the JSON payload for the workflow_dispatch event
-    payload <- jsonlite::toJSON(list(
+    workflow_id <- workflow_info$workflows[[1]]$id
+
+    # Trigger the workflow using the GitHub API
+    response <- gh::gh(
+      "POST /repos/:owner/:repo/actions/workflows/:workflow_id/dispatches",
+      owner = "aidan2b",
+      repo = "adr-detection",
+      workflow_id = workflow_id,
       ref = "main",
-      inputs = list(
-        medication = medication_name
-      )
-    ), auto_unbox = TRUE)
-
-    # Send an HTTP POST request to trigger the workflow
-    response <- POST(
-      "https://api.github.com/repos/aidan2b/adr-detection/actions/workflows/shiny-deploy.yml/dispatches",
-      auth_header,
-      content_type("application/json"),
-      body = payload
+      inputs = list(medication = medication_name)
     )
 
     # Print the response to the R console for debugging purposes
