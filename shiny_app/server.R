@@ -9,7 +9,11 @@ library(readr)
 library(reticulate)
 library(gh)
 
+
 function(input, output, session) {
+  
+  # Set the GitHub token for the gh package
+  gh::gh_token(Sys.getenv("GITHUB_TOKEN"))
   
   # Fetch the data and store it in a reactive variable
   fetched_data <- reactive({
