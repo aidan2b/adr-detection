@@ -7,45 +7,35 @@ library(purrr)
 library(httr)
 library(readr)
 library(reticulate)
-library(gh)
-
 
 function(input, output, session) {
   
-  # Set the GitHub token for the gh package
-  gh::gh_token(Sys.getenv("MY_GITHUB_TOKEN"))
-
-  # Fetch the data and store it in a reactive variable
+  github_token <- Sys.getenv("MY_GITHUB_TOKEN")
+  
   fetched_data <- reactive({
     data <- read.csv('linked_data.csv')
-    print(head(data)) # Print the first few rows of the fetched data
+    print(head(data))
     data
   })
 
-  # Trigger the GitHub Actions workflow when the submit button is clicked
   observeEvent(input$submit, {
     medication_name <- input$medication
 
-    # Get the workflow ID using the GitHub API
-    workflow_info <- gh::gh(
-      "GET /repos/:owner/:repo/actions/workflows",
-      owner = "aidan2b",
-      repo = "adr-detection"
-    )
+    url <- "https://api.github.com/repos/aidan2b/adr-detection/actions/workflows"
+    headers <- c(Accept = "application/vnd.github+json",
+                 Authorization = paste0("Bearer ", github_token))
+    response <- httr::GET(url, httr::add_headers(.headers=headers))
+    workflow_info <- httr::content(response, as = "parsed")
 
     workflow_id <- workflow_info$workflows[[1]]$id
 
-    # Trigger the workflow using the GitHub API
-    response <- gh::gh(
-      "POST /repos/:owner/:repo/actions/workflows/:workflow_id/dispatches",
-      owner = "aidan2b",
-      repo = "adr-detection",
-      workflow_id = workflow_id,
-      ref = "main",
-      inputs = list(medication = medication_name)
-    )
+    url <- paste0("https://api.github.com/repos/aidan2b/adr-detection/actions/workflows/",
+                  workflow_id, "/dispatches")
+    headers <- c(Accept = "application/vnd.github+json",
+                 Authorization = paste0("Bearer ", github_token))
+    body <- list(ref = "main", inputs = list(medication = medication_name))
+    response <- httr::POST(url, httr::add_headers(.headers=headers), httr::jsonlite::toJSON(body))
 
-    # Print the response to the R console for debugging purposes
     print(response)
   })
 
