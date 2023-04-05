@@ -49,7 +49,7 @@ jobs:
 
   deploy_shiny:
     name: Deploy to shinyapps.io
-    runs-on: ubuntu-latest  
+    runs-on: [self-hosted, cml, gpu]   
     needs: run_pipeline
     steps:
       - uses: actions/checkout@v2
