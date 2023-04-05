@@ -40,9 +40,11 @@ jobs:
           MEDICATION_NAME: ${{ github.event.inputs.medication }}
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          
+
       - name: Commit and push linked_data.csv
         run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
           git add shiny_app/linked_data.csv
           git commit -m "Update linked_data.csv"
           git push  
