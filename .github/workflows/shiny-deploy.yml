@@ -28,10 +28,10 @@ jobs:
           ls -lh models/roberta-classifier
           ls -lh models/flair-ner
 
-      # - name: Set up Python
-      #   uses: actions/setup-python@v2
-      #   with:
-      #     python-version: 3.8
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
       
       # - name: Install Python dependencies
       #   run: |
