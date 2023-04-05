@@ -65,7 +65,7 @@ jobs:
           R -e ".libPaths('$HOME/adr-detection/.R/library'); rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
           R -e ".libPaths('$HOME/adr-detection/.R/library'); rsconnect::deployApp(appDir = 'shiny_app/', appName = 'adr-detection', account = 'aidan2b')"
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
           
