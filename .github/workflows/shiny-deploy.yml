@@ -60,13 +60,6 @@ jobs:
         run: |
           git pull
 
-      - name: Trigger workflow_dispatch event
-        run: |
-          gh auth login --with-token <<< "${MY_GITHUB_TOKEN}"
-          gh api repos/:owner/:repo/actions/workflows/shiny-deploy.yml/dispatches \
-            --header "Accept: application/vnd.github.v3+json" \
-            -X POST \
-
       - name: Deploy to shinyapps.io
         run: |
           R -e ".libPaths('$HOME/adr-detection/.R/library'); rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
