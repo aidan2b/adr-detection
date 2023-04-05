@@ -34,7 +34,7 @@ function(input, output, session) {
     headers <- c(Accept = "application/vnd.github+json",
                  Authorization = paste0("Bearer ", github_token))
     body <- list(ref = "main", inputs = list(medication = medication_name))
-    response <- httr::POST(url, httr::add_headers(.headers=headers), httr::jsonlite::toJSON(body))
+    response <- httr::POST(url, httr::add_headers(.headers=headers), jsonlite::toJSON(body))
 
     print(response)
   })
