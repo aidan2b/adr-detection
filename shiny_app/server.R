@@ -23,7 +23,7 @@ shinyServer(function(input, output, session) {
 
     url <- "https://api.github.com/repos/aidan2b/adr-detection/actions/workflows"
     headers <- c(Accept = "application/vnd.github+json",
-                 Authorization = paste0("Bearer ", github_token))
+                 Authorization = paste0(github_token))
     response <- httr::GET(url, httr::add_headers(.headers=headers))
     workflow_info <- httr::content(response, as = "parsed")
 
@@ -32,7 +32,7 @@ shinyServer(function(input, output, session) {
     url <- paste0("https://api.github.com/repos/aidan2b/adr-detection/actions/workflows/",
                   workflow_id, "/dispatches")
     headers <- c(Accept = "application/vnd.github+json",
-                 Authorization = paste0("Bearer ", github_token))
+                 Authorization = paste0(github_token))
     body <- list(ref = "main", inputs = list(medication = medication_name))
     response <- httr::POST(url, httr::add_headers(.headers=headers), jsonlite::toJSON(body))
 
