@@ -6,9 +6,9 @@ library(jsonlite)
 library(purrr)
 
 fluidPage(
-  textInput("medication", "Enter medication name:"),
+  # textInput("medication", "Enter medication name:"),
 
-  actionButton("submit", "Submit"),
+  # actionButton("submit", "Submit"),
   
   selectInput(inputId = "drug", label = "Select a drug mentioned:", choices = NULL),
   
