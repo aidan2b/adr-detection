@@ -12,8 +12,8 @@ class FlairNERTrain:
         self.label_type = 'ner'
         self.embedding_types : List[TokenEmbeddings] = [
             WordEmbeddings('glove'),
-            FlairEmbeddings('news-forward-fast'),
-            FlairEmbeddings('news-backward-fast'),
+            FlairEmbeddings('news-forward'),
+            FlairEmbeddings('news-backward'),
         ]
         self.embeddings : StackedEmbeddings = StackedEmbeddings(
             embeddings=self.embedding_types)
@@ -48,8 +48,6 @@ def main(just_run: bool = False):
     ner_trainer.train(train_file='train.txt',
                       test_file='test.txt',
                       dev_file='dev.txt',
-                      tagger_path='model/')
+                      tagger_path='model-info/')
 
 
-if __name__ == "__main__":
-    main()
