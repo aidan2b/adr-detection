@@ -401,6 +401,7 @@ def get_faers(medication):
         except:
             accepted = False
     if accepted == False:
+        print(medication)
         print("Drug Name invalid")
     else:
         df.to_csv('shiny_app/faers.csv')
