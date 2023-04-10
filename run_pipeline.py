@@ -392,7 +392,7 @@ def get_faers(medication):
     try:
         response = requests.get('https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:'+medication+'&limit=20&count=patient.reaction.reactionmeddrapt.exact')
         data = response.json()
-        df = pandas.DataFrame(data['results'])
+        df = pd.DataFrame(data['results'])
         accepted = True
     except:
         accepted = False
@@ -401,7 +401,7 @@ def get_faers(medication):
         try:
             response = requests.get('https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:'+medication+'&limit=20&count=patient.reaction.reactionmeddrapt.exact')
             data = response.json()
-            df = pandas.DataFrame(data['results'])
+            df = pd.DataFrame(data['results'])
             accepted = True
         except:
             accepted = False
