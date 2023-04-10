@@ -386,7 +386,7 @@ def get_faers(medication):
     
     print(f"Fetching FAERS data for: {medication}")
     
-    print(f"Medication variable type: " {type(medication)})
+    print(f"Medication variable type: {type(medication)}")
 
     accepted = False
     try:
