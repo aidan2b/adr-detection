@@ -383,6 +383,11 @@ class ADRLinker:
         print(f"Saved output to {output_path}.")
 
 def get_faers(medication):
+    
+    print(f"Fetching FAERS data for: {medication}")
+    
+    print(f"Medication variable type: " {type(medication)})
+
     accepted = False
     try:
         response = requests.get('https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:'+medication+'&limit=20&count=patient.reaction.reactionmeddrapt.exact')
@@ -401,8 +406,7 @@ def get_faers(medication):
         except:
             accepted = False
     if accepted == False:
-        print(medication)
-        print("Drug Name invalid")
+        print(f"{medication} invalid")
     else:
         df.to_csv('shiny_app/faers.csv')
 
