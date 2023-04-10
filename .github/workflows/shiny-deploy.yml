@@ -13,7 +13,7 @@ jobs:
     runs-on: [self-hosted, cml, gpu]  
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: aidan2b/checkout@v2
         with:
           lfs: true
       
@@ -29,7 +29,7 @@ jobs:
           ls -lh models/flair-ner
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: aidan2b/setup-python@v2
         with:
           python-version: 3.8
       
