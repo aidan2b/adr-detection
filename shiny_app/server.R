@@ -14,10 +14,13 @@ shinyServer(function(input, output, session) {
   
   fetched_data <- reactive({
     data <- read.csv('linked_data.csv')
-    faers_data <- read.csv('faers.csv')
+    
     print(head(data))
-    print(head(faers_data))
+    
   })
+
+  faers_data <- read.csv('faers.csv')
+  print(head(faers_data))
 
   observeEvent(input$submit, {
     medication_name <- input$medication
