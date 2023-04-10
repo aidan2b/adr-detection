@@ -416,25 +416,25 @@ def run_pipeline(medication):
     reddit_pull = RedditPull(medication)
     get_faers(str(medication))
 
-    # print("Pulling comments from Reddit...")
-    # comments = reddit_pull.reddit_pull()
+    print("Pulling comments from Reddit...")
+    comments = reddit_pull.reddit_pull()
 
-    # print("Finished pulling comments. Creating dataframe...")
-    # reddit_data = reddit_pull.create_dataframe(comments)
+    print("Finished pulling comments. Creating dataframe...")
+    reddit_data = reddit_pull.create_dataframe(comments)
  
-    # print("Finished creating dataframe. Classifying texts as containing an adverse drug reaction (ADR) or not...")
-    # adr_classifier = ADRClassifier(input_df=reddit_data, model_path="models/roberta-classifier/best_model_with_gpt.pt")
-    # classified_data = adr_classifier.main(reddit_data)  
+    print("Finished creating dataframe. Classifying texts as containing an adverse drug reaction (ADR) or not...")
+    adr_classifier = ADRClassifier(input_df=reddit_data, model_path="models/roberta-classifier/best_model_with_gpt.pt")
+    classified_data = adr_classifier.main(reddit_data)  
 
-    # print("Finished classifying texts. Labeling drug name and words or phrases indicating an ADR...")
-    # adr_labeler = ADRLabeler(input_df=classified_data, model_path="models/flair-ner/best-model.pt")
-    # labeled_data = adr_labeler.drug_labeled
+    print("Finished classifying texts. Labeling drug name and words or phrases indicating an ADR...")
+    adr_labeler = ADRLabeler(input_df=classified_data, model_path="models/flair-ner/best-model.pt")
+    labeled_data = adr_labeler.drug_labeled
 
-    # print("Finished labeling. Linking drugs and ADRs syntactically...")
-    # linked_data = ADRLinker(input_df=labeled_data, model_path="models/flair-ner/best-model.pt")
-    # linked_data.extract(output_path="shiny_app/linked_data.csv")
+    print("Finished labeling. Linking drugs and ADRs syntactically...")
+    linked_data = ADRLinker(input_df=labeled_data, model_path="models/flair-ner/best-model.pt")
+    linked_data.extract(output_path="shiny_app/linked_data.csv")
 
-    # print("Finished linking drugs and ADRs.")
+    print("Finished linking drugs and ADRs.")
 
 if __name__ == '__main__':
     
