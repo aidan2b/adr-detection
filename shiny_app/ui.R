@@ -14,5 +14,7 @@ fluidPage(
   
   selectInput(inputId = "adr_exclusions", label = "Deselect ADRs:", choices = NULL, multiple = TRUE, selectize = TRUE),
   
-  plotlyOutput(outputId = "plot")
+  plotlyOutput(outputId = "plot"),
+
+  plotlyOutput(outputId = "faers_plot")
 )

@@ -14,8 +14,9 @@ shinyServer(function(input, output, session) {
   
   fetched_data <- reactive({
     data <- read.csv('linked_data.csv')
+    faers_data <- read.csv('faers.csv')
     print(head(data))
-    data
+    print(head(faers_data))
   })
 
   observeEvent(input$submit, {
@@ -74,5 +75,14 @@ shinyServer(function(input, output, session) {
       layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "ADR"),
              title = paste0("Top 20 ADR occurrences for ", input$drug))
+  })
+
+  # Create an interactive plot of ADR occurrences using plotly
+  output$faers_plot <- renderPlotly({
+    plot_ly(faers_data, x = ~count, y = ~reorder(term, count), type = "bar",
+            marker = list(color = ~count, colorscale = "Viridis")) %>%
+      layout(xaxis = list(title = "Occurrences"),
+             yaxis = list(title = "ADR"),
+             title = paste0("Top 20 ADR reported to FAERS for ", input$drug))
   })
 })
