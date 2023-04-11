@@ -20,44 +20,16 @@ shinyServer(function(input, output, session) {
 
   faers_data <- reactive({
     medication <- input$drug
-
-    print(paste0("Fetching FAERS data for: ", medication))
-    print(paste0("Medication variable type: ", class(medication)))
-
-    accepted <- FALSE
-
-    # Fetch FAERS data for brand name
-    url <- paste0("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:", medication, "&limit=20&count=patient.reaction.reactionmeddrapt.exact")
-    response <- httr::GET(url)
-
-    if (response$status_code == 200) {
-      data <- httr::content(response, as = "parsed")
-      df <- data.frame(data$results)
-      accepted <- TRUE
-    }
-
-    # Fetch FAERS data for generic name if not accepted
-    if (!accepted) {
-      url <- paste0("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:", medication, "&limit=20&count=patient.reaction.reactionmeddrapt.exact")
-      response <- httr::GET(url)
-
-      if (response$status_code == 200) {
-        data <- httr::content(response, as = "parsed")
-        df <- data.frame(data$results)
-        accepted <- TRUE
-      }
-    }
-
-    if (!accepted) {
-      print(paste0(medication, " invalid"))
-      df <- data.frame(term = character(), count = integer())
-    } else {
-      write.csv(df, "faers.csv")
-    }
-
+    
+    # Call the get_faers Python function
+    faers_module$get_faers(medication)
+    
+    # Read the CSV file saved by the Python function
+    df <- read.csv("faers.csv")
+    
     df <- df %>%
       mutate(term = tolower(term))
-
+    
     print(head(df))
     df
   })
@@ -111,13 +83,13 @@ shinyServer(function(input, output, session) {
     result
   })
 
-  faers_plot_data <- reactive({
-    result <- faers_data() %>% 
-      dplyr::filter(!term %in% input$adr_exclusions) %>%  # Filter based on the excluded ADRs
-      head(20)
-    print(result) # Print the filtered data
-    result
-  })
+  # faers_plot_data <- reactive({
+  #   result <- faers_data() %>% 
+  #     dplyr::filter(!term %in% input$adr_exclusions) %>%  # Filter based on the excluded ADRs
+  #     head(20)
+  #   print(result) # Print the filtered data
+  #   result
+  # })
   
   # Create an interactive plot of ADR occurrences using plotly
   output$plot <- renderPlotly({
