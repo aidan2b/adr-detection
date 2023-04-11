@@ -8,6 +8,8 @@ library(httr)
 library(readr)
 library(reticulate)
 
+faers_module <- import("faers")
+
 shinyServer(function(input, output, session) {
   
   github_token <- Sys.getenv("MY_GITHUB_TOKEN")
