@@ -21,25 +21,11 @@ shinyServer(function(input, output, session) {
   faers_data <- reactive({
     medication <- input$drug
     
-    # Fetch FAERS data for brand name
-    url <- paste0("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:", medication, "&limit=20&count=patient.reaction.reactionmeddrapt.exact")
-    response <- httr::GET(url)
+    # Call the get_faers Python function
+    faers_module$get_faers(medication)
     
-    if (response$status_code == 200) {
-      data <- httr::content(response, as = "parsed")
-      df <- data.frame(data$results)
-    } else {
-      # Fetch FAERS data for generic name
-      url <- paste0("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:", medication, "&limit=20&count=patient.reaction.reactionmeddrapt.exact")
-      response <- httr::GET(url)
-      
-      if (response$status_code == 200) {
-        data <- httr::content(response, as = "parsed")
-        df <- data.frame(data$results)
-      } else {
-        df <- data.frame(term = character(), count = integer())
-      }
-    }
+    # Read the CSV file saved by the Python function
+    df <- read.csv("faers.csv")
     
     df <- df %>%
       mutate(term = tolower(term))

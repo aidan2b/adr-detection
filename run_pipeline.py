@@ -382,39 +382,10 @@ class ADRLinker:
         self.results_df.to_csv(output_path, index=False)
         print(f"Saved output to {output_path}.")
 
-# def get_faers(medication):
-    
-#     print(f"Fetching FAERS data for: {medication}")
-    
-#     print(f"Medication variable type: {type(medication)}")
-
-#     accepted = False
-#     try:
-#         response = requests.get('https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:'+medication+'&limit=20&count=patient.reaction.reactionmeddrapt.exact')
-#         data = response.json()
-#         df = pd.DataFrame(data['results'])
-#         accepted = True
-#     except:
-#         accepted = False
-
-#     if accepted == False:
-#         try:
-#             response = requests.get('https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:'+medication+'&limit=20&count=patient.reaction.reactionmeddrapt.exact')
-#             data = response.json()
-#             df = pd.DataFrame(data['results'])
-#             accepted = True
-#         except:
-#             accepted = False
-#     if accepted == False:
-#         print(f"{medication} invalid")
-#     else:
-#         df.to_csv('shiny_app/faers.csv')
-
 def run_pipeline(medication):
 
     print("Starting pipeline for medication:", medication)
     reddit_pull = RedditPull(medication)
-    # get_faers(str(medication))
 
     print("Pulling comments from Reddit...")
     comments = reddit_pull.reddit_pull()
