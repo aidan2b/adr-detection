@@ -11,3 +11,4 @@ spacy
 transformers
 tqdm
 nltk
+requests
