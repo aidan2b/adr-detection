@@ -408,7 +408,7 @@ def get_faers(medication):
     if accepted == False:
         print(f"{medication} invalid")
     else:
-        df.to_csv('faers.csv')
+        df.to_csv('shiny_app/faers.csv')
 
 def run_pipeline(medication):
 
