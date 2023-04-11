@@ -19,19 +19,10 @@ shinyServer(function(input, output, session) {
   })
 
   faers_data <- reactive({
-    medication <- input$drug
-    
-    # Call the get_faers Python function
-    faers_module$get_faers(medication)
-    
-    # Read the CSV file saved by the Python function
-    df <- read.csv("faers.csv")
-    
-    df <- df %>%
-      mutate(term = tolower(term))
-    
-    print(head(df))
-    df
+    data <- read.csv('faers.csv') %>%
+      mutate(term = tolower(term))  
+    print(head(data))
+    data
   })
 
   observeEvent(input$submit, {
@@ -69,7 +60,7 @@ shinyServer(function(input, output, session) {
   })
   
   # Create a reactive data frame filtered by the selected drug
-  reddit_plot_data <- reactive({
+  drug_data <- reactive({
     result <- fetched_data() %>% dplyr::filter(drug == input$drug) %>% 
       mutate(adrs = gsub("'", "\"", adrs), 
              adrs = map(adrs, ~ fromJSON(.x))) %>% 
@@ -82,27 +73,19 @@ shinyServer(function(input, output, session) {
     print(result) # Print the filtered data
     result
   })
-
-  # faers_plot_data <- reactive({
-  #   result <- faers_data() %>% 
-  #     dplyr::filter(!term %in% input$adr_exclusions) %>%  # Filter based on the excluded ADRs
-  #     head(20)
-  #   print(result) # Print the filtered data
-  #   result
-  # })
   
   # Create an interactive plot of ADR occurrences using plotly
   output$plot <- renderPlotly({
-    plot_ly(reddit_plot_data(), x = ~occurrences, y = ~reorder(adr, occurrences), type = "bar",
+    plot_ly(drug_data(), x = ~occurrences, y = ~reorder(adr, occurrences), type = "bar",
             marker = list(color = ~occurrences, colorscale = "Viridis")) %>%
       layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "ADR"),
              title = paste0("Top 20 ADR occurrences for ", input$drug))
   })
 
-  # Create an interactive plot of ADR occurrences using plotly for the FAERS data
+  # Create an interactive plot of ADR occurrences using plotly
   output$faers_plot <- renderPlotly({
-    plot_ly(faers_plot_data(), x = ~count, y = ~reorder(term, count), type = "bar",
+    plot_ly(faers_data(), x = ~count, y = ~reorder(term, count), type = "bar",
             marker = list(color = ~count, colorscale = "Viridis")) %>%
       layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "ADR"),
