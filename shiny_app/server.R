@@ -19,10 +19,33 @@ shinyServer(function(input, output, session) {
   })
 
   faers_data <- reactive({
-    data <- read.csv('faers.csv') %>%
-      mutate(term = tolower(term))  
-    print(head(data))
-    data
+    medication <- input$drug
+    
+    # Fetch FAERS data for brand name
+    url <- paste0("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:", medication, "&limit=20&count=patient.reaction.reactionmeddrapt.exact")
+    response <- httr::GET(url)
+    
+    if (response$status_code == 200) {
+      data <- httr::content(response, as = "parsed")
+      df <- data.frame(data$results)
+    } else {
+      # Fetch FAERS data for generic name
+      url <- paste0("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:", medication, "&limit=20&count=patient.reaction.reactionmeddrapt.exact")
+      response <- httr::GET(url)
+      
+      if (response$status_code == 200) {
+        data <- httr::content(response, as = "parsed")
+        df <- data.frame(data$results)
+      } else {
+        df <- data.frame(term = character(), count = integer())
+      }
+    }
+    
+    df <- df %>%
+      mutate(term = tolower(term))
+    
+    print(head(df))
+    df
   })
 
   observeEvent(input$submit, {
