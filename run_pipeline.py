@@ -294,7 +294,8 @@ class ADRLabeler:
 class ADRLinker:
     def __init__(self, input_df, model_path):
         self.nlp = spacy.load("en_core_web_md")
-        self.model = SequenceTagger.load(model_path)
+        self.model = SequenceTagger.load(model_path).to('cuda')
+        print(f"Model loaded onto {torch.cuda.get_device_name(0)}")
         self.drug_labeled = input_df
         self.results_df = None
 
