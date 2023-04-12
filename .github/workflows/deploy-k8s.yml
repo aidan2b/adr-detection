@@ -31,7 +31,7 @@ jobs:
         MEDICATION: ${{ github.event.inputs.medication }}
       run: |
         # Update the medication value in the adr-detection.yaml
-        sed -i "s/wellbutrin/$MEDICATION/" adr-detection.yaml
+        sed -i "s/ocrevus/$MEDICATION/" adr-detection.yaml
 
         # Apply the Kubernetes configuration
         kubectl apply -f adr-detection.yaml
