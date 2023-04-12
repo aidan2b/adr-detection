@@ -19,8 +19,8 @@ jobs:
       env:
         KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
       run: |
-        echo "$KUBECONFIG_CONTENT" | base64 --decode > kubeconfig.yaml
-        export KUBECONFIG=kubeconfig.yaml
+        echo "$KUBECONFIG_SECRET" | base64 --decode > config
+        export KUBECONFIG=config
 
     - name: Set up kubectl
       run: |
