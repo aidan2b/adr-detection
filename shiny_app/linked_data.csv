@@ -1,0 +1,71 @@
+drug,adrs,total_occurrences
+wellbutrin,"[{'adr': 'brain fog', 'occurrences': 17}, {'adr': 'insomnia', 'occurrences': 14}, {'adr': 'reaction', 'occurrences': 11}, {'adr': 'headaches', 'occurrences': 10}, {'adr': 'weight gain', 'occurrences': 9}, {'adr': 'fatigue', 'occurrences': 9}, {'adr': 'withdrawal', 'occurrences': 9}, {'adr': 'tinnitus', 'occurrences': 9}, {'adr': 'addicted', 'occurrences': 9}, {'adr': 'hypersomnia', 'occurrences': 9}, {'adr': 'manic', 'occurrences': 8}, {'adr': 'panic attacks', 'occurrences': 8}, {'adr': 'hair loss', 'occurrences': 7}, {'adr': 'hangover', 'occurrences': 7}, {'adr': 'pain', 'occurrences': 6}, {'adr': 'rashes', 'occurrences': 6}, {'adr': 'weight loss', 'occurrences': 5}, {'adr': 'rash', 'occurrences': 5}, {'adr': 'sick', 'occurrences': 5}, {'adr': 'itching', 'occurrences': 4}, {'adr': 'nauseated', 'occurrences': 4}, {'adr': 'fatigued', 'occurrences': 4}, {'adr': 'breast cancer', 'occurrences': 4}, {'adr': 'autism', 'occurrences': 4}, {'adr': 'killed my sex drive', 'occurrences': 4}, {'adr': 'irritability', 'occurrences': 3}, {'adr': 'ear pressure', 'occurrences': 3}, {'adr': 'flared', 'occurrences': 3}, {'adr': 'nausea', 'occurrences': 3}, {'adr': 'depressed', 'occurrences': 3}, {'adr': 'gain weight', 'occurrences': 3}, {'adr': 'unwell', 'occurrences': 3}, {'adr': 'irritable', 'occurrences': 3}, {'adr': 'vertigo', 'occurrences': 3}, {'adr': 'chest pain', 'occurrences': 3}, {'adr': 'acid reflux', 'occurrences': 3}, {'adr': 'infection', 'occurrences': 2}, {'adr': 'jittery', 'occurrences': 2}, {'adr': 'lost my appetite', 'occurrences': 2}, {'adr': 'allergic reaction', 'occurrences': 2}, {'adr': 'hives', 'occurrences': 2}, {'adr': 'skin rash', 'occurrences': 2}, {'adr': 'acne', 'occurrences': 2}, {'adr': 'dehydrated', 'occurrences': 2}, {'adr': 'dysthymia', 'occurrences': 2}, {'adr': 'stopped working', 'occurrences': 2}, {'adr': 'quit working', 'occurrences': 2}, {'adr': 'decreased my appetite', 'occurrences': 2}, {'adr': 'losing my appetite', 'occurrences': 2}, {'adr': 'sweating', 'occurrences': 2}, {'adr': 'lethargic', 'occurrences': 2}, {'adr': 'low libido', 'occurrences': 2}, {'adr': 'tiredness', 'occurrences': 2}, {'adr': 'hypomania', 'occurrences': 2}, {'adr': 'lose weight', 'occurrences': 2}, {'adr': 'gastritis', 'occurrences': 2}, {'adr': 'vomiting', 'occurrences': 2}, {'adr': 'anorexia', 'occurrences': 2}, {'adr': 'neck pain', 'occurrences': 2}, {'adr': 'joint pain', 'occurrences': 1}, {'adr': 'headache', 'occurrences': 1}, {'adr': 'eye pain', 'occurrences': 1}, {'adr': 'tingling', 'occurrences': 1}, {'adr': 'withdrawals', 'occurrences': 1}, {'adr': 'loss of appetite', 'occurrences': 1}, {'adr': 'narcolepsy', 'occurrences': 1}, {'adr': 'numbness', 'occurrences': 1}, {'adr': 'postpartum', 'occurrences': 1}, {'adr': 'drowsy', 'occurrences': 1}, {'adr': 'suicidal', 'occurrences': 1}, {'adr': 'hypomanic', 'occurrences': 1}, {'adr': 'irritation', 'occurrences': 1}, {'adr': 'drowsiness', 'occurrences': 1}, {'adr': 'dead libido', 'occurrences': 1}, {'adr': 'dizzy', 'occurrences': 1}, {'adr': 'arthritis', 'occurrences': 1}, {'adr': 'lightheadedness', 'occurrences': 1}, {'adr': 'lethargy racing', 'occurrences': 1}, {'adr': 'overheated', 'occurrences': 1}, {'adr': 'migraines', 'occurrences': 1}, {'adr': 'fibromyalgia', 'occurrences': 1}, {'adr': 'tremors', 'occurrences': 1}, {'adr': 'irritable rage', 'occurrences': 1}, {'adr': 'neck stiffness', 'occurrences': 1}, {'adr': 'sinus pressure', 'occurrences': 1}, {'adr': 'mood overall', 'occurrences': 1}, {'adr': 'restless', 'occurrences': 1}, {'adr': 'irritable outbursts', 'occurrences': 1}, {'adr': 'flare up', 'occurrences': 1}, {'adr': 'hyperhidrosis', 'occurrences': 1}, {'adr': 'losing weight', 'occurrences': 1}, {'adr': 'psoriasis', 'occurrences': 1}, {'adr': 'inflammatory issues', 'occurrences': 1}]",300
+prozac,"[{'adr': 'weight loss', 'occurrences': 18}, {'adr': 'lost my appetite', 'occurrences': 9}, {'adr': 'rash', 'occurrences': 4}, {'adr': 'pain', 'occurrences': 4}, {'adr': 'weight gain', 'occurrences': 3}, {'adr': 'withdrawal', 'occurrences': 3}, {'adr': 'dysthymia', 'occurrences': 2}, {'adr': 'stopped working', 'occurrences': 2}, {'adr': 'blisters', 'occurrences': 2}, {'adr': 'stiffness', 'occurrences': 2}, {'adr': 'fibromyalgia', 'occurrences': 2}, {'adr': 'swollen hot face', 'occurrences': 2}, {'adr': 'lupus', 'occurrences': 2}, {'adr': 'rheumatoid arthritis', 'occurrences': 2}, {'adr': 'fatigue', 'occurrences': 1}, {'adr': 'brain fog', 'occurrences': 1}, {'adr': 'panic attacks', 'occurrences': 1}, {'adr': 'dead libido', 'occurrences': 1}]",61
+lamictal,"[{'adr': 'rashes', 'occurrences': 9}, {'adr': 'itching', 'occurrences': 6}, {'adr': 'rash', 'occurrences': 5}, {'adr': 'allergic reaction', 'occurrences': 3}, {'adr': 'hives', 'occurrences': 3}, {'adr': 'skin rash', 'occurrences': 3}, {'adr': 'withdrawal', 'occurrences': 2}, {'adr': 'depressed', 'occurrences': 2}, {'adr': 'mood overall', 'occurrences': 2}, {'adr': 'neck pain', 'occurrences': 2}, {'adr': 'weight gain', 'occurrences': 1}, {'adr': 'brain fog', 'occurrences': 1}, {'adr': 'restless', 'occurrences': 1}, {'adr': 'irritable outbursts', 'occurrences': 1}, {'adr': 'manic', 'occurrences': 1}, {'adr': 'flare up', 'occurrences': 1}]",43
+zoloft,"[{'adr': 'quit working', 'occurrences': 4}, {'adr': 'autism', 'occurrences': 4}, {'adr': 'weight gain', 'occurrences': 3}, {'adr': 'withdrawal', 'occurrences': 3}, {'adr': 'irritability', 'occurrences': 2}, {'adr': 'fatigue', 'occurrences': 2}, {'adr': 'brain fog', 'occurrences': 2}, {'adr': 'panic attacks', 'occurrences': 2}, {'adr': 'dysthymia', 'occurrences': 2}, {'adr': 'postpartum', 'occurrences': 2}, {'adr': 'stopped working', 'occurrences': 2}, {'adr': 'drowsy', 'occurrences': 2}, {'adr': 'joint pain', 'occurrences': 1}, {'adr': 'lethargic', 'occurrences': 1}, {'adr': 'low libido', 'occurrences': 1}, {'adr': 'acid reflux', 'occurrences': 1}]",34
+lexapro,"[{'adr': 'withdrawal', 'occurrences': 5}, {'adr': 'losing weight', 'occurrences': 3}, {'adr': 'quit working', 'occurrences': 2}, {'adr': 'vertigo', 'occurrences': 2}, {'adr': 'gain weight', 'occurrences': 2}, {'adr': 'lose weight', 'occurrences': 2}, {'adr': 'jittery', 'occurrences': 1}, {'adr': 'withdrawals', 'occurrences': 1}, {'adr': 'postpartum', 'occurrences': 1}, {'adr': 'sweating', 'occurrences': 1}, {'adr': 'lethargy racing', 'occurrences': 1}, {'adr': 'sinus pressure', 'occurrences': 1}, {'adr': 'killed my sex drive', 'occurrences': 1}, {'adr': 'restless', 'occurrences': 1}, {'adr': 'rash', 'occurrences': 1}, {'adr': 'irritable outbursts', 'occurrences': 1}]",26
+adderall,"[{'adr': 'headaches', 'occurrences': 6}, {'adr': 'insomnia', 'occurrences': 2}, {'adr': 'panic attacks', 'occurrences': 2}, {'adr': 'autism', 'occurrences': 2}, {'adr': 'acid reflux', 'occurrences': 2}, {'adr': 'infection', 'occurrences': 1}, {'adr': 'joint pain', 'occurrences': 1}, {'adr': 'withdrawal', 'occurrences': 1}, {'adr': 'fatigue', 'occurrences': 1}, {'adr': 'gain weight', 'occurrences': 1}, {'adr': 'weight gain', 'occurrences': 1}, {'adr': 'pain', 'occurrences': 1}, {'adr': 'tremors', 'occurrences': 1}, {'adr': 'fatigued', 'occurrences': 1}]",23
+ozempic,"[{'adr': 'weight loss', 'occurrences': 14}, {'adr': 'lost my appetite', 'occurrences': 7}]",21
+cymbalta,"[{'adr': 'pain', 'occurrences': 6}, {'adr': 'fibromyalgia', 'occurrences': 3}, {'adr': 'rash', 'occurrences': 2}, {'adr': 'withdrawal', 'occurrences': 1}, {'adr': 'blisters', 'occurrences': 1}, {'adr': 'stiffness', 'occurrences': 1}, {'adr': 'swollen hot face', 'occurrences': 1}, {'adr': 'lupus', 'occurrences': 1}, {'adr': 'rheumatoid arthritis', 'occurrences': 1}]",17
+abilify,"[{'adr': 'rash', 'occurrences': 4}, {'adr': 'restless', 'occurrences': 3}, {'adr': 'irritable outbursts', 'occurrences': 3}, {'adr': 'manic', 'occurrences': 2}, {'adr': 'weight gain', 'occurrences': 2}]",14
+effexor,"[{'adr': 'insomnia', 'occurrences': 3}, {'adr': 'panic attacks', 'occurrences': 3}, {'adr': 'fatigued', 'occurrences': 3}, {'adr': 'weight gain', 'occurrences': 2}, {'adr': 'reaction', 'occurrences': 1}, {'adr': 'brain fog', 'occurrences': 1}]",13
+gabapentin,"[{'adr': 'reaction', 'occurrences': 3}, {'adr': 'pain', 'occurrences': 2}, {'adr': 'vertigo', 'occurrences': 2}, {'adr': 'narcolepsy', 'occurrences': 1}, {'adr': 'fibromyalgia', 'occurrences': 1}, {'adr': 'sinus pressure', 'occurrences': 1}]",10
+vyvanse,"[{'adr': 'irritability', 'occurrences': 3}, {'adr': 'narcolepsy', 'occurrences': 2}, {'adr': 'infection', 'occurrences': 1}, {'adr': 'panic attacks', 'occurrences': 1}]",7
+bupropion,"[{'adr': 'tinnitus', 'occurrences': 2}, {'adr': 'ear pressure', 'occurrences': 2}, {'adr': 'flared', 'occurrences': 2}, {'adr': 'hypomania', 'occurrences': 1}]",7
+norepinephrine,"[{'adr': 'nausea', 'occurrences': 3}, {'adr': 'fatigue', 'occurrences': 3}]",6
+ritalin,"[{'adr': 'insomnia', 'occurrences': 2}, {'adr': 'weight gain', 'occurrences': 1}, {'adr': 'withdrawal', 'occurrences': 1}, {'adr': 'fatigue', 'occurrences': 1}]",5
+hydroxyzine,"[{'adr': 'hangover', 'occurrences': 4}]",4
+ativan,"[{'adr': 'gastritis', 'occurrences': 2}, {'adr': 'vomiting', 'occurrences': 2}]",4
+guanfacine,"[{'adr': 'irritation', 'occurrences': 2}, {'adr': 'drowsiness', 'occurrences': 2}]",4
+concerta,"[{'adr': 'weight gain', 'occurrences': 1}, {'adr': 'arthritis', 'occurrences': 1}, {'adr': 'pain', 'occurrences': 1}, {'adr': 'panic attacks', 'occurrences': 1}]",4
+celexa,"[{'adr': 'infection', 'occurrences': 2}, {'adr': 'weight gain', 'occurrences': 2}]",4
+tamoxifen,"[{'adr': 'breast cancer', 'occurrences': 3}]",3
+minoxodil,"[{'adr': 'hair loss', 'occurrences': 3}]",3
+sensahealth,"[{'adr': 'brain fog', 'occurrences': 2}, {'adr': 'losing my appetite', 'occurrences': 1}]",3
+naltrexone,"[{'adr': 'pain', 'occurrences': 2}, {'adr': 'fibromyalgia', 'occurrences': 1}]",3
+lyrica,"[{'adr': 'pain', 'occurrences': 2}, {'adr': 'fibromyalgia', 'occurrences': 1}]",3
+cipralex,"[{'adr': 'brain fog', 'occurrences': 1}, {'adr': 'unwell', 'occurrences': 1}, {'adr': 'insomnia', 'occurrences': 1}]",3
+fluvoxamine,"[{'adr': 'headache', 'occurrences': 1}, {'adr': 'insomnia', 'occurrences': 1}, {'adr': 'eye pain', 'occurrences': 1}]",3
+victoza,"[{'adr': 'weight loss', 'occurrences': 2}, {'adr': 'lost my appetite', 'occurrences': 1}]",3
+nioxin,"[{'adr': 'hair loss', 'occurrences': 3}]",3
+joico,"[{'adr': 'hair loss', 'occurrences': 3}]",3
+effexorcymbalta,"[{'adr': 'vertigo', 'occurrences': 1}, {'adr': 'sinus pressure', 'occurrences': 1}]",2
+propranolol,"[{'adr': 'nausea', 'occurrences': 1}, {'adr': 'fatigue', 'occurrences': 1}]",2
+topamax,"[{'adr': 'pain', 'occurrences': 1}, {'adr': 'vertigo', 'occurrences': 1}]",2
+nuvaring,"[{'adr': 'arthritis', 'occurrences': 1}, {'adr': 'pain', 'occurrences': 1}]",2
+nauseavomiting,"[{'adr': 'hangover', 'occurrences': 2}]",2
+trintellix,"[{'adr': 'brain fog', 'occurrences': 1}, {'adr': 'withdrawal', 'occurrences': 1}]",2
+lex,"[{'adr': 'hyperhidrosis', 'occurrences': 1}, {'adr': 'sweating', 'occurrences': 1}]",2
+strattera,"[{'adr': 'nausea', 'occurrences': 2}]",2
+xanax,"[{'adr': 'insomnia', 'occurrences': 1}, {'adr': 'weight gain', 'occurrences': 1}]",2
+straterra,"[{'adr': 'depressed', 'occurrences': 1}, {'adr': 'panic attacks', 'occurrences': 1}]",2
+seroquel,"[{'adr': 'joint pain', 'occurrences': 1}, {'adr': 'manic', 'occurrences': 1}]",2
+focalin,"[{'adr': 'narcolepsy', 'occurrences': 2}]",2
+atomoxetine,"[{'adr': 'irritation', 'occurrences': 1}, {'adr': 'drowsiness', 'occurrences': 1}]",2
+zoloftwellbutrin,"[{'adr': 'stopped working', 'occurrences': 1}, {'adr': 'drowsy', 'occurrences': 1}]",2
+desvenlafaxine,"[{'adr': 'nausea', 'occurrences': 1}, {'adr': 'fatigue', 'occurrences': 1}]",2
+quetiapine,"[{'adr': 'stopped working', 'occurrences': 1}, {'adr': 'drowsy', 'occurrences': 1}]",2
+escitalopram,"[{'adr': 'stopped working', 'occurrences': 1}, {'adr': 'drowsy', 'occurrences': 1}]",2
+lamotrigine,"[{'adr': 'manic', 'occurrences': 1}, {'adr': 'headaches', 'occurrences': 1}]",2
+curcumin,"[{'adr': 'weight gain', 'occurrences': 1}]",1
+benzodiazepine,"[{'adr': 'reaction', 'occurrences': 1}]",1
+menthol,"[{'adr': 'neck stiffness', 'occurrences': 1}]",1
+pregabalin,"[{'adr': 'fatigued', 'occurrences': 1}]",1
+raloxifene,"[{'adr': 'breast cancer', 'occurrences': 1}]",1
+duloxetine,"[{'adr': 'reaction', 'occurrences': 1}]",1
+heartburn,"[{'adr': 'acid reflux', 'occurrences': 1}]",1
+vvanse,"[{'adr': 'irritability', 'occurrences': 1}]",1
+prazosin,"[{'adr': 'reaction', 'occurrences': 1}]",1
+ketamine,"[{'adr': 'hypomania', 'occurrences': 1}]",1
+intuniv,"[{'adr': 'insomnia', 'occurrences': 1}]",1
+wellbrutrin,"[{'adr': 'tremors', 'occurrences': 1}]",1
+buspirone,"[{'adr': 'hypomania', 'occurrences': 1}]",1
+esketamine,"[{'adr': 'hypomania', 'occurrences': 1}]",1
+tmjd,"[{'adr': 'vertigo', 'occurrences': 1}]",1
+botox,"[{'adr': 'vertigo', 'occurrences': 1}]",1
+norepinephrinedopamine,"[{'adr': 'chest pain', 'occurrences': 1}]",1
+amitryptaline,"[{'adr': 'overheated', 'occurrences': 1}]",1
+sertraline,"[{'adr': 'insomnia', 'occurrences': 1}]",1
+clomipramine,"[{'adr': 'insomnia', 'occurrences': 1}]",1
+lamtical,"[{'adr': 'fatigue', 'occurrences': 1}]",1
+buspar,"[{'adr': 'jittery', 'occurrences': 1}]",1
