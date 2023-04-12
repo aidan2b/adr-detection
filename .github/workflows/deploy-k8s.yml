@@ -14,8 +14,16 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
-
+    - name: Set up kubeconfig
+      env:
+        KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
+      run: |
+        echo "$KUBECONFIG_CONTENT" | base64 --decode > config
+        export KUBECONFIG=config
+    
     - name: Set up kubectl
+      env:
+        KUBECONFIG: kubeconfig.yaml
       run: |
         # Set up kubectl with your desired version
         VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
