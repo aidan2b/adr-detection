@@ -23,7 +23,7 @@ jobs:
     
     - name: Set up kubectl
       env:
-        KUBECONFIG: kubeconfig.yaml
+        KUBECONFIG: config
       run: |
         # Set up kubectl with your desired version
         VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
