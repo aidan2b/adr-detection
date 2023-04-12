@@ -35,3 +35,4 @@ jobs:
 
         # Apply the Kubernetes configuration
         kubectl apply -f adr-detection.yaml
+
