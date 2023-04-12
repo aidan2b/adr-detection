@@ -1,0 +1,39 @@
+name: Deploy to Kubernetes
+
+on:
+  workflow_dispatch:
+    inputs:
+      medication:
+        description: 'Enter medication name:'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up kubectl
+      run: |
+        # Set up kubectl with your desired version
+        VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+        curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
+          --progress-bar \
+          --location \
+          --remote-name
+        chmod +x kubectl
+        sudo mv kubectl /usr/local/bin/
+
+    - name: Deploy to Kubernetes
+      env:
+        MEDICATION: ${{ github.event.inputs.medication }}
+      run: |
+        # Update the medication value in the adr-detection.yaml
+        sed -i "s/wellbutrin/$MEDICATION/" adr-detection.yaml
+
+        # Apply the Kubernetes configuration
+        kubectl apply -f adr-detection.yaml
+
+rsconnect::setAccountInfo(name='aidan2b', token='CB0B25B8C10C5919FC844A539BE6B9BC', secret='4/xFWbK+mauqQuMCwQvYBs7VrzoZBQurR9Mc9pLq')
