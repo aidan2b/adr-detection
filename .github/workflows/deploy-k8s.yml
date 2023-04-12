@@ -35,5 +35,3 @@ jobs:
 
         # Apply the Kubernetes configuration
         kubectl apply -f adr-detection.yaml
-
-rsconnect::setAccountInfo(name='aidan2b', token='CB0B25B8C10C5919FC844A539BE6B9BC', secret='4/xFWbK+mauqQuMCwQvYBs7VrzoZBQurR9Mc9pLq')
