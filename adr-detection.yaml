@@ -6,7 +6,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: shiny-deploy
-      image: aidan2b/adr-detection:k8
+      image: aidan2b/adr-detection:test
       command: ["/bin/sh", "-c"]
       env:
         - name: MEDICATION_NAME
