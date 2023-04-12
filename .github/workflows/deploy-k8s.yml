@@ -1,4 +1,4 @@
-name: Deploy to Kubernetes
+name: Run Pipeline to Deploy Shinyapp
 
 on:
   workflow_dispatch:
