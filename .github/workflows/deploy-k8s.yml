@@ -14,16 +14,15 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
+
     - name: Set up kubeconfig
       env:
         KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
       run: |
         echo "$KUBECONFIG_CONTENT" | base64 --decode > config
         export KUBECONFIG=config
-    
+
     - name: Set up kubectl
-      env:
-        KUBECONFIG: config
       run: |
         # Set up kubectl with your desired version
         VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
@@ -37,10 +36,10 @@ jobs:
     - name: Deploy to Kubernetes
       env:
         MEDICATION: ${{ github.event.inputs.medication }}
+        KUBECONFIG: config
       run: |
         # Update the medication value in the adr-detection.yaml
         sed -i "s/ocrevus/$MEDICATION/" adr-detection.yaml
 
         # Apply the Kubernetes configuration
         kubectl apply -f adr-detection.yaml
-
