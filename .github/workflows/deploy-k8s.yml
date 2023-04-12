@@ -19,8 +19,8 @@ jobs:
       env:
         KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
       run: |
-        echo "$KUBECONFIG_SECRET" | base64 --decode > config
-        export KUBECONFIG=config
+        echo "$KUBECONFIG_SECRET" | base64 --decode > config.yaml
+        export KUBECONFIG=config.yaml
 
     - name: Set up kubectl
       run: |
@@ -36,14 +36,14 @@ jobs:
     - name: Debug KUBECONFIG
       run: |
         echo "Contents of config file:"
-        cat config
+        cat config.yaml
         echo "KUBECONFIG environment variable:"
         echo $KUBECONFIG
 
     - name: Deploy to Kubernetes
       env:
         MEDICATION: ${{ github.event.inputs.medication }}
-        KUBECONFIG: config
+        KUBECONFIG: config.yaml
       run: |
         # Update the medication value in the adr-detection.yaml
         sed -i "s/ocrevus/$MEDICATION/" adr-detection.yaml
