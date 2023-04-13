@@ -31,14 +31,7 @@ jobs:
           --location \
           --remote-name
         chmod +x kubectl
-        sudo mv kubectl /usr/local/bin/
-    
-    - name: Debug KUBECONFIG
-      run: |
-        echo "Contents of config file:"
-        cat config
-        echo "KUBECONFIG environment variable:"
-        echo $KUBECONFIG
+        sudo mv kubectl /usr/local/bin
 
     - name: Deploy to Kubernetes
       env:
