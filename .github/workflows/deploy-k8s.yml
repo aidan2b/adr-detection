@@ -24,12 +24,12 @@ jobs:
           --location \
           --remote-name
         chmod +x kubectl
-        sudo mv kubectl /usr/local/bin
+        mv kubectl /usr/local/bin
 
     - name: Deploy to Kubernetes
       env:
         MEDICATION: ${{ github.event.inputs.medication }}
-        KUBECONFIG: config
+        KUBECONFIG: ${{ github.workspace }}/config
       run: |
         # Update the medication value in the adr-detection.yaml
         sed -i "s/ocrevus/$MEDICATION/" adr-detection.yaml
