@@ -24,7 +24,7 @@ jobs:
           --location \
           --remote-name
         chmod +x kubectl
-        mv kubectl /usr/local/bin
+        sudo mv kubectl /usr/local/bin
 
     - name: Deploy to Kubernetes
       env:
