@@ -1,72 +1,77 @@
-apiVersion: v1
-kind: Pod
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: shiny-deploy-pod
+  name: shiny-deploy-job
 spec:
-  restartPolicy: Never
-  containers:
-    - name: shiny-deploy
-      image: aidan2b/adr-detection:test
-      command: ["/bin/sh", "-c"]
-      env:
-        - name: MEDICATION_NAME
-          value: "ocrevus"
-        - name: REDDIT_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: adr-detection-secrets
-              key: REDDIT_CLIENT_ID
-        - name: REDDIT_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: adr-detection-secrets
-              key: REDDIT_CLIENT_SECRET
-        - name: SHINYAPPS_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: adr-detection-secrets
-              key: SHINYAPPS_TOKEN
-        - name: SHINYAPPS_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: adr-detection-secrets
-              key: SHINYAPPS_SECRET
-      args:
-        - |   
-          # Run the pipeline script
-          python run_pipeline.py
+  template:
+    metadata:
+      name: shiny-deploy-pod
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: shiny-deploy
+          image: aidan2b/adr-detection:test
+          command: ["/bin/sh", "-c"]
+          env:
+            - name: MEDICATION_NAME
+              value: "ocrevus"
+            - name: REDDIT_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: adr-detection-secrets
+                  key: REDDIT_CLIENT_ID
+            - name: REDDIT_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: adr-detection-secrets
+                  key: REDDIT_CLIENT_SECRET
+            - name: SHINYAPPS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: adr-detection-secrets
+                  key: SHINYAPPS_TOKEN
+            - name: SHINYAPPS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: adr-detection-secrets
+                  key: SHINYAPPS_SECRET
+          args:
+            - |
+              # Run the pipeline script
+              python run_pipeline.py
 
-          # Deploy to shinyapps.io
-          export PATH=$PATH:/usr/bin/R
-          R -e "rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
-          R -e "rsconnect::deployApp(appDir = 'shiny_app/', appName = 'adr-detection', account = 'aidan2b')"
-      resources:
-        limits:
-          memory: 12Gi
-          cpu: 2
-          nvidia.com/gpu: 1
-        requests:
-          memory: 12Gi
-          cpu: 2
-          nvidia.com/gpu: 1
-      volumeMounts:
-        - mountPath: /data
-          name: adr-emptydir
-        - mountPath: /dev/shm
-          name: dshm
-  volumes:
-    - name: adr-emptydir
-      emptyDir: {}
-    - name: dshm
-      emptyDir:
-        medium: Memory
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: nvidia.com/gpu.product
-                operator: In
-                values:
-                  - NVIDIA-GeForce-RTX-3090
-                  - Tesla-T4
+              # Deploy to shinyapps.io
+              export PATH=$PATH:/usr/bin/R
+              R -e "rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
+              R -e "rsconnect::deployApp(appDir = 'shiny_app/', appName = 'adr-detection', account = 'aidan2b')"
+          resources:
+            limits:
+              memory: 12Gi
+              cpu: 2
+              nvidia.com/gpu: 1
+            requests:
+              memory: 12Gi
+              cpu: 2
+              nvidia.com/gpu: 1
+          volumeMounts:
+            - mountPath: /data
+              name: adr-emptydir
+            - mountPath: /dev/shm
+              name: dshm
+      volumes:
+        - name: adr-emptydir
+          emptyDir: {}
+        - name: dshm
+          emptyDir:
+            medium: Memory
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: nvidia.com/gpu.product
+                    operator: In
+                    values:
+                      - NVIDIA-GeForce-RTX-3090
+                      - Tesla-T4
+  backoffLimit: 1
