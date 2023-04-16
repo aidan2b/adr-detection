@@ -55,15 +55,11 @@ spec:
               nvidia.com/gpu: 1
           volumeMounts:
             - mountPath: /data
-              name: adr-emptydir
-            - mountPath: /dev/shm
-              name: dshm
+              name: adr-detection-pvc
       volumes:
-        - name: adr-emptydir
-          emptyDir: {}
-        - name: dshm
-          emptyDir:
-            medium: Memory
+        - name: adr-detection-pvc
+          persistentVolumeClaim:
+            claimName: persistentVolume-name
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
