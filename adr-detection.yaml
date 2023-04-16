@@ -59,7 +59,7 @@ spec:
       volumes:
         - name: adr-detection-pvc
           persistentVolumeClaim:
-            claimName: persistentVolume-name
+            claimName: adr-detection-pvc
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
