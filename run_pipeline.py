@@ -380,7 +380,7 @@ class ADRLinker:
 
         # create a dataframe from the results list and sort it by the number of total occurrences in descending order
         self.results_df = pd.DataFrame(results).sort_values(by='total_occurrences', ascending=False)
-        self.results_df.to_csv(output_path, index=False)
+        self.results_df.iloc[0].to_csv(output_path, index=False)
         print(f"Saved output to {output_path}.")
 
 def get_faers(medication):

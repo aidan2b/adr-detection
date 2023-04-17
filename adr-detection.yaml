@@ -36,8 +36,7 @@ spec:
           # Run the pipeline script
           python run_pipeline.py
 
-          tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
-          tail -n +2 /shiny_app/faers.csv >> /data/faers.csv
+          cp -r /shiny_app/* /data/
 
           # Deploy to shinyapps.io
           export PATH=$PATH:/usr/bin/R
