@@ -36,6 +36,8 @@ spec:
           # Run the pipeline script
           python run_pipeline.py
 
+          cp -r /shiny_app/* /data/
+
           # Deploy to shinyapps.io
           export PATH=$PATH:/usr/bin/R
           R -e "rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
