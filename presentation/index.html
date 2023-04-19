@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeline Presentation</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="timeline">
+    <div class="timeline-navigation">
+      <div class="timeline-node active" data-target="event-1">INTRO</div>
+      <div class="timeline-node" data-target="event-2">EDA</div>
+      <div class="timeline-node" data-target="event-3">ANNOTATION</div>
+      <div class="timeline-node" data-target="event-4">IRR</div>
+      <div class="timeline-node" data-target="event-5">MODELS</div>
+      <div class="timeline-node" data-target="event-6">PIPELINE</div>
+      <div class="timeline-node" data-target="event-7">EVALUATION</div>
+      <div class="timeline-node" data-target="event-8">DEPLOY</div>
+      <div class="demo-node" data-target="demo">DEMO</div>
+    </div>
+    <div class="event-container">
+      <div class="event" id="event-1"> 
+        <div class="event-section">
+          <h3 class ="event-title">Initial research questions</h3>
+          <ul style="line-height:1.5" class ="event-content"s>
+            <li>To what degree are adverse medication reactions shared on social media beyond official reporting?</li>
+            <li>Are there unacknowledged adverse drug reactions (ADRs) absent from the FDA's Adverse Event Reporting System (FAERS)?</li>
+            <li>Are significant outliers present? If so, what is their magnitude of difference?</li>
+            <li>Can social media be considered a reliable data source for pharmacovigilance, and at which point is this determination made?</li>
+          </ul>
+        </div>
+        
+        <div class="event-section">
+          <h3 class="event-title">Initial scope</h3>
+          <ul style="line-height:1.5" class="event-content">
+            <li>Conduct a comparative analysis of the reporting rates of ADRs for the most prescribed medications in the United States on social media platforms versus FAERS to evaluate the feasibility and effectiveness of using social media data mining for post-market surveillance of medications (<em>pharmacovigilance</em>).</li>
+          </ul>
+        </div>
+        
+        <div class="event-section">
+          <h3 class ="event-title">Measurable Objectives</h3>
+          <ul style="line-height:1.5" class ="event-content">
+            <li>Collect ADR data from social media and FAERS</li>
+              <ul><li>Develop ADR extraction methods for social media</li></ul>
+            <li>Compare social media ADR rates to FAERS baseline</li>
+            <li>Identify unrecognized ADRs and significant outliers</li>
+          </ul>
+        </div>
+
+        <div class="event-section">
+          <h3 class ="event-title">Constraints</h3>
+          <ul style="line-height:1.5" class ="event-content">
+            <li>Limit on the number of medications which can be included in the data</li>
+            <li>Reddit-specific limitations: younger demographic and longer comments</li>
+            <li>Consideration of data collection differences and social media biases</li>
+          </ul>
+        </div>
+
+        <div class="event-section">
+          <h3 class ="event-title">Initial methodology</h3>
+          <ul style="line-height:1.5" class ="event-content">
+            <li><b>Research methods:</b> Reddit scraping (Twitter ended public API access), sentiment analysis, FAERS data mining</li>
+            <li><b>Intended audience:</b> Pharmaceutical, bioinformatics, public health researchers</li>
+            <li><b>Format:</b> Website with visualizations, dashboards, and statistics</li>
+            <li><b>Preliminary description of final data story/product:</b> Comprehensive website exploring social media data mining for pharmacovigilance</li>
+          </ul>
+        </div>
+        
+
+        <div class="event-section">
+          <h3 class="event-title">Initial data management strategy</h3>
+          <ul style="line-height:1.5" class="event-content">
+            <li>Google Cloud for secure, scalable data storage and processing</li>
+          </ul>
+        </div>
+      
+
+
+        <div class="event-section">
+          <h3 class ="event-title">Key performance indicators (KPIs)</h3>
+          <ul style="line-height:1.5" class ="event-content">
+            <li><b>ADR recognition rate:</b> The percentage of ADRs reported on social media platforms that are also recognized by FAERS.</li>
+            <li><b>Outlier magnitude:</b> The magnitude of any significant outliers in the ADR reporting rates between social media platforms and FAERS.</li>
+            <li><b>Model training metrics:</b> Precision, recall, and f1-score.</li>
+          </ul>
+        </div>
+      </div>  
+      
+      <div class="event" id="event-2">
+        <div class="event-section">
+          <h2 class ="event-title">Initial exploratory data analysis (EDA)</h2>
+          <ul style="line-height:1.5" class ="event-content">
+            <h3><b>Sentiment Analysis</b></h3>
+              <ul>
+                <li>Applied SentimentIntensityAnalyzer on Reddit comment content</li>
+                <li>Added Polarity Scores and assigned sentiment labels to DataFrame rows</li>
+                <li>Visualized results with Seaborn box plots and count plots</li>
+                <div class="image-container">
+                  <img src="visualizations/sent_analysis.png" alt="Sentiment Analysis">
+                  <img src="visualizations/sent_analysis_dist.png" alt="Sentiment Analysis Distribution">
+                </div>
+                <li>Basic topic modeling of negative Reddit comments using LatentDirichletAllocation</li>
+              </ul>     
+            <h3><b>Wordcloud</b></h3>
+              <ul>
+                <li>Utilized wordcloud library to visualize most used words per medication</li>
+                <li>Colored words based on sentiment analysis with TextBlob library</li>
+                  <img src="visualizations/wordclouds.png" width=1100 alt="Sentiment Analysis" class="padding">
+              </ul>    
+            <h3><b>Word Frequency Comparison</b></h3>
+              <ul>
+                <li>Employed pandas to compare word frequency across different sentiments</li>
+                <li>Calculated frequency differences for positive and negative Reddit comments</li>
+                <img src="visualizations/wordfreqcomp.png" width=600 alt="Word Frequency Comparison Tables" class="padding">
+              </ul>    
+          </ul>
+        </div>
+      </div>
+	    <div class="event" id="event-3">
+        <div class="event-section">
+          <h3 class ="event-title"><em>A pivot was needed...</em></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li>Upon further research and suggestions from our mentor, we decided to dip our toes into neural networks and deep learning methods due to the complexity of our problem. To set the foundations for this transtion, a metamorphosis of our method was needed.</li>
+              <li>Namely, we would need to narrow our scope from many medications to choosing one to build a solid model on. From there, building a pipeline which can then be used for other drugs</li>
+            </ul>
+        </div>
+        <div class="event-section">
+          <h3 class ="event-title"><b>Prodigy Annotations</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li>Annotated raw Reddit text in Prodigy, highlighting symptoms and drugs, and saved annotations in JSON format</li>
+              <li>Incorporated Medical Dictionary for Regulatory Activities (MedDRA) terminology of side effects to enhance model's vocabulary</li>
+              <li>A sizeable amount of annotations were needed in order to improve the model's performance. Therefore, we decided it would be best for the team to split into pairs and start annotating as a group.</li>
+              <li>Set up a Google Cloud VM and installed Prodigy for collaborative annotation work</li>
+              <li>Reworked key performance indicators to include Cohen's Kappa calculations in order to ensure inter-rater reliability (IRR) between the pairs</li>  
+              <ul>
+                <li><b>Inter-rater reliability</b></li>
+                <ul>
+                  <li>Ensures consistency and accuracy in annotation tasks</li>
+                  <li>Minimizes subjective bias and variability among annotators</li>
+                  <li>Enhances the quality of training data and overall model performance</li>
+                </ul>
+                <li><b>Cohen's Kappa</b></li>
+                <ul>
+                  <li>A statistical measure that quantifies the level of agreement between two annotators</li>
+                  <li>Accounts for agreement by chance</li>
+                  <li>Kappa values range from -1 to 1, with 1 indicating perfect agreement and values above 0.6 generally considered acceptable</li>
+                </ul>
+              </ul>              
+            </ul>
+        </div>
+        <div class="event-section">
+          <h3 class ="event-title"><b>Annotation Styles</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li><b>Named Entity Recognition (NER)</b></li>
+              <ul>
+                <li>Identify and lebel drug names and adverse reaction words or phrases in the text</li>
+              </ul>
+              <li><b>Span Categorization (SpanCat)</b></li>
+              <ul>
+                <li>Detect and categorize relevant spans of text related to adverse drug reactions, allows for overlapping labels for context</li>
+              </ul>
+              <li><b>Text Classification (TextCat)</b></li>
+              <ul>
+                <li>Categorize the text as containing an ADR for any drug or not</li>
+              </ul>
+            </ul>  
+        </div>
+        <div class="event-section">  
+          <h3 class ="event-title"><b>spaCy Natural Language Processing (NLP) Library Compatibility w/ Prodigy</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li>spaCy provides pre-trained models that can be used with any of these annotation styles</li>
+              <li>However, before we train with any of these, we must assert some form of inter-rater reliability for our annotations</li>
+            </ul>
+        </div>    
+      </div>
+	    <div class="event" id="event-4">
+        <div class="event-section">  
+          <h3 class ="event-title"><b>NER</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li>When using Prodigy, we use two potential tags for terms/entities in the text: DRUG and ADR.</li>
+              <li>The DRUG tag is only applied to the specific medication we are looking for (currently ocrelizumab aka Ocrevus).</li>
+              <ul>
+                <li>Any other drugs mentioned in the text are not tagged.</li>
+              </ul>
+              <li>The ADR tag is only applied to specific symptoms, diseases, reactions or other events related directly to ocrelizumab in the text.</li>
+              <ul>
+                <li>If there are no ADRs mentioned but the desired medication is mentioned, we tag the DRUG and accept the comment.</li>
+                <li>If the medication we are looking for is mentioned and ADRs are explicitly or contextually tied to the medication in the text, we tag both DRUG and ADR examples and accept the comment.</li>
+                <li>If the medication we are looking for is not mentioned and ADRs are also not mentioned, we tag nothing but accept the comment.</li>
+                <li>If the medication we are looking for is not mentioned, but terms that could be ADRs of any kind are mentioned, we tag nothing and reject the comment to remove it from consideration.</li>
+                <li>Unable to calculate Cohen's Kappa due to misunderstandings on 'accept' vs. 'reject' in the annotation rules.</li>
+                <li>Complexity to labeling adverse drug reactions in as casual and imprecise a format as Reddit comments.</li> 
+                <li>One of the larger factors in this dilemma it seemed, was context. Which prompted us to try the next method, SpanCat.</li>
+              </ul>
+            </ul>
+        </div>
+        <div class="event-section">  
+          <h3 class ="event-title"><b>SpanCat</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li>Switched to Spancat, to align more with what we intended to do with our project which was labeling ADRs pertaining to a specific DRUG. The span categorization method allowed us to have overlapping labels providing the model with more context clues 
+              <li>Overcame technical issue with MySQL database for Prodigy by limiting to posts 2000 characters or lower</li>
+              <li>Zach and Taylor's Cohen's Kappa: <b>.46</b></li>
+              <li>Aidan and Jackson's Cohen's Kappa: <b>.34</b></li>
+            </ul>
+        </div>   
+      </div>
+	    <div class="event" id="event-5">
+        <div class="event-section">  
+          <h3 class ="event-title"><b>NER/SpanCat Models: Sense2vec</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li>Sense2Vec is a novel method for word sense disambiguation in neural word embeddings using supervised NLP labels instead of unsupervised clustering.</li> 
+              <li>A word sense is usually determined by the words around it, or the co-occurrence of words. Word sense disambiguation is the task of identifying the correct sense of a word in a given sentence or text.</li>
+              <li>sense2vec can disambiguate between different parts of speech, sentiment, named entities, and syntactic roles of words, and shows subjective and qualitative examples of the disambiguated embeddings.</li>
+            </ul>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Text Classification: RoBERTa w/ Classifier; GPT2</b></h3>
+            <ul style="line-height:1.5" class ="event-content">  
+              <li>RoBERTa with classifier for ADR identification, and using ChatGPT-generated comments to augment training data</li>
+              <li>Also tried a GPT2 model with classifier for ADR identification, decided to settle on RoBERTa due to better performance</li>
+            </ul> 
+            <p>Overall shape of our final pipeline flow begins to take shape here | binary classification -> named entity recognition on classified comments</p>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Annotation Progresss</b></h3> 
+            <ul style="line-height:1.5" class ="event-content"> 
+              <li>Inter-rater reliability (Cohen's Kappa) improvements:</li>
+              <ul>
+                <li>Span Categorization (from previous SpanCat):</li>
+                <ul>
+                  <li>Taylor and Zach: .46 -> <b>.55</b></li> 
+                  <li>Aidan and Jackson : .34 -> <b>.56</b></li>
+                </ul>
+              </ul>
+              <li>Text Classification:</li>
+              <ul>
+                <li>Taylor and Zach: <b>.74</b></li>
+                <li>Aidan and Jackson : <b>.58</b></li>
+              </ul>
+            </ul>
+        </div>
+      </div>
+
+	    <div class="event" id="event-6">
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Reproducible Pipeline</b></h3>
+          <ul style="line-height:1.5" class ="event-content">
+            <li>We want to provide the ability to filter social media's comments of not just Reddit, but other platforms such as Twitter or Facebook</li>
+            <li>Allowing the user to input any medication or adverse drug reaction that they are concerned about
+            <li>Prime directive is for the tool to be accessibile and usable by academic, corporate, governmental, and public entities</li>
+            </li>
+          </ul>
+        </div>
+
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>RoBERTa Text Classification</b></h3>
+            <ul style="line-height:1.5" class ="event-content"> 
+              <li><b>Pre-trained RoBERTa base model from HuggingFace transformers library</b></li>
+              <ul> 
+                <li>“Robustly Optimized BERT Pretraining Approach”</li>
+                <li>Builds on classic BERT model with longer and more focused pretraining and hyperparameter optimization</li>
+              </ul>
+              <li><b>Custom PyTorch Dataset and Dataloaders</b></li>
+              <ul>
+                <li>Text preprocessing (removal of punctuation, links, etc.)</li>
+                <li>Comments are split into lists of strings and passed into RoBERTa tokenizer item by item with overlap between them</li>
+              </ul>
+              <li><b>PyTorch classification “head” on top of RoBERTa base model</b></li>
+              <ul>
+                <li>Takes pooled output of RoBERTa and performs classification (ADR or no ADR)</li>
+                <li>nn.Dropout to help prevent overfitting</li>
+                <li>nn.Linear transforms output to number of classes</li>
+              </ul>
+              <li><b>Training parameters</b></li>
+              <ul>
+                <li>5 training epochs with validation cycle after each</li>
+                <li>CrossEntropyLoss with class weights</li>
+                <li>AdamW optimizer</li>
+                <li>Linear learning rate scheduler</li>
+              </ul>
+            </ul>
+        </div>
+
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Flair Named Entity Recogntion</b></h3>
+            <ul style="line-height:1.5" class ="event-content"> 
+              <li><b>Stacked Embeddings</b></li>
+              <ul> 
+                <li>GloVe Embeddings (word similarity, co-occurrence)</li>
+                <li>FlairEmbeddings (forward and backwards context)</li>
+                <ul>
+                  <li>Character level-embedding</li>
+                  <li>Same word will have different embeddings depending on its contextual use</li> 
+                </ul>
+              </ul>
+              <li><b>WordDropout and LockedDropout</b></li>
+              <ul>
+                <li>Drops words and feature dimensions to prevent overfitting (p = 0.05)</li>
+              </ul>
+              <li><b>Recurrent neural network (RNN) - Bidirectional Long Short Term Memory (biLSTM)</b></li>
+              <ul>
+                <li>Provides short-term memory for RNN that can last thousands of steps</li>
+                <li>Processes the input sequence forward and backwards (4196 input, 256 hidden output, x2 for bidirectionality)</li>
+              </ul>
+              <li><b>Linear layer</b></li>
+              <ul>
+                <li>5 training epochs with validation cycle after each</li>
+                <li>CrossEntropyLoss with class weights</li>
+                <li>AdamW optimizer</li>
+                <li>Linear learning rate scheduler</li>
+              </ul>
+              <li><b>ViterbiLoss function</b></li>
+            </ul>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>spaCy Dependency Parser</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li><b>Pre-trained</b></li>
+            </ul>
+        </div>
+      </div>
+
+      <div class="event" id="event-7">
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Final Annotations</b></h3>
+          <ul style="line-height:1.5" class ="event-content"> 
+            <li>Inter-rater reliability (Cohen's Kappa) improvements:</li>
+            <ul>
+              <li>Text classification (from previous TextCat):</li>
+              <ul>
+                <li>Taylor and Zach: .74 -> <b>.73</b> (retained IRR)</li> 
+              </ul>
+              <li>Named entity recogntion:</li>
+              <ul>
+                <li>Aidan and Jackson: <b>.58</b></li>
+              </ul>
+            </ul>
+          </ul>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>RoBERTa Evaluation Metrics</b></h3>
+          <ul style="line-height:1.5" class ="event-content"> 
+            <li>Data is split into training, validation and test sets</li>
+            <li>Run through with a batch size of 8 using a custom PyTorch data loader and the RoBERTa tokenizer which is a BPE (byte pair encoding) tokenizer.</li>
+            <li>Model is trained for 5 epochs, with a validation cycle after each epoch.</li>
+            <li>The training and validation accuracy and loss metrics are calculated at each training and validation step and convergence is observed.</li>
+            <img src="visualizations/robertatrainviz.png" width=1100 alt="RoBERTa Training Visualizations" class="padding">
+          </ul>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>RoBERTa Evaluation Metrics</b></h3>
+          <ul style="line-height:1.5" class ="event-content"> 
+            <li>Data is split into training, validation and test sets</li>
+            <li>The training process is configured with a learning rate of 0.1, a mini-batch size of 32, and a maximum of 25 epochs.</li>
+            <img src="visualizations/flairtrainviz.png" width=1100 alt="Flair Training Visualizations" class="padding">
+          </ul>
+        </div>
+      </div>
+      <div class="event" id="event-8">
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Docker and Github</b></h3>
+          <ul style="line-height:1.5" class ="event-content"> 
+            <li>Docker containerization, deployment</li>
+            <li>Github repository and Github Actions workflow</li>
+            <ul>
+              <li>Building a docker image</li>
+              <li>Run the pipeline on local runner</li>
+            </ul>
+            <li>Uses Git LFS</li>
+            <li>Post exec-week, upon suggestion from Dr. Scott, started researching Nautilus</li> 
+          </ul>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Docker, Github, and Nautilus</b></h3>
+          <ul style="line-height:1.5" class ="event-content"> 
+            <li>Model runs on Nautilus</li>
+            <li>Still able to mantain Github Action workflow (needs self-hosted runner)</li>
+            <div class="image-container">
+              <img src="visualizations/githubactionswf1.png" alt="Github Action Workflow STEP 1">
+              <img src="visualizations/githubactionswf2.png" alt="Github Action Workflow STEP 2">
+            </div>
+            <li>Config file refresh leads to hiccups when running, usually needs to be reset once daily, but works otherwise.</li>
+          </ul>
+        </div>      
+      </div>
+
+	    <div class="event" id="demo">
+        <h3>Demo</h3>
+        <iframe src="https://aidan2b.shinyapps.io/adr-detection/" width="100%" height="600px" style="border:none;"></iframe>
+      </div>
+	  
+    </div>
+  </div>
+
+  <script src="./scripts.js"></script>
+</body>
+</html>
