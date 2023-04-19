@@ -19,7 +19,7 @@ shinyServer(function(input, output, session) {
     data
   })
   
-  faers_data <- reactive({
+  faers <- reactive({
     data <- read.csv('faers.csv') %>%
       mutate(term = tolower(term))  
     print(head(data))
@@ -74,6 +74,17 @@ shinyServer(function(input, output, session) {
     print(result) # Print the filtered data
     result
   })
+
+  # Create a reactive data frame filtered by the selected drug
+  faers_data <- reactive({
+    result <- faers() %>% dplyr::filter(!term %in% input$adr_exclusions) %>%
+      group_by(term) %>%
+      summarize(count = sum(count)) %>%
+      arrange(desc(count)) %>%
+      head(20)
+    print(result) # Print the filtered data
+    result
+  })
   
   adr_counts <- reactive({
     result2 <- fetched_data() %>%
@@ -82,7 +93,7 @@ shinyServer(function(input, output, session) {
       unnest(adrs)
     d1 <- event_data("plotly_click", source = "A")
     if (is.null(d1)){
-      result2 <- result2 %>% dplyr::filter(adr == "insomnia") %>%
+      result2 <- result2 %>% dplyr::filter(adr == "fatigue") %>%
         arrange(desc(occurrences))
     } else {
       result2 <- result2 %>% dplyr::filter(adr == d1$y) %>%
@@ -100,7 +111,10 @@ shinyServer(function(input, output, session) {
             source = "A") %>%
       layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "ADR"),
-             title = paste0("Top ADR Reddit mentions for ", input$drug))
+             title = paste0("Top ADRs reported on Reddit for ", input$drug),
+             plot_bgcolor = "transparent",
+             paper_bgcolor = "transparent",
+             margin = list(l = 100, r = 30, t = 30, b = 50)) 
   })
   
   # Create an interactive plot of ADR occurrences using plotly
@@ -109,22 +123,28 @@ shinyServer(function(input, output, session) {
             marker = list(color = ~count, colorscale = "Viridis")) %>%
       layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "ADR"),
-             title = paste0("Top ADRs reported to FAERS for ", input$drug))
+             title = paste0("Top ADRs reported to FAERS for ", input$drug),
+             plot_bgcolor = "transparent",
+             paper_bgcolor = "transparent",
+             margin = list(l = 100, r = 30, t = 30, b = 50))
   })
   
   # Create a plot of ADR occurrences (ordered by drug) using plotly
   output$adr_plot <- renderPlotly({
     d2 <- event_data("plotly_click", source = "A")
     if (is.null(d2)){
-      blank <- "insomnia"
+      blank <- "fatigue"
     } else {
       blank <- d2$y
     }
     plot_ly(adr_counts(), x = ~occurrences, y = ~reorder(drug, occurrences), type = "bar",
             marker = list(color = ~occurrences, colorscale = "Viridis")) %>%
-      layout(xaxis = list(title = "Number of Posts"),
+      layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "Drug"),
-             title = paste0("How Many Reddit Posts Mentioned the ADR ", blank, "?"))
+             title = paste0("Top drugs associated with ", blank),
+             plot_bgcolor = "transparent",
+             paper_bgcolor = "transparent",
+             margin = list(l = 100, r = 30, t = 30, b = 50))
   })
   
 })
