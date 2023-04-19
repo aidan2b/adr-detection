@@ -195,7 +195,7 @@
               </ul>
             </ul>
         </div>
-        <div class="event-section">  
+        <div class="event-section">
           <h3 class ="event-title"><b>SpanCat</b></h3>
             <ul style="line-height:1.5" class ="event-content">
               <li>Switched to Spancat, to align more with what we intended to do with our project which was labeling ADRs pertaining to a specific DRUG. The span categorization method allowed us to have overlapping labels providing the model with more context clues 
@@ -206,6 +206,14 @@
         </div>   
       </div>
 	    <div class="event" id="event-5">
+        <div class="event-section">
+          <h3 class ="event-title"><b>Switched medications</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li>Ocrevus, while a popular medication on Reddit, was almost too good of a medication. We needed to provide data to the model that had ADRs in it in the first place if we were wanting to train the model to pick out ADRs.</li>
+              <li>Therefore, we switched to Humira, a tumor necrosis factor (TNF) blocker that reduces the effects of a substance in the body that can cause inflammation.</li>
+              <li>We noticed many people mentioning and complaining about Humira while annotating the "Ocrevus" comments.</li>
+            </ul>
+        </div>
         <div class="event-section">  
           <h3 class ="event-title"><b>NER/SpanCat Models: Sense2vec</b></h3>
             <ul style="line-height:1.5" class ="event-content">
