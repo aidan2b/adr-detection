@@ -21,5 +21,10 @@ fluidPage(
     column(width = 6,
       plotlyOutput(outputId = "faers_plot")
     )
+  ),
+  fluidRow(
+    column(width = 6,
+           plotlyOutput(outputId = "adr_plot")
+    )
   )
 )

@@ -440,6 +440,7 @@ def run_pipeline(medication):
 if __name__ == '__main__':
     
     medication = os.getenv("MEDICATION_NAME") 
-    
+    # medication = input("Enter medication name: ") 
+
     run_pipeline(medication)
 

@@ -7,6 +7,7 @@ library(purrr)
 library(httr)
 library(readr)
 library(reticulate)
+library(ggplot2)
 
 shinyServer(function(input, output, session) {
   
@@ -17,35 +18,35 @@ shinyServer(function(input, output, session) {
     print(head(data))
     data
   })
-
+  
   faers_data <- reactive({
     data <- read.csv('faers.csv') %>%
       mutate(term = tolower(term))  
     print(head(data))
     data
   })
-
+  
   observeEvent(input$submit, {
     medication_name <- input$medication
-
+    
     url <- "https://api.github.com/repos/aidan2b/adr-detection/actions/workflows"
     headers <- c(Accept = "application/vnd.github+json",
                  Authorization = paste0(github_token))
     response <- httr::GET(url, httr::add_headers(.headers=headers))
     workflow_info <- httr::content(response, as = "parsed")
-
+    
     workflow_id <- workflow_info$workflows[[1]]$id
-
+    
     url <- paste0("https://api.github.com/repos/aidan2b/adr-detection/actions/workflows/",
                   workflow_id, "/dispatches")
     headers <- c(Accept = "application/vnd.github+json",
                  Authorization = paste0(github_token))
     body <- list(ref = "main", inputs = list(medication = medication_name))
     response <- httr::POST(url, httr::add_headers(.headers=headers), jsonlite::toJSON(body))
-
+    
     print(response)
   })
-
+  
   # Populate the drug and ADR choices in the UI
   observe({
     updateSelectInput(session, "drug", choices = unique(fetched_data()$drug))
@@ -74,21 +75,56 @@ shinyServer(function(input, output, session) {
     result
   })
   
+  adr_counts <- reactive({
+    result2 <- fetched_data() %>%
+      mutate(adrs = gsub("'", "\"", adrs)) %>%
+      mutate(adrs = map(adrs, ~ fromJSON(.x))) %>%
+      unnest(adrs)
+    d1 <- event_data("plotly_click", source = "A")
+    if (is.null(d1)){
+      result2 <- result2 %>% dplyr::filter(adr == "insomnia") %>%
+        arrange(desc(occurrences))
+    } else {
+      result2 <- result2 %>% dplyr::filter(adr == d1$y) %>%
+        arrange(desc(occurrences))
+    }
+    print(result2)
+    print(d1)
+    result2
+  })
+  
   # Create an interactive plot of ADR occurrences using plotly
   output$plot <- renderPlotly({
     plot_ly(drug_data(), x = ~occurrences, y = ~reorder(adr, occurrences), type = "bar",
-            marker = list(color = ~occurrences, colorscale = "Viridis")) %>%
+            marker = list(color = ~occurrences, colorscale = "Viridis"), 
+            source = "A") %>%
       layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "ADR"),
-             title = paste0("Top 20 ADR occurrences for ", input$drug))
+             title = paste0("Top ADR Reddit mentions for ", input$drug))
   })
-
+  
   # Create an interactive plot of ADR occurrences using plotly
   output$faers_plot <- renderPlotly({
     plot_ly(faers_data(), x = ~count, y = ~reorder(term, count), type = "bar",
             marker = list(color = ~count, colorscale = "Viridis")) %>%
       layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "ADR"),
-             title = paste0("Top 20 ADR reported to FAERS for ", input$drug))
+             title = paste0("Top ADRs reported to FAERS for ", input$drug))
   })
+  
+  # Create a plot of ADR occurrences (ordered by drug) using plotly
+  output$adr_plot <- renderPlotly({
+    d2 <- event_data("plotly_click", source = "A")
+    if (is.null(d2)){
+      blank <- "insomnia"
+    } else {
+      blank <- d2$y
+    }
+    plot_ly(adr_counts(), x = ~occurrences, y = ~reorder(drug, occurrences), type = "bar",
+            marker = list(color = ~occurrences, colorscale = "Viridis")) %>%
+      layout(xaxis = list(title = "Number of Posts"),
+             yaxis = list(title = "Drug"),
+             title = paste0("How Many Reddit Posts Mentioned the ADR ", blank, "?"))
+  })
+  
 })
