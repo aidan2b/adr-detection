@@ -34,10 +34,10 @@ fluidPage(
   
   tags$div(class = "panel",
            fluidRow(
-             column(width = 2,
+             column(width = 3,
                     selectInput(inputId = "drug", label = "Select a drug mentioned:", choices = NULL)
              ),
-             column(width = 2,
+             column(width = 3,
                     selectInput(inputId = "adr_exclusions", label = "Deselect ADRs:", choices = NULL, multiple = TRUE, selectize = TRUE)
              )
            ),
