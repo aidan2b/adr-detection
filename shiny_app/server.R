@@ -11,7 +11,6 @@ library(ggplot2)
 
 shinyServer(function(input, output, session) {
   
-  github_token <- Sys.getenv("MY_GITHUB_TOKEN")
   
   fetched_data <- reactive({
     data <- read.csv('linked_data.csv')
@@ -19,33 +18,55 @@ shinyServer(function(input, output, session) {
     data
   })
   
+  get_faers_R <- function(medication) {
+    cat(paste0("Fetching FAERS data for: ", medication, "\n"))
+    cat(paste0("Medication variable type: ", class(medication), "\n"))
+    
+    url_brand <- paste0("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:", medication, "&limit=20&count=patient.reaction.reactionmeddrapt.exact")
+    url_generic <- paste0("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.generic_name:", medication, "&limit=20&count=patient.reaction.reactionmeddrapt.exact")
+    
+    response_brand <- tryCatch({
+      response <- GET(url_brand)
+      if (response$status_code != 200) {
+        stop("Request failed")
+      }
+      content(response, "text")
+    }, error = function(e) {
+      NULL
+    })
+    
+    response_generic <- tryCatch({
+      response <- GET(url_generic)
+      if (response$status_code != 200) {
+        stop("Request failed")
+      }
+      content(response, "text")
+    }, error = function(e) {
+      NULL
+    })
+    
+    if (!is.null(response_brand)) {
+      data <- fromJSON(response_brand)
+      df <- data.frame(data$results)
+    } else if (!is.null(response_generic)) {
+      data <- fromJSON(response_generic)
+      df <- data.frame(data$results)
+    } else {
+      cat(paste0(medication, " invalid\n"))
+      return(NULL)
+    }
+    
+    write.csv(df, "faers.csv", row.names = FALSE)
+  }
+  
   faers <- reactive({
-    data <- read.csv('faers.csv') %>%
+    get_faers_R(input$drug)
+    data <- read.csv("faers.csv") %>%
       mutate(term = tolower(term))  
     print(head(data))
     data
   })
-  
-  observeEvent(input$submit, {
-    medication_name <- input$medication
-    
-    url <- "https://api.github.com/repos/aidan2b/adr-detection/actions/workflows"
-    headers <- c(Accept = "application/vnd.github+json",
-                 Authorization = paste0(github_token))
-    response <- httr::GET(url, httr::add_headers(.headers=headers))
-    workflow_info <- httr::content(response, as = "parsed")
-    
-    workflow_id <- workflow_info$workflows[[1]]$id
-    
-    url <- paste0("https://api.github.com/repos/aidan2b/adr-detection/actions/workflows/",
-                  workflow_id, "/dispatches")
-    headers <- c(Accept = "application/vnd.github+json",
-                 Authorization = paste0(github_token))
-    body <- list(ref = "main", inputs = list(medication = medication_name))
-    response <- httr::POST(url, httr::add_headers(.headers=headers), jsonlite::toJSON(body))
-    
-    print(response)
-  })
+
   
   # Populate the drug and ADR choices in the UI
   observe({
