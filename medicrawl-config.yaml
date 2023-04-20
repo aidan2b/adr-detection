@@ -1,16 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: medications-configmap
+  name: medicrawl-config
 data:
   medications: |
     prozac
     wellbutrin
     lexapro
     zoloft
-    xanax
-    ativan
-    cymbalta
-    valium
-    paxil
-    celexa
+    propranolol

@@ -1,0 +1,13 @@
+name: Run Pipeline
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Run pipeline on Nautilus
+      run: |
+        ./medicrawl.sh

@@ -1,0 +1,14 @@
+name: Run Pipeline to Deploy Shinyapp
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Use saved Nautilus data to deploy S
+      run: |
+        # Apply the Kubernetes configuration
+        kubectl apply -f shiny-deploy.yaml
