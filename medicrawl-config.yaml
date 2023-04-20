@@ -4,8 +4,11 @@ metadata:
   name: medicrawl-config
 data:
   medications: |
-    prozac
-    wellbutrin
-    lexapro
     zoloft
-    propranolol
+    tylenol
+    lisinopril
+    celexa
+    lipitor
+    xanax
+
+    
