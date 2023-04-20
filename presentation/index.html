@@ -12,11 +12,10 @@
       <div class="timeline-node active" data-target="event-1">INTRO</div>
       <div class="timeline-node" data-target="event-2">EDA</div>
       <div class="timeline-node" data-target="event-3">ANNOTATION</div>
-      <div class="timeline-node" data-target="event-4">IRR</div>
-      <div class="timeline-node" data-target="event-5">MODELS</div>
-      <div class="timeline-node" data-target="event-6">PIPELINE</div>
-      <div class="timeline-node" data-target="event-7">EVALUATION</div>
-      <div class="timeline-node" data-target="event-8">DEPLOY</div>
+      <div class="timeline-node" data-target="event-4">TESTING</div>
+      <div class="timeline-node" data-target="event-5">PIPELINE</div>
+      <div class="timeline-node" data-target="event-6">EVALUATION</div>
+      <div class="timeline-node" data-target="event-7">DEPLOY</div>
       <div class="demo-node" data-target="demo">DEMO</div>
     </div>
     <div class="event-container">
@@ -126,9 +125,16 @@
               <li>Namely, we would need to narrow our scope from many medications to choosing one to build a solid model on. From there, building a pipeline which can then be used for other drugs</li>
             </ul>
         </div>
+        <div class="event-section">  
+          <h3 class ="event-title"><b>spaCy NLP Library Compatibility w/ Prodigy</b></h3>
+            <ul style="line-height:1.5" class ="event-content">
+              <li>spaCy provides pre-trained models that can be used with many annotation styles afforded to us through Prodigy</li>
+            </ul>
+        </div>
         <div class="event-section">
           <h3 class ="event-title"><b>Prodigy Annotations</b></h3>
             <ul style="line-height:1.5" class ="event-content">
+              <li>In order to train any of the models on our data, we deemed it wise to assert some form of inter-rater reliability for the annotation method that we use</li>
               <li>Annotated raw Reddit text in Prodigy, highlighting symptoms and drugs, and saved annotations in JSON format</li>
               <li>Incorporated Medical Dictionary for Regulatory Activities (MedDRA) terminology of side effects to enhance model's vocabulary</li>
               <li>A sizeable amount of annotations were needed in order to improve the model's performance. Therefore, we decided it would be best for the team to split into pairs and start annotating as a group.</li>
@@ -155,58 +161,35 @@
             <ul style="line-height:1.5" class ="event-content">
               <li><b>Named Entity Recognition (NER)</b></li>
               <ul>
-                <li>Identify and lebel drug names and adverse reaction words or phrases in the text</li>
+                <li>When using Prodigy, we use two potential tags for terms/entities in the text: DRUG and ADR.</li>
+                <li>The DRUG tag is only applied to the specific medication we are looking for (currently ocrelizumab aka Ocrevus).</li>
+                <ul>
+                  <li>Any other drugs mentioned in the text are not tagged.</li>
+                </ul>
+                <li>The ADR tag is only applied to specific symptoms, diseases, reactions or other events related directly to ocrelizumab in the text.</li>
+                <ul>
+                  <li>If there are no ADRs mentioned but the desired medication is mentioned, we tag the DRUG and accept the comment.</li>
+                  <li>If the medication we are looking for is mentioned and ADRs are explicitly or contextually tied to the medication in the text, we tag both DRUG and ADR examples and accept the comment.</li>
+                  <li>If the medication we are looking for is not mentioned and ADRs are also not mentioned, we tag nothing but accept the comment.</li>
+                  <li>If the medication we are looking for is not mentioned, but terms that could be ADRs of any kind are mentioned, we tag nothing and reject the comment to remove it from consideration.</li>
+                  <li>Unable to calculate Cohen's Kappa due to misunderstandings on 'accept' vs. 'reject' in the annotation rules.</li>
+                  <li>Complexity to labeling adverse drug reactions in as casual and imprecise a format as Reddit comments.</li> 
+                  <li>One of the larger factors in this dilemma it seemed, was context. Which prompted us to try the next method, SpanCat.</li>
+                </ul>
               </ul>
+              <img src="visualizations/ner.png" width=550  alt="NER Example" class="padding">
               <li><b>Span Categorization (SpanCat)</b></li>
               <ul>
-                <li>Detect and categorize relevant spans of text related to adverse drug reactions, allows for overlapping labels for context</li>
+                <li>Switched to Spancat, to align more with what we intended to do with our project which was labeling ADRs pertaining to a specific DRUG. The span categorization method allowed us to have overlapping labels providing the model with more context clues 
+                <li>Overcame technical issue with MySQL database for Prodigy by limiting to posts 2000 characters or lower</li>
+                <li>Zach and Taylor's Cohen's Kappa: <b>.46</b></li>
+                <li>Aidan and Jackson's Cohen's Kappa: <b>.34</b></li>
               </ul>
-              <li><b>Text Classification (TextCat)</b></li>
-              <ul>
-                <li>Categorize the text as containing an ADR for any drug or not</li>
-              </ul>
-            </ul>  
-        </div>
-        <div class="event-section">  
-          <h3 class ="event-title"><b>spaCy Natural Language Processing (NLP) Library Compatibility w/ Prodigy</b></h3>
-            <ul style="line-height:1.5" class ="event-content">
-              <li>spaCy provides pre-trained models that can be used with any of these annotation styles</li>
-              <li>However, before we train with any of these, we must assert some form of inter-rater reliability for our annotations</li>
+              <img src="visualizations/spancat.png" width=550  alt="SpanCat Example" class="padding">
             </ul>
-        </div>    
+        </div>   
       </div>
 	    <div class="event" id="event-4">
-        <div class="event-section">  
-          <h3 class="event-title"><b>NER</b></h3>
-            <ul style="line-height:1.5" class ="event-content">
-              <li>When using Prodigy, we use two potential tags for terms/entities in the text: DRUG and ADR.</li>
-              <li>The DRUG tag is only applied to the specific medication we are looking for (currently ocrelizumab aka Ocrevus).</li>
-              <ul>
-                <li>Any other drugs mentioned in the text are not tagged.</li>
-              </ul>
-              <li>The ADR tag is only applied to specific symptoms, diseases, reactions or other events related directly to ocrelizumab in the text.</li>
-              <ul>
-                <li>If there are no ADRs mentioned but the desired medication is mentioned, we tag the DRUG and accept the comment.</li>
-                <li>If the medication we are looking for is mentioned and ADRs are explicitly or contextually tied to the medication in the text, we tag both DRUG and ADR examples and accept the comment.</li>
-                <li>If the medication we are looking for is not mentioned and ADRs are also not mentioned, we tag nothing but accept the comment.</li>
-                <li>If the medication we are looking for is not mentioned, but terms that could be ADRs of any kind are mentioned, we tag nothing and reject the comment to remove it from consideration.</li>
-                <li>Unable to calculate Cohen's Kappa due to misunderstandings on 'accept' vs. 'reject' in the annotation rules.</li>
-                <li>Complexity to labeling adverse drug reactions in as casual and imprecise a format as Reddit comments.</li> 
-                <li>One of the larger factors in this dilemma it seemed, was context. Which prompted us to try the next method, SpanCat.</li>
-              </ul>
-            </ul>
-        </div>
-        <div class="event-section">
-          <h3 class="event-title"><b>SpanCat</b></h3>
-            <ul style="line-height:1.5" class ="event-content">
-              <li>Switched to Spancat, to align more with what we intended to do with our project which was labeling ADRs pertaining to a specific DRUG. The span categorization method allowed us to have overlapping labels providing the model with more context clues 
-              <li>Overcame technical issue with MySQL database for Prodigy by limiting to posts 2000 characters or lower</li>
-              <li>Zach and Taylor's Cohen's Kappa: <b>.46</b></li>
-              <li>Aidan and Jackson's Cohen's Kappa: <b>.34</b></li>
-            </ul>
-        </div>
-      </div>
-	    <div class="event" id="event-5">
         <div class="event-section">
           <h3 class="event-title"><b>Switched medications</b></h3>
             <ul style="line-height:1.5" class ="event-content">
@@ -226,21 +209,43 @@
         <div class="event-section"> 
           <h3 class="event-title"><b>Text Classification: RoBERTa w/ Classifier; GPT2</b></h3>
             <ul style="line-height:1.5" class ="event-content">  
-              <li>RoBERTa with classifier for ADR identification, and using ChatGPT-generated comments to augment training data</li>
+              <li>RoBERTa with classifier for ADR identification</li>
+              <ul>
+                <li>OpenAI's gpt-3.5-turbo model for generating comments and classifying those comments as well to augment training data</li>
+                <ul>
+                  <li><b>Address class imbalances:</b> Useful when trying to predict something that does not occur very often.</li>
+                  <li><b>Diversify training data:</b> Create diverse perspectives that may not be present in the original dataset. Countering biased data.</li>
+                  <li><b>Increase annotation efficiency:</b> Reduce manual annotation workload by using effective prompt engineering.</li>
+                </ul>
+              </ul>
               <li>Also tried a GPT2 model with classifier for ADR identification, decided to settle on RoBERTa due to better performance</li>
             </ul> 
             <p>Overall shape of our final pipeline flow begins to take shape here | binary classification -> named entity recognition on classified comments</p>
         </div>
         <div class="event-section"> 
-          <h3 class="event-title"><b>Annotation Progresss</b></h3> 
-            <ul style="line-height:1.5" class ="event-content"> 
-              <li>Inter-rater reliability (Cohen's Kappa) improvements:</li>
+          <h3 class="event-title"><b>Annotation Updates</b></h3> 
+          <p>To increases annotation speed, we edited our patterns file to include these resources:</p>
+            <ul style="line-height:1.5" class ="event-content">
+              <li><b>ADRs</b> ADR Lexicon V 1.1 - HLP Cedars-Sinai</li>
               <ul>
-                <li>Span Categorization (from previous SpanCat):</li>
-                <ul>
-                  <li>Taylor and Zach: .46 -> <b>.55</b></li> 
-                  <li>Aidan and Jackson : .34 -> <b>.56</b></li>
-                </ul>
+                <li>SIDER (Side Effect Resource)</li>
+                <li>CHV (Consumer Health Vocabulary)</li>
+                <li>COSTART (Coding Symbols for a Thesaurus of Adverse Reaction Terms)</li>
+                <li>DIEGO_Lab</li>
+              </ul>  
+              <li><b>DRUGS</b>: Drugs@FDA Data Files</li>
+              <ul>
+                <li>Selected the unique drug names and active ingredients from this</li>
+              </ul>
+            </ul>
+        </div>
+        <div class="event-section">
+          <h3 class="event-title"><b>Inter-rater reliability (Cohen's Kappa) improvements:</b></h3> 
+            <ul style="line-height:1.5" class ="event-content">
+              <li>Span Categorization (from previous SpanCat):</li>
+              <ul>
+                <li>Taylor and Zach: .46 -> <b>.55</b></li> 
+                <li>Aidan and Jackson : .34 -> <b>.56</b></li>
               </ul>
               <li>Text Classification:</li>
               <ul>
@@ -248,10 +253,10 @@
                 <li>Aidan and Jackson : <b>.58</b></li>
               </ul>
             </ul>
+            <img src="visualizations/textcat.png" width=550  alt="NER Example" class="padding">
         </div>
       </div>
-
-	    <div class="event" id="event-6">
+	    <div class="event" id="event-5">
         <div class="event-section"> 
           <h3 class="event-title"><b>Reproducible Pipeline</b></h3>
           <ul style="line-height:1.5" class ="event-content">
@@ -333,7 +338,7 @@
         </div>
       </div>
 
-      <div class="event" id="event-7">
+      <div class="event" id="event-6">
         <div class="event-section"> 
           <h3 class ="event-title"><b>Final Annotations</b></h3>
           <p>After another round of annotations, Taylor and Zach were able to maintain a solid Cohen's Kappa with Text Classification. However, Jackson and Aidan had poor results (<b>.38</b>) so the pair conducted another round of annotations but beforehand the team got together to create a document of rules for both annotation methods. After the rules were created, Jackson and Aidan made significant improvements in Cohen's Kappa.</p>
@@ -349,7 +354,7 @@
                 <li>Aidan and Jackson: .38 -> <b>.58</b></li>
               </ul>
             </ul>
-            <img src="visualizations/irr_progresssion.png" width=500 alt="Inter-rater Reliability Progression" class="padding">
+            <img src="visualizations/irr_progresssion.png" width=550 height=500 alt="Inter-rater Reliability Progression" class="padding">
           </ul>
         </div>
         <div class="event-section"> 
@@ -371,7 +376,7 @@
           </ul>
         </div>
       </div>
-      <div class="event" id="event-8">
+      <div class="event" id="event-7">
         <div class="event-section"> 
           <h3 class ="event-title"><b>Docker Containers for Data Storage and Reproducibility</b></h3>
           <ul style="line-height:1.5" class ="event-content"> 
@@ -382,7 +387,7 @@
         <div class="event-section"> 
           <h3 class ="event-title"><b>GitHub Repository and Actions Workflows</b></h3>
           <ul style="line-height:1.5" class ="event-content"> 
-            <li>Remote storage and code versioning</li>
+            <li>Remote storage and version control</li>
             <li>GitHub-hosted CPU runners and self-hosted GPU runners</li>
             <li>Initial workflows:</li>
             <ul>
@@ -394,7 +399,7 @@
         <div class="event-section"> 
           <h3 class ="event-title"><b>Challenges and Workflow Adjustments</b></h3>
           <ul style="line-height:1.5" class ="event-content"> 
-            <li>Laptop's RTX 2060 Max-Q has limited processing speed</li>
+            <li>Aidan's laptop's RTX 2060 Max-Q can only do so much...</li>
             <li>Running pipeline for each user request is time-consuming and impractical</li>
             <li>New strategy considered for more efficient processing</li>
             <li>PushShift API issues encountered</li>
