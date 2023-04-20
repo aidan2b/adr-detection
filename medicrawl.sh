@@ -14,6 +14,7 @@ spec:
   containers:
     - name: medicrawl
       image: aidan2b/adr-detection:test
+      imagePullPolicy: Always
       command: ["/bin/sh", "-c"]
       env:
         - name: MEDICATION_NAME
