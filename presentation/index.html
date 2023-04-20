@@ -89,37 +89,38 @@
       
       <div class="event" id="event-2">
         <div class="event-section">
-          <h2 class ="event-title">Initial exploratory data analysis (EDA)</h2>
+          <h3 class ="event-title">Sentiment Analysis</h3>
           <ul style="line-height:1.5" class ="event-content">
-            <h3><b>Sentiment Analysis</b></h3>
-              <ul>
-                <li>Applied SentimentIntensityAnalyzer on Reddit comment content</li>
-                <li>Added Polarity Scores and assigned sentiment labels to DataFrame rows</li>
-                <li>Visualized results with Seaborn box plots and count plots</li>
-                <div class="image-container">
-                  <img src="visualizations/sent_analysis.png" alt="Sentiment Analysis">
-                  <img src="visualizations/sent_analysis_dist.png" alt="Sentiment Analysis Distribution">
-                </div>
-                <li>Basic topic modeling of negative Reddit comments using LatentDirichletAllocation</li>
-              </ul>     
-            <h3><b>Wordcloud</b></h3>
-              <ul>
-                <li>Utilized wordcloud library to visualize most used words per medication</li>
-                <li>Colored words based on sentiment analysis with TextBlob library</li>
-                  <img src="visualizations/wordclouds.png" width=1100 alt="Sentiment Analysis" class="padding">
-              </ul>    
-            <h3><b>Word Frequency Comparison</b></h3>
-              <ul>
-                <li>Employed pandas to compare word frequency across different sentiments</li>
-                <li>Calculated frequency differences for positive and negative Reddit comments</li>
-                <img src="visualizations/wordfreqcomp.png" width=600 alt="Word Frequency Comparison Tables" class="padding">
-              </ul>    
+            <li>Applied SentimentIntensityAnalyzer on Reddit comment content</li>
+            <li>Added Polarity Scores and assigned sentiment labels to DataFrame rows</li>
+            <li>Visualized results with Seaborn box plots and count plots</li>
+            <div class="image-container">
+              <img src="visualizations/sent_analysis.png" alt="Sentiment Analysis">
+              <img src="visualizations/sent_analysis_dist.png" alt="Sentiment Analysis Distribution">
+            </div>
+            <li>Basic topic modeling of negative Reddit comments using LatentDirichletAllocation</li>
           </ul>
+        </div>
+        <div class="event-section">    
+          <h3 class ="event-title">Wordcloud</h3>
+          <ul style="line-height:1.5" class ="event-content">
+            <li>Utilized wordcloud library to visualize most used words per medication</li>
+            <li>Colored words based on sentiment analysis with TextBlob library</li>
+              <img src="visualizations/wordclouds.png" width=1100 alt="Sentiment Analysis" class="padding">
+          </ul>
+        </div>
+        <div class="event-section">  
+          <h3 class ="event-title">Word Frequency Comparison</h3>
+          <ul style="line-height:1.5" class ="event-content">
+            <li>Employed pandas to compare word frequency across different sentiments</li>
+            <li>Calculated frequency differences for positive and negative Reddit comments</li>
+            <img src="visualizations/wordfreqcomp.png" width=600 alt="Word Frequency Comparison Tables" class="padding">
+          </ul>    
         </div>
       </div>
 	    <div class="event" id="event-3">
         <div class="event-section">
-          <h3 class ="event-title"><em>A pivot was needed...</em></h3>
+          <h3 class ="event-title"><b>A pivot was needed...</b></h3>
             <ul style="line-height:1.5" class ="event-content">
               <li>Upon further research and suggestions from our mentor, we decided to dip our toes into neural networks and deep learning methods due to the complexity of our problem. To set the foundations for this transtion, a metamorphosis of our method was needed.</li>
               <li>Namely, we would need to narrow our scope from many medications to choosing one to build a solid model on. From there, building a pipeline which can then be used for other drugs</li>
@@ -291,7 +292,7 @@
         </div>
 
         <div class="event-section"> 
-          <h3 class ="event-title"><b>Flair Named Entity Recogntion</b></h3>
+          <h3 class ="event-title"><b>Flair NER - SequenceTagger </b></h3>
             <ul style="line-height:1.5" class ="event-content"> 
               <li><b>Stacked Embeddings</b></li>
               <ul> 
@@ -325,6 +326,9 @@
           <h3 class ="event-title"><b>spaCy Dependency Parser</b></h3>
             <ul style="line-height:1.5" class ="event-content">
               <li><b>Pre-trained</b></li>
+              <li>Uses the output of the SequenceTagger (input DataFrame with labeled ADRs).</li>
+              <li>Links drugs and ADRs in the input text by finding the shortest dependency path between them using Spacy's en_core_web_md model.</li>
+              <li>Extracts and pairs drug-ADR entities and saves the results in a CSV file.</li>
             </ul>
         </div>
       </div>
@@ -332,6 +336,7 @@
       <div class="event" id="event-7">
         <div class="event-section"> 
           <h3 class ="event-title"><b>Final Annotations</b></h3>
+          <p>After another round of annotations, Taylor and Zach were able to maintain a solid Cohen's Kappa with Text Classification. However, Jackson and Aidan had poor results, so the pair conducted another round of annotations but beforehand the team got together to create a document of rules for both annotation methods. After the rules were created, Jackson and Aidan made significant improvements in Cohen's Kappa.</p>
           <ul style="line-height:1.5" class ="event-content"> 
             <li>Inter-rater reliability (Cohen's Kappa) improvements:</li>
             <ul>
@@ -341,7 +346,7 @@
               </ul>
               <li>Named entity recogntion:</li>
               <ul>
-                <li>Aidan and Jackson: <b>.58</b></li>
+                <li>Aidan and Jackson: .38 -> <b>.58</b></li>
               </ul>
             </ul>
           </ul>
@@ -357,7 +362,7 @@
           </ul>
         </div>
         <div class="event-section"> 
-          <h3 class ="event-title"><b>RoBERTa Evaluation Metrics</b></h3>
+          <h3 class ="event-title"><b>Flair Evaluation Metrics</b></h3>
           <ul style="line-height:1.5" class ="event-content"> 
             <li>Data is split into training, validation and test sets</li>
             <li>The training process is configured with a learning rate of 0.1, a mini-batch size of 32, and a maximum of 25 epochs.</li>
@@ -367,28 +372,60 @@
       </div>
       <div class="event" id="event-8">
         <div class="event-section"> 
-          <h3 class ="event-title"><b>Docker and Github</b></h3>
+          <h3 class ="event-title"><b>Docker Containers for Data Storage and Reproducibility</b></h3>
           <ul style="line-height:1.5" class ="event-content"> 
-            <li>Docker containerization, deployment</li>
-            <li>Github repository and Github Actions workflow</li>
-            <ul>
-              <li>Building a docker image</li>
-              <li>Run the pipeline on local runner</li>
-            </ul>
-            <li>Uses Git LFS</li>
-            <li>Post exec-week, upon suggestion from Dr. Scott, started researching Nautilus</li> 
+            <li>Remote storage with two initial versions (v1: 1200 comments, v1-large: 12000 comments)</li>
+            <li>Ensures reproducibility through containerized environments</li>
           </ul>
         </div>
         <div class="event-section"> 
-          <h3 class ="event-title"><b>Docker, Github, and Nautilus</b></h3>
+          <h3 class ="event-title"><b>GitHub Repository and Actions Workflows</b></h3>
           <ul style="line-height:1.5" class ="event-content"> 
-            <li>Model runs on Nautilus</li>
-            <li>Still able to mantain Github Action workflow (needs self-hosted runner)</li>
+            <li>Remote storage and code versioning</li>
+            <li>GitHub-hosted CPU runners and self-hosted GPU runners</li>
+            <li>Initial workflows:</li>
+            <ul>
+                <li>Push select GitHub branch to a specific Docker tag</li>
+                <li>Enter medication, select Docker tag, run pipeline, and deploy to Shiny Apps (on self-hosted runner)</li>
+            </ul>
             <div class="image-container">
               <img src="visualizations/githubactionswf1.png" alt="Github Action Workflow STEP 1">
               <img src="visualizations/githubactionswf2.png" alt="Github Action Workflow STEP 2">
             </div>
+            
+          </ul>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Challenges and Workflow Adjustments</b></h3>
+          <ul style="line-height:1.5" class ="event-content"> 
+            <li>Laptop's RTX 2060 Max-Q has limited processing speed</li>
+            <li>Running pipeline for each user request is time-consuming and impractical</li>
+            <li>New strategy considered for more efficient processing</li>
+            <li>PushShift API issues encountered</li>
             <li>Config file refresh leads to hiccups when running, usually needs to be reset once daily, but works otherwise.</li>
+          </ul>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Nautilus HyperCluster</b></h3>
+          <ul style="line-height:1.5" class ="event-content"> 
+            <li>Remote storage, CPU and GPU runners</li>
+            <li>Initial workflows:</li>
+            <ul>
+                <li>Run pipeline and deploy to Shiny Apps</li>
+            </ul>
+            <li>Current Workflow:</li>
+            <ul>
+                <li>Create a database of Reddit comments using Medicrawl.sh</li>
+                <ul>
+                    <li>Pulls 1000 comments for each medication listed in ConfigMap file</li>
+                    <li>Appends comments to CSVs stored in Persistent Volume Claim (PVC)</li>
+                </ul>
+                <li>GitHub and Nautilus integration:</li>
+                <ul>
+                    <li>Push to Shiny App: loads CSVs from PVC and builds and deploys Shiny App</li>
+                    <li>Push to Pages: creates a GitHub Pages site for presentation and tool demo</li>
+                </ul>
+            </ul>
           </ul>
         </div>      
       </div>
