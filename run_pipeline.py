@@ -28,38 +28,26 @@ class RedditPull:
 
     def reddit_pull(self):
         reddit = praw.Reddit(
-            client_id=os.environ['REDDIT_CLIENT_ID'],
-            client_secret=os.environ['REDDIT_CLIENT_SECRET'],
+            client_id='nRPrGU-9AWMxwpq2LHU_lA',
+            client_secret='YtQF-062bFkCyCY4YDne1FJmX3uM8A',
             user_agent='test-app'
         )
 
-        api_praw = PushshiftAPI(praw=reddit)
+        all_comments = []
 
-        year = 2022  # Set the year you want to iterate through
-        all_comments = pd.DataFrame()
+        for submission in reddit.subreddit("all").search(self.medication, sort="new", limit=None):
+            submission.comments.replace_more(limit=0)
+            for comment in submission.comments.list():
+                if self.medication.lower() in comment.body.lower():
+                    all_comments.append(comment)
+                    if len(all_comments) >= 1000:
+                        break
+            if len(all_comments) >= 1000:
+                break
 
-        for month in range(1, 13):  # Iterate through each month
-            start_date = int(dt.datetime(year, month, 1).timestamp())
-
-            if month == 12:
-                end_date = int(dt.datetime(year + 1, 1, 1).timestamp())
-            else:
-                end_date = int(dt.datetime(year, month + 1, 1).timestamp())
-
-            comments = api_praw.search_comments(
-                q=self.medication,
-                limit=100,
-                after=start_date,
-                before=end_date
-            )
-
-            print('Retrieved {} comments for {}-{}'.format(len(comments), year, month))
-            month_comments = pd.DataFrame(comments)
-            all_comments = pd.concat([all_comments, month_comments], ignore_index=True)
-
-        print('Retrieved total {} comments'.format(len(all_comments)))
-
-        return all_comments
+        # Create a DataFrame with comment data
+        comments_df = pd.DataFrame([vars(c) for c in all_comments])
+        return comments_df[['body']]
 
     
     def preprocess_text(self,text):
@@ -440,7 +428,6 @@ def run_pipeline(medication):
 if __name__ == '__main__':
     
     medication = os.getenv("MEDICATION_NAME") 
-    # medication = input("Enter medication name: ") 
 
     run_pipeline(medication)
 
