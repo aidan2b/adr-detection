@@ -1,16 +1,19 @@
 apiVersion: v1
-kind: Pod
+kind: pod
 metadata:
   name: shiny-deploy-pod
 spec:
   restartPolicy: Never
   containers:
     - name: shiny-deploy
-      image: aidan2b/adr-detection:test
+      # image: aidan2b/adr-detection:test
       command: ["/bin/sh", "-c"]
       env:
         - name: MEDICATION_NAME
-          value: "ocrevus"
+          valueFrom:
+            configMapKeyRef:
+              name: medications-configmap
+              key: medications
         - name: REDDIT_CLIENT_ID
           valueFrom:
             secretKeyRef:
@@ -34,10 +37,10 @@ spec:
       args:
         - |
           # Run the pipeline script
-          python run_pipeline.py
+          # python run_pipeline.py
 
-          cp -r /shiny_app/faers.csv /data/faers.csv
-          tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
+          # cp -r /shiny_app/faers.csv /data/faers.csv
+          # tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
 
           # Deploy to shinyapps.io
           export PATH=$PATH:/usr/bin/R
