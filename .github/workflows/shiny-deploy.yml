@@ -1,5 +1,8 @@
 name: Run Pipeline to Deploy Shinyapp
 
+on:
+  workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: self-hosted
