@@ -1,5 +1,5 @@
 #!/bin/bash
-CONFIGMAP_NAME="medications-configmap"
+CONFIGMAP_NAME="medicrawl-config"
 KEY="medications"
 
 for medication in $(kubectl get configmap $CONFIGMAP_NAME -o jsonpath="{.data.$KEY}" | tr '\n' ' ')
@@ -29,7 +29,7 @@ containers:
         secretKeyRef:
             name: adr-detection-secrets
             key: REDDIT_CLIENT_SECRET
-            
+
     args:
     - |
         # Run the pipeline script
