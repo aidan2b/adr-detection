@@ -30,12 +30,12 @@ custom_css <- function() {
 
 fluidPage(
   custom_css(),
-  tags$h1("ADR Detection"),
+  tags$h1("Adverse Drug Reaction (ADR) Detection"),
   
   tags$div(class = "panel",
            fluidRow(
              column(width = 3,
-                    selectInput(inputId = "drug", label = "Select a drug mentioned:", choices = NULL)
+                    selectInput(inputId = "drug", label = "Select a medication:", choices = NULL, selectize = TRUE)
              ),
              column(width = 3,
                     selectInput(inputId = "adr_exclusions", label = "Deselect ADRs:", choices = NULL, multiple = TRUE, selectize = TRUE)
