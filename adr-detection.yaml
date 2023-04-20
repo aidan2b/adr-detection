@@ -37,12 +37,13 @@ spec:
           # Run the pipeline script
           python run_pipeline.py
 
-          cp -r /shiny_app/* /data/
+          cp -r /shiny_app/faers.csv /data/faers.csv
+          tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
 
           # Deploy to shinyapps.io
           export PATH=$PATH:/usr/bin/R
           R -e "rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
-          R -e "rsconnect::deployApp(appDir = 'shiny_app/', appName = 'adr-detection', account = 'aidan2b')"
+          R -e "rsconnect::deployApp(appDir = 'data/', appName = 'adr-detection', account = 'aidan2b')"
       resources:
         limits:
           memory: 12Gi
