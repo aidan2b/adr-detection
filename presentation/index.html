@@ -177,7 +177,7 @@
       </div>
 	    <div class="event" id="event-4">
         <div class="event-section">  
-          <h3 class ="event-title"><b>NER</b></h3>
+          <h3 class="event-title"><b>NER</b></h3>
             <ul style="line-height:1.5" class ="event-content">
               <li>When using Prodigy, we use two potential tags for terms/entities in the text: DRUG and ADR.</li>
               <li>The DRUG tag is only applied to the specific medication we are looking for (currently ocrelizumab aka Ocrevus).</li>
@@ -197,18 +197,18 @@
             </ul>
         </div>
         <div class="event-section">
-          <h3 class ="event-title"><b>SpanCat</b></h3>
+          <h3 class="event-title"><b>SpanCat</b></h3>
             <ul style="line-height:1.5" class ="event-content">
               <li>Switched to Spancat, to align more with what we intended to do with our project which was labeling ADRs pertaining to a specific DRUG. The span categorization method allowed us to have overlapping labels providing the model with more context clues 
               <li>Overcame technical issue with MySQL database for Prodigy by limiting to posts 2000 characters or lower</li>
               <li>Zach and Taylor's Cohen's Kappa: <b>.46</b></li>
               <li>Aidan and Jackson's Cohen's Kappa: <b>.34</b></li>
             </ul>
-        </div>   
+        </div>
       </div>
 	    <div class="event" id="event-5">
         <div class="event-section">
-          <h3 class ="event-title"><b>Switched medications</b></h3>
+          <h3 class="event-title"><b>Switched medications</b></h3>
             <ul style="line-height:1.5" class ="event-content">
               <li>Ocrevus, while a popular medication on Reddit, was almost too good of a medication. We needed to provide data to the model that had ADRs in it in the first place if we were wanting to train the model to pick out ADRs.</li>
               <li>Therefore, we switched to Humira, a tumor necrosis factor (TNF) blocker that reduces the effects of a substance in the body that can cause inflammation.</li>
@@ -216,7 +216,7 @@
             </ul>
         </div>
         <div class="event-section">  
-          <h3 class ="event-title"><b>NER/SpanCat Models: Sense2vec</b></h3>
+          <h3 class="event-title"><b>NER/SpanCat Models: Sense2vec</b></h3>
             <ul style="line-height:1.5" class ="event-content">
               <li>Sense2Vec is a novel method for word sense disambiguation in neural word embeddings using supervised NLP labels instead of unsupervised clustering.</li> 
               <li>A word sense is usually determined by the words around it, or the co-occurrence of words. Word sense disambiguation is the task of identifying the correct sense of a word in a given sentence or text.</li>
@@ -224,7 +224,7 @@
             </ul>
         </div>
         <div class="event-section"> 
-          <h3 class ="event-title"><b>Text Classification: RoBERTa w/ Classifier; GPT2</b></h3>
+          <h3 class="event-title"><b>Text Classification: RoBERTa w/ Classifier; GPT2</b></h3>
             <ul style="line-height:1.5" class ="event-content">  
               <li>RoBERTa with classifier for ADR identification, and using ChatGPT-generated comments to augment training data</li>
               <li>Also tried a GPT2 model with classifier for ADR identification, decided to settle on RoBERTa due to better performance</li>
@@ -232,7 +232,7 @@
             <p>Overall shape of our final pipeline flow begins to take shape here | binary classification -> named entity recognition on classified comments</p>
         </div>
         <div class="event-section"> 
-          <h3 class ="event-title"><b>Annotation Progresss</b></h3> 
+          <h3 class="event-title"><b>Annotation Progresss</b></h3> 
             <ul style="line-height:1.5" class ="event-content"> 
               <li>Inter-rater reliability (Cohen's Kappa) improvements:</li>
               <ul>
@@ -253,7 +253,7 @@
 
 	    <div class="event" id="event-6">
         <div class="event-section"> 
-          <h3 class ="event-title"><b>Reproducible Pipeline</b></h3>
+          <h3 class="event-title"><b>Reproducible Pipeline</b></h3>
           <ul style="line-height:1.5" class ="event-content">
             <li>We want to provide the ability to filter social media's comments of not just Reddit, but other platforms such as Twitter or Facebook</li>
             <li>Allowing the user to input any medication or adverse drug reaction that they are concerned about
@@ -263,7 +263,7 @@
         </div>
 
         <div class="event-section"> 
-          <h3 class ="event-title"><b>RoBERTa Text Classification</b></h3>
+          <h3 class="event-title"><b>RoBERTa Text Classification</b></h3>
             <ul style="line-height:1.5" class ="event-content"> 
               <li><b>Pre-trained RoBERTa base model from HuggingFace transformers library</b></li>
               <ul> 
@@ -336,7 +336,7 @@
       <div class="event" id="event-7">
         <div class="event-section"> 
           <h3 class ="event-title"><b>Final Annotations</b></h3>
-          <p>After another round of annotations, Taylor and Zach were able to maintain a solid Cohen's Kappa with Text Classification. However, Jackson and Aidan had poor results, so the pair conducted another round of annotations but beforehand the team got together to create a document of rules for both annotation methods. After the rules were created, Jackson and Aidan made significant improvements in Cohen's Kappa.</p>
+          <p>After another round of annotations, Taylor and Zach were able to maintain a solid Cohen's Kappa with Text Classification. However, Jackson and Aidan had poor results (<b>.38</b>) so the pair conducted another round of annotations but beforehand the team got together to create a document of rules for both annotation methods. After the rules were created, Jackson and Aidan made significant improvements in Cohen's Kappa.</p>
           <ul style="line-height:1.5" class ="event-content"> 
             <li>Inter-rater reliability (Cohen's Kappa) improvements:</li>
             <ul>
@@ -349,6 +349,7 @@
                 <li>Aidan and Jackson: .38 -> <b>.58</b></li>
               </ul>
             </ul>
+            <img src="visualizations/irr_progresssion.png" width=500 alt="Inter-rater Reliability Progression" class="padding">
           </ul>
         </div>
         <div class="event-section"> 
@@ -388,11 +389,6 @@
                 <li>Push select GitHub branch to a specific Docker tag</li>
                 <li>Enter medication, select Docker tag, run pipeline, and deploy to Shiny Apps (on self-hosted runner)</li>
             </ul>
-            <div class="image-container">
-              <img src="visualizations/githubactionswf1.png" alt="Github Action Workflow STEP 1">
-              <img src="visualizations/githubactionswf2.png" alt="Github Action Workflow STEP 2">
-            </div>
-            
           </ul>
         </div>
         <div class="event-section"> 
