@@ -13,4 +13,4 @@ jobs:
 
     - name: Run pipeline on Nautilus
       run: |
-        ./medicrawl.sh
+        sudo ./medicrawl.sh
