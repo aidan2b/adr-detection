@@ -1,5 +1,8 @@
 name: Run Pipeline
 
+on:
+  workflow_dispatch:
+  
 jobs:
   deploy:
     runs-on: self-hosted

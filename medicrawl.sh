@@ -29,16 +29,7 @@ containers:
         secretKeyRef:
             name: adr-detection-secrets
             key: REDDIT_CLIENT_SECRET
-    - name: SHINYAPPS_TOKEN
-        valueFrom:
-        secretKeyRef:
-            name: adr-detection-secrets
-            key: SHINYAPPS_TOKEN
-    - name: SHINYAPPS_SECRET
-        valueFrom:
-        secretKeyRef:
-            name: adr-detection-secrets
-            key: SHINYAPPS_SECRET
+            
     args:
     - |
         # Run the pipeline script
@@ -47,10 +38,6 @@ containers:
         cp -r /shiny_app/faers.csv /data/faers.csv
         tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
 
-        # Deploy to shinyapps.io
-        # export PATH=$PATH:/usr/bin/R
-        # R -e "rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
-        # R -e "rsconnect::deployApp(appDir = 'data/', appName = 'adr-detection', account = 'aidan2b')"
     resources:
     limits:
         memory: 12Gi

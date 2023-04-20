@@ -6,24 +6,8 @@ spec:
   restartPolicy: Never
   containers:
     - name: shiny-deploy
-      # image: aidan2b/adr-detection:test
       command: ["/bin/sh", "-c"]
       env:
-        - name: MEDICATION_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: medications-configmap
-              key: medications
-        - name: REDDIT_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: adr-detection-secrets
-              key: REDDIT_CLIENT_ID
-        - name: REDDIT_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: adr-detection-secrets
-              key: REDDIT_CLIENT_SECRET
         - name: SHINYAPPS_TOKEN
           valueFrom:
             secretKeyRef:
@@ -36,12 +20,6 @@ spec:
               key: SHINYAPPS_SECRET
       args:
         - |
-          # Run the pipeline script
-          # python run_pipeline.py
-
-          # cp -r /shiny_app/faers.csv /data/faers.csv
-          # tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
-
           # Deploy to shinyapps.io
           export PATH=$PATH:/usr/bin/R
           R -e "rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
