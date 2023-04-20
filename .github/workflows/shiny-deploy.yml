@@ -1,4 +1,4 @@
-name: Run Pipeline to Deploy Shinyapp
+name: Deploy Shinyapp
 
 on:
   workflow_dispatch:

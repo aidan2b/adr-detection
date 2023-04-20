@@ -1,8 +1,8 @@
-name: Run Pipeline
+name: Create medication database
 
 on:
   workflow_dispatch:
-  
+
 jobs:
   deploy:
     runs-on: self-hosted
