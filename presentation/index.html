@@ -226,14 +226,14 @@
           <h3 class="event-title"><b>Annotation Updates</b></h3> 
           <p>To increases annotation speed, we edited our patterns file to include these resources:</p>
             <ul style="line-height:1.5" class ="event-content">
-              <li><b>ADRs</b> ADR Lexicon V 1.1 - HLP Cedars-Sinai</li>
+              <li><b>ADRs:</b> ADR Lexicon V 1.1 - HLP Cedars-Sinai</li>
               <ul>
                 <li>SIDER (Side Effect Resource)</li>
                 <li>CHV (Consumer Health Vocabulary)</li>
                 <li>COSTART (Coding Symbols for a Thesaurus of Adverse Reaction Terms)</li>
                 <li>DIEGO_Lab</li>
               </ul>  
-              <li><b>DRUGS</b>: Drugs@FDA Data Files</li>
+              <li><b>DRUGS:</b> Drugs@FDA Data Files</li>
               <ul>
                 <li>Selected the unique drug names and active ingredients from this</li>
               </ul>
@@ -326,6 +326,10 @@
               </ul>
               <li><b>ViterbiLoss function</b></li>
             </ul>
+            <div class="image-container">
+              <img src="visualizations/flairjustglove.png" alt="Sentiment Analysis">
+              <img src="visualizations/flairembedplusglove.png" alt="Sentiment Analysis Distribution">
+            </div>
         </div>
         <div class="event-section"> 
           <h3 class ="event-title"><b>spaCy Dependency Parser</b></h3>
@@ -335,6 +339,7 @@
               <li>Links drugs and ADRs in the input text by finding the shortest dependency path between them using Spacy's en_core_web_md model.</li>
               <li>Extracts and pairs drug-ADR entities and saves the results in a CSV file.</li>
             </ul>
+            <img src="visualizations/dependency-viz.png" width=750 alt="Sentiment Analysis Distribution">
         </div>
       </div>
 
