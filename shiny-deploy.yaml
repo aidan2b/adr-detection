@@ -6,7 +6,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: shiny-deploy
-      image: aidan2b/adr-detection:test
+      image: rocker/shiny-verse:latest
       imagePullPolicy: Always
       command: ["/bin/sh", "-c"]
       env:
@@ -33,12 +33,10 @@ spec:
       resources:
         limits:
           memory: 12Gi
-          cpu: 2
-          nvidia.com/gpu: 1
+          cpu: 6  # Limit of 6 CPU cores
         requests:
           memory: 12Gi
-          cpu: 2
-          nvidia.com/gpu: 1
+          cpu: 4  # Request of 4 CPU cores
       volumeMounts:
         - mountPath: /data
           name: adr-detection-pvc
@@ -46,13 +44,3 @@ spec:
     - name: adr-detection-pvc
       persistentVolumeClaim:
         claimName: adr-detection-pvc
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: nvidia.com/gpu.product
-                operator: In
-                values:
-                  - NVIDIA-GeForce-RTX-3090
-                  - Tesla-T4
