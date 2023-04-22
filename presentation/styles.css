@@ -1,5 +1,6 @@
 body {
-  font-family: "Ubuntu",Tahoma,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  line-height: 1.5;
 }
 
 .center {
@@ -62,6 +63,25 @@ body {
   width: 100%;
   max-width: 1200px;
   margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.event-table img {
+  width: 100%;
+  max-width: 550px;
+}
+
+.event-section {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .event {
@@ -94,6 +114,37 @@ body {
   display: none;
 }
 
+.header:nth-child(1) {
+  grid-column: 1 / span 3;
+}
+
+.padding
+{
+  padding: 10px;
+}
+
+
+.stage-container {
+  display: flex;
+}
+
+.stage-text {
+  flex: 4; /* Takes 50% of the space */
+  padding-right: 20px;
+}
+
+.stage-image {
+  flex: 3; /* Takes 50% of the space */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.stage-image img {
+  width: 100%;
+  height: auto;
+}
+
+
 .image-container {
   display: flex;
   justify-content: left;
@@ -103,13 +154,11 @@ body {
 }
 
 .image-container img {
-  max-width: 42%;
+  max-width: 45%;
   margin: 1%;
-  max-height: 69%;
+  max-height: auto
 }
 
 
-.padding
-{
-  padding: 10px;
-}
+
+

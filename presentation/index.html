@@ -41,7 +41,7 @@
         </div>
         
         <div class="event-section">
-          <p>To efficiently extract Reddit data, we employed the Python Reddit API Wrapper (PRAW) and PushshiftAPI for targeted searches of comments mentioning specific medications. Challenges in Reddit data extraction include the length and grammar of comments, as well as the lack of context, which may hinder accurate interpretation and understanding of the full scope of ADRs. To address these challenges and ensure secure, scalable data storage and processing, we implemented a data management strategy using Google Cloud.</p>
+          <p>To efficiently extract Reddit data, we employed the Python Reddit API Wrapper (PRAW) and PushshiftAPI for targeted searches of comments mentioning specific medications. Challenges in Reddit data extraction include the length and grammar of comments, as well as the lack of context, which may hinder accurate interpretation and understanding of the full scope of ADRs. To address these challenges and ensure secure, scalable data storage and processing, we implemented a data management strategy using Jupyter and Google Cloud.</p>
         </div>
         
         <div class="event-section">
@@ -54,7 +54,6 @@
         
         </div>
         
-
         <div class="event-section">
           <p>To further explore the data, we used the wordcloud library to visualize the most frequently used words per medication and colored these words based on sentiment analysis conducted with the TextBlob library. Moreover, we employed pandas to compare word frequencies across different sentiments, calculating frequency differences for positive and negative Reddit comments. These visualizations and comparisons provide insights into the prominence and distribution of sentiments related to specific medications, allowing for the identification of ADR trends and significant outliers within the data.</p>
           <div class="image-container">
@@ -63,7 +62,6 @@
           </div>
         </div>
       </div>
-
 
 	    <div class="event" id="event-3">
         <div class="event-section">
@@ -78,75 +76,182 @@
               
             <p>A Google Cloud VM was set up and Prodigy was installed for collaborative annotation work. We redefined our key performance indicators to include Cohen's Kappa calculations, ensuring inter-rater reliability (IRR) between annotator pairs. IRR is essential for maintaining consistency and accuracy in annotation tasks, minimizing subjective bias and variability among annotators, and ultimately enhancing the quality of training data and overall model performance. Cohen's Kappa, a statistical measure that quantifies the level of agreement between two annotators while accounting for chance agreement, served as a valuable metric. Kappa values range from -1 to 1, with 1 indicating perfect agreement and values above 0.6 generally considered acceptable.</p>
         </div>
+        <div class="event-table">
+          <div class="header">
+              <h3 class="event-title"><b>Annotation Styles</b></h3>
+          </div>
+          <div class="content">
+              <p>
+                  <h4>Named Entity Recognition (NER)</h4>
+                  <ul>
+                      <li>Proper nouns and self-contained expressions like person names or products</li>
+                      <li>Single-token-based tags; better with clear token boundaries</li>
+                  </ul>
+              </p>
+          </div>
+          <div class="content">
+              <p>
+                 <h4>Span Categorization (SpanCat)</h4>
+                  <ul>
+                      <li>Multi-token-based tags; better with complex or overlapping entities</li>
+                      <li>Can be used to annotate relations between entities</li>
+                  </ul>
+              </p>
+          </div>
+          <div class="content">
+              <p>
+                  <h4>Text Classification (TextCat)</h4>
+                  <ul>
+                      <li>Binary or multi-class classification of text</li>
+                      <li>Can be used to annotate text with a single or multiple labels</li>
+                  </ul>
+              </p>
+          </div>
+          <div class="image">
+              <img src="visualizations/ner.png" width=550 alt="NER Example" class="padding">
+          </div>
+          <div class="image">
+              <img src="visualizations/spancat.png" width=550 alt="SpanCat Example" class="padding">
+          </div>
+          <div class="image">
+              <img src="visualizations/textcat.png" width=550 alt="TextCat Example" class="padding">
+          </div>
+        </div>
         <div class="event-section">
-          <h3 class ="event-title"><b>Annotation Styles</b></h3>
-            <h4>Named Entity Recognition (NER)</h4>
-            <p>
-              <ul>
-                <li>Proper nouns and self-contained expressions like person names or products</li>
-                <li>Single-token-based tags; better with clear token boundaries</li>
-              </ul>
-            </p>
-            <img src="visualizations/ner.png" width=550  alt="NER Example" class="padding">
-            <h4>Span Categorization (SpanCat)</h4>
-            <p>
-              <ul>
-                <li>Multi-token-based tags; better with complex or overlapping entities</li>
-                <li>Can be used to annotate relations between entities</li>
-              </ul>
-            <img src="visualizations/spancat.png" width=550  alt="SpanCat Example" class="padding">
-            <h4>Text Classification (TextCat)</h4>
-            <p>
-              <ul>
-                <li>Binary or multi-class classification of text</li>
-                <li>Can be used to annotate text with a single or multiple labels</li>
-              </ul>
-            <img src="visualizations/textcat.png" width=550  alt="TextCat Example" class="padding">
-        </div>   
+          <h3 class ="event-title"><b>Choosing a Medication</b></h3>
+            <p>We chose Ocrevus (ocrelizumab), due to it being a recently approved multiple sclerosis (MS) medication considered "first-in-class" by the FDA.</p>
+        </div>
+        <div>
+          <h4>Initial annotation attempts</h4>
+          <p>
+            NER:
+            <ul>
+              <li>Failed attempt due to unclear annotation rules, switched to Span Categorization as we felt NER may have contributed to the issue at the time.</li>
+            </ul>
+            SpanCat:
+            <ul>
+              <li>Zach and Taylor's Cohen's Kappa: <b>.46</b></li>
+              <li>Aidan and Jackson's Cohen's Kappa: <b>.34</b></li>
+            </ul>
+          </p>
+        </div>
       </div>
 
 	    <div class="event" id="event-4">
         <div class="event-section">
-          <h3 class ="event-title"><b>Testing Models and Annotation Updates</b></h3>
-            <h4>Medication Switch</h4>
+          <h3 class ="event-title"><b>Annotation Updates and Model Testing</b></h3>
             <p>
               During our testing phase, we realized that Ocrevus, despite being popular on Reddit, was not an ideal medication for our study due to its relatively low number of adverse drug reactions (ADRs). To provide the model with sufficient ADR data for training, we switched to studying Humira—a tumor necrosis factor (TNF) blocker known for reducing inflammation—observing that many individuals mentioned and complained about it while annotating Ocrevus comments.
             </p>
-            <h4>Model Testing</h4>
+        </div>
+        <div>
+          <h4 class ="event-title">Annotation Updates</h4>
+          <p>
+            To expedite the annotation process, we updated our patterns file by incorporating resources such as the ADR Lexicon V 1.1 from HLP Cedars-Sinai, SIDER, CHV, COSTART, and DIEGO_Lab for ADRs, and Drugs@FDA Data Files for drug names and active ingredients. Integrating these resources into our annotation process enabled us to increase annotation speed and improve the quality of our training data, thereby enhancing the overall performance of our model.
+          </p>
+          <h4>IRR improvements</h4>
+
+          <p>
+            SpanCat (from previous SpanCat):
+
+            <ul>
+              <li>Taylor and Zach: .46 -> <b>.55</b></li>
+              <li>Aidan and Jackson : .34 -> <b>.56</b></li>
+            </ul>
+            
+
+            TextCat:
+            
+            <ul>
+              <li>Taylor and Zach: <b>.74</b></li>
+              <li>Aidan and Jackson: <b>.58</b></li>
+            </ul>
+
+          </p>
+        </div>
+        <div class="event-section">
+          <h4 class ="event-title"><b>Sense2Vec</b></h4>
             <p>
-              In our exploration of Named Entity Recognition (NER) and SpanCat models, we implemented Sense2Vec, a novel method for word sense disambiguation in neural word embeddings that utilizes supervised NLP labels instead of unsupervised clustering. Sense2Vec can disambiguate different parts of speech, sentiment, named entities, and syntactic roles of words, as well as demonstrate subjective and qualitative examples of disambiguated embeddings. This approach provides a more accurate representation of words in context, enhancing our model's ability to identify ADRs.            
+              Another tool from the creators of spaCy and Prodigy, that had the potential to assist in our labeling of drugs and ADRs was Sense2Vec. Sense2Vec is a novel method for word sense disambiguation in neural word embeddings that utilizes supervised NLP labels instead of unsupervised clustering. Sense2Vec can disambiguate different parts of speech, sentiment, named entities, and syntactic roles of words, as well as demonstrate subjective and qualitative examples of disambiguated embeddings. We were able to add and utilize the new side effect vectors (same as our new patterns) and pick them out with regularity but struggled with multi-word phrases Tried to train on drug names, but results were less than satisfactory.            
             </p>
+        </div>
+        <div class="event-section">
+          <h4 class ="event-title"><b>Remedying Class Imbalances</b></h4>
+            <ul>
+              <li>OpenAI's gpt-3.5-turbo model for generating comments and classifying those comments as well to augment training data</li>
+                <ul>
+                  <li>Address class imbalances: Useful when trying to predict something that does not occur very often.</li>
+                  <li>Diversify training data: Create diverse perspectives that may not be present in the original dataset. Countering biased data.</li>
+                  <li>Increase annotation efficiency: Reduce manual annotation workload by using effective prompt engineering.</li>
+                </ul>
+            </ul>
+        </div>
+        <div class="event-section">
+          <h4 class ="event-title"><b>GPT-2</b></h4>
             <p>
-              We also tested a GPT-2 model with a classifier for ADR identification. Our final pipeline's structure emerged from these tests, involving binary classification followed by named entity recognition on classified comments.            
+              We also tested a GPT-2 model with a classifier for ADR identification. We found that it was "learning" the general format of the ChatGPT comments and started to label any shorter comment an ADR. 
+              
+              Some were correctly classified, but overall, the model results were underwhelming.
             </p>
-            <h4>Annotation Updates</h4>
-            <p>
-              To expedite the annotation process, we updated our patterns file by incorporating resources such as the ADR Lexicon V 1.1 from HLP Cedars-Sinai, SIDER, CHV, COSTART, and DIEGO_Lab for ADRs, and Drugs@FDA Data Files for drug names and active ingredients. Integrating these resources into our annotation process enabled us to increase annotation speed and improve the quality of our training data, thereby enhancing the overall performance of our model.
-            </p>
-        </div> 
-      </div>
+            <img src="visualizations/gpt2-train.png" alt="GPT-2 Training" class="padding">
+            <p>Our final pipeline's structure emerged from these tests:</p>
+        </div>
+        <div class="event-section">
+          <ol>
+            <li>Text Classification</li>
+            <li>Named Entity Recognition</li>
+          </ol>        
+        </div>
+
+        
+      </div> 
 
 	    <div class="event" id="event-5">
         <div class="event-section">
           <h3 class ="event-title"><b>Pipeline Development</b></h3>
-            <h4>Reproducibility</h4>
             <p>
               Our primary goal was to develop a reproducible pipeline that enables the analysis of not only Reddit comments but also extends to other social media platforms, such as Twitter and Facebook. This pipeline aims to be accessible and usable by academic, corporate, governmental, and public entities, allowing users to input any medication or adverse drug reaction of interest.            
             </p>
             <h4>Stage 1: RoBERTa Text Classification</h4>
-            <p>
-              We employed the RoBERTa text classification model, a robustly optimized BERT pretraining approach built on the classic BERT model with longer and more focused pretraining and hyperparameter optimization. Utilizing the pre-trained RoBERTa base model from the HuggingFace transformers library, we developed custom PyTorch datasets and dataloaders for text preprocessing, which involved removing punctuation and links. The comments were split into lists of strings and passed into the RoBERTa tokenizer item by item with overlap. The PyTorch classification head on top of the RoBERTa base model takes the pooled output and performs classification (ADR or no ADR) with dropout layers to prevent overfitting. We trained the model using 5 epochs with validation cycles, CrossEntropyLoss with class weights, the AdamW optimizer, and a linear learning rate scheduler.            
-            </p>
-            <p>
-              To augment text classification training data, we employed OpenAI's GPT-3.5-turbo model for generating and classifying comments, addressing class imbalances and diversifying the training data to counteract biases and improve annotation efficiency.            
-            </p>
+            <div class="stage-container">
+              <div class="stage-text">
+                <p>
+                  We employed the RoBERTa text classification model, a robustly optimized BERT pretraining approach built on the classic BERT model with longer and more focused pretraining and hyperparameter optimization. Utilizing the pre-trained RoBERTa base model from the HuggingFace transformers library, we developed custom PyTorch datasets and dataloaders for text preprocessing, which involved removing punctuation and links.
+                </p> 
+                <p>
+                  The comments were split into lists of strings and passed into the RoBERTa tokenizer item by item with overlap. The PyTorch classification head on top of the RoBERTa base model takes the pooled output and performs classification (ADR or no ADR) with dropout layers to prevent overfitting. We trained the model using 5 epochs with validation cycles, CrossEntropyLoss with class weights, the AdamW optimizer, and a linear learning rate scheduler.            
+                </p>
+                <p>
+                  To augment text classification training data, we employed OpenAI's GPT-3.5-turbo model for generating and classifying comments, addressing class imbalances and diversifying the training data to counteract biases and improve annotation efficiency.            
+                </p>
+              </div>
+              <div class="stage-image">
+                <img src="visualizations/flair f1 score improvement.png" alt="Stage 1 Image">
+              </div>
+            </div>
             <h4>Stage 2: Flair NER</h4>
-            <p>
-              For Named Entity Recognition (NER), we used Flair's SequenceTagger with stacked embeddings, including GloVe and Flair embeddings, providing different embeddings for the same word depending on its contextual use. We incorporated word dropout and locked dropout to prevent overfitting, as well as a bidirectional Long Short-Term Memory (biLSTM) RNN to maintain short-term memory throughout the input sequence processing. We trained the model using 5 epochs with validation cycles, CrossEntropyLoss with class weights, the AdamW optimizer, and a linear learning rate scheduler, employing the ViterbiLoss function.            
-            </p>
+            <div class="stage-container">
+              <div class="stage-text">
+                <p>
+                  For Named Entity Recognition (NER), we used Flair's SequenceTagger with stacked embeddings, including GloVe and Flair embeddings, providing different embeddings for the same word depending on its contextual use. 
+                </p>
+                <p>
+                  We incorporated word dropout and locked dropout to prevent overfitting, as well as a bidirectional Long Short-Term Memory (biLSTM) RNN to maintain short-term memory throughout the input sequence processing. 
+                </p>
+                <p>
+                  We trained the model using 5 epochs with validation cycles, CrossEntropyLoss with class weights, the AdamW optimizer, and a linear learning rate scheduler, employing the ViterbiLoss function.            
+                </p>
+              </div>
+              <div class="stage-image">
+                <img src="visualizations/roberta f1 score improvement.png" alt="Stage 1 Image">
+              </div>
+            </div>
+            
+            
+            
             <h4>Stage 3: spaCy Dependency Parser</h4>
             <p>
-              Finally, we utilized a pre-trained spaCy dependency parser to extract and pair drug-ADR entities based on the output of the SequenceTagger. This parser links drugs and ADRs in the input text by finding the shortest dependency path between them, using the en_core_web_md model. The extracted and paired drug-ADR entities were saved in a CSV file for further analysis.            </p>
+              Finally, we utilized a <b>pre-trained</b> spaCy dependency parser to extract and pair drug-ADR entities based on the output of the SequenceTagger. This parser links drugs and ADRs in the input text by finding the shortest dependency path between them, using the en_core_web_md model. The extracted and paired drug-ADR entities were saved in a CSV file for further analysis.            </p>
             <h4>Pipeline Summary</h4>
             <p>
               This pipeline offers a robust and flexible approach to extracting ADR phrases in relation to medications in text, making it an optimal method for our project's objectives. By combining advanced text classification, NER, and dependency parsing techniques, our pipeline can efficiently identify and extract relevant information from social media data for pharmacovigilance purposes.            </p>
@@ -156,21 +261,22 @@
       <div class="event" id="event-6">
         <div class="event-section">
           <h3 class ="event-title"><b>Pipeline Evaluation and Optimization</b></h3>
-            <h4>Finalizing Annotation Methods</h4>
             <p>
               During the final annotation phase, Taylor and Zach maintained a satisfactory Cohen's Kappa for text classification, while Jackson and Aidan initially achieved poor results. To address this issue, the team created a document outlining rules for both annotation methods. Subsequently, Jackson and Aidan significantly improved their Cohen's Kappa scores, achieving better consistency and accuracy in their annotations. The inter-rater reliability improvements were as follows:
 
               <ul><li>Text Classification (from previous TextCat):</li>
                     <ul>
-                      <li>Taylor and Zach: 0.74 -> 0.73</li>
+                      <li>Taylor and Zach: 0.74 -> <b>0.73</b></li>
                     </ul>
                   <li>Named Entity Recognition:</li>
                   <ul>
-                    <li>Aidan and Jackson: 0.38 -> 0.58</li>
+                    <li>Aidan and Jackson: 0.38 -> <b>0.58</b></li>
                   </ul>
               </ul>            
             </p>
-            <h4>RoBERTa Text Classification</h4>
+        </div>
+        <div class="event-section">
+          <h3 class ="event-title"><b>RoBERTa Text Classification</b></h3>
             <p>
               To evaluate the RoBERTa model, we split the data into training, validation, and test sets. The model was trained using a custom PyTorch data loader and the RoBERTa tokenizer, which is a byte pair encoding (BPE) tokenizer. We ran the model for five epochs with a validation cycle after each epoch and calculated the training and validation accuracy and loss metrics at each step to observe convergence.            
             </p>
@@ -178,7 +284,9 @@
             <p>
               To augment text classification training data, we employed OpenAI's GPT-3.5-turbo model for generating and classifying comments, addressing class imbalances and diversifying the training data to counteract biases and improve annotation efficiency.            
             </p>
-            <h4>Flair NER</h4>
+        </div>
+        <div class="event-section">
+          <h3 class ="event-title"><b>Flair NER</b></h3>
             <p>
               For Named Entity Recognition (NER), we used Flair's SequenceTagger with stacked embeddings, including GloVe and Flair embeddings, providing different embeddings for the same word depending on its contextual use. We incorporated word dropout and locked dropout to prevent overfitting, as well as a bidirectional Long Short-Term Memory (biLSTM) RNN to maintain short-term memory throughout the input sequence processing. We trained the model using 5 epochs with validation cycles, CrossEntropyLoss with class weights, the AdamW optimizer, and a linear learning rate scheduler, employing the ViterbiLoss function.            
             </p>
@@ -187,17 +295,15 @@
               <img src="visualizations/flairembedplusglove.png" alt="NER Visualization">
             </div>
             <img src="visualizations/flairtrainviz.png" alt="Flair Training" class="padding">
-            <h4>spaCy Dependency Parser</h4>
+        </div>
+        <div class="event-section">
+          <h3 class ="event-title"><b>spaCy Dependency Parser</b></h3>   
             <p>
               For our dependency parser implementation, we have developed an interactive network graph that visually represents the relationships between drug and ADR entities extracted using the NER model. This graph, constructed by generating nodes for each unique drug and ADR entity and forming edges based on the dependency relations identified by the spaCy dependency parser, allows users to explore the connections between drugs and their associated ADRs, thereby providing an intuitive way to assess the quality of the entity extraction and dependency parsing processes. The interactive visualization enables users to click on individual nodes and view the corresponding text containing the extracted pairing, offering valuable insights into the context in which the entities were identified and the accuracy of the dependency parsing process.
             </p>
             <img src="visualizations/dependency-viz.png" width="550" alt="Dependency Parser Visualization" class="padding">
             <p>
               This evaluation method offers several advantages for understanding the performance of the NER and dependency parsing models, such as facilitating a more intuitive understanding of the underlying structure of the extracted entities and their associations, and allowing users to explore specific instances of drug-ADR pairings to assess their validity based on the surrounding context. Furthermore, the integration of NER results and dependency parser output enables users to evaluate the overall effectiveness of the pipeline in identifying and connecting relevant entities.            
-            </p>
-            <h4>Evaluation Summary</h4>
-            <p>
-              Discuss model results comprehensively.
             </p>
         </div> 
       </div>
