@@ -357,12 +357,13 @@ class ADRLinker:
         # create an empty dictionary to store the drug-ADR pairs
         drug_adr_dict = {}
 
+        stemmer = nltk.stem.snowball.SnowballStemmer("english")
         # loop over each row in the 'drug_adr_pairs' column
         for pairs in self.drug_labeled['drug_adr_pairs']:
             # update the drug-ADR dictionary with the new pairs
             for pair in pairs:
                 drug = pair['drug']
-                adr = pair['adr']
+                adr = stemmer.stem(pair['adr'])
                 
                 if drug not in drug_adr_dict:
                     drug_adr_dict[drug] = []
