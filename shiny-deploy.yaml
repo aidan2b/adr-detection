@@ -27,7 +27,7 @@ spec:
 
           # Deploy to shinyapps.io
           export PATH=$PATH:/usr/bin/R
-          R -e "install.packages(c('rsconnect', 'RcppTOML', 'crosstalk', 'here', 'lazyeval', 'plotly', 'png', 'reticulate'), repos = 'https://cran.rstudio.com/')"
+          R -e "install.packages(c('rsconnect', 'RcppTOML', 'crosstalk', 'here', 'lazyeval', 'plotly', 'png', 'reticulate','MASS'), repos = 'https://cran.rstudio.com/')"
           R -e "rsconnect::setAccountInfo(name = 'aidan2b', token = Sys.getenv('SHINYAPPS_TOKEN'), secret = Sys.getenv('SHINYAPPS_SECRET'))"
           R -e "rsconnect::deployApp(appDir = 'data/', appName = 'adr-detection', account = 'aidan2b')"
 
