@@ -4,11 +4,10 @@ metadata:
   name: medicrawl-config
 data:
   medications: |
-    cymbalta 
-    effexor 
-    metformin 
-    plavix
-    seroquel
+    wellbutrin
+
+
+    
     
 
     

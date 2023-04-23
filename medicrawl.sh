@@ -35,7 +35,9 @@ spec:
           python run_pipeline.py
 
           cp -r /shiny_app/faers.csv /data/faers.csv
-          tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
+          cp -r /shiny_app/linked_data.csv /data/linked_data.csv
+          
+          # tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
       resources:
         limits:
           memory: 12Gi
