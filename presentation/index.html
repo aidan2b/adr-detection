@@ -70,19 +70,22 @@
         </div>
         <div class="event-section">  
           <h3 class ="event-title"><b>spaCy NLP Library Compatibility w/ Prodigy</b></h3>
-            <p>To facilitate this transition, we utilized the spaCy NLP library, which is compatible with Prodigy and offers pre-trained models for various annotation styles. In order to train our models on the data, we acknowledged the importance of establishing inter-rater reliability for our annotation method. We annotated raw Reddit text in Prodigy by highlighting symptoms and drugs, saving annotations in JSON format. Furthermore, we incorporated the Medical Dictionary for Regulatory Activities (MedDRA) terminology of side effects to enhance the model's vocabulary.</p>
-
-            <p>Our team divided into pairs to collaboratively annotate a sizable amount of data, ensuring improved model performance. Prodigy allowed multiple users to annotate documents asynchronously, which streamlined the annotation process. This approach also facilitated the collection of annotations from multiple users, guaranteeing high inter-rater reliability—a crucial aspect for developing accurate models.</p>
-              
-            <p>A Google Cloud VM was set up and Prodigy was installed for collaborative annotation work. We redefined our key performance indicators to include Cohen's Kappa calculations, ensuring inter-rater reliability (IRR) between annotator pairs. IRR is essential for maintaining consistency and accuracy in annotation tasks, minimizing subjective bias and variability among annotators, and ultimately enhancing the quality of training data and overall model performance. Cohen's Kappa, a statistical measure that quantifies the level of agreement between two annotators while accounting for chance agreement, served as a valuable metric. Kappa values range from -1 to 1, with 1 indicating perfect agreement and values above 0.6 generally considered acceptable.</p>
+            <p>The spaCy library is a powerful and widely-used natural language processing (NLP) library designed for efficient and high-performance text processing tasks. It offers pre-trained models that are developed on large and diverse datasets, ensuring versatility and applicability across various domains. One of the key strengths of spaCy is its fine-tunability, which enables us to achieve higher accuracy and better performance by adapting the pre-trained models to specific tasks or domains.</p>         
+            <p>Prodigy, an annotation tool developed by the creators of spaCy, is designed to streamline and optimize the annotation process. Prodigy offers the ability to suggest new annotations based on patterns defined by the user, significantly reducing the time and effort required for manual annotation. Furthermore, the tool supports multiple users, allowing us to asynchronously annotate documents and collaborate more effectively.</p>
+            <p>Another advantage of Prodigy is its seamless integration with Google Cloud Platform (GCP), which enables us to scale our model training and deployment to handle large volumes of data. This integration ensures that our NLP pipeline can be easily adapted to meet the demands of various projects and workloads.</p>
+          </div>
+        <div class="event-section">  
+          <h4 class ="event-title"><b>Inter-rater Reliability</b></h4>      
+            <p>
+              We redefined our key performance indicators to include Cohen's Kappa calculations, ensuring inter-rater reliability (IRR) between annotator pairs. IRR is essential for maintaining consistency and accuracy in annotation tasks, minimizing subjective bias and variability among annotators, and ultimately enhancing the quality of training data and overall model performance. Cohen's Kappa, a statistical measure that quantifies the level of agreement between two annotators while accounting for chance agreement, served as a valuable metric. Kappa values range from -1 to 1, with 1 indicating perfect agreement and values above 0.6 generally considered acceptable.</p>
         </div>
         <div class="event-table">
           <div class="header">
-              <h3 class="event-title"><b>Annotation Styles</b></h3>
+              <h3 class="event-title"><b>Prodigy Annotation Styles</b></h3>
           </div>
           <div class="content">
               <p>
-                  <h4>Named Entity Recognition (NER)</h4>
+                  <h4><a href="https://demo.prodi.gy/?=null&view_id=ner_manual">Named Entity Recognition (NER)</a></h4>
                   <ul>
                       <li>Proper nouns and self-contained expressions like person names or products</li>
                       <li>Single-token-based tags; better with clear token boundaries</li>
@@ -91,7 +94,7 @@
           </div>
           <div class="content">
               <p>
-                 <h4>Span Categorization (SpanCat)</h4>
+                <h4><a href="https://demo.prodi.gy/?=null&view_id=spans_manual">Span Categorization (SpanCat)</a></h4>
                   <ul>
                       <li>Multi-token-based tags; better with complex or overlapping entities</li>
                       <li>Can be used to annotate relations between entities</li>
@@ -100,13 +103,14 @@
           </div>
           <div class="content">
               <p>
-                  <h4>Text Classification (TextCat)</h4>
+                  <h4><a href="https://demo.prodi.gy/?=null&view_id=textcat">Text Classification (TextCat)</a></h4>
                   <ul>
                       <li>Binary or multi-class classification of text</li>
                       <li>Can be used to annotate text with a single or multiple labels</li>
                   </ul>
               </p>
           </div>
+        
           <div class="image">
               <img src="visualizations/ner.png" width=550 alt="NER Example" class="padding">
           </div>
@@ -120,6 +124,7 @@
         <div class="event-section">
           <h3 class ="event-title"><b>Choosing a Medication</b></h3>
             <p>We chose Ocrevus (ocrelizumab), due to it being a recently approved multiple sclerosis (MS) medication considered "first-in-class" by the FDA.</p>
+            <p>At this point we also chose the Medical Dictionary for Regulatory Activities (MedDRA) terminology of side effects as a resource to use as patterns for Prodigy to enhance our annotation process.</p>
         </div>
         <div>
           <h4>Initial annotation attempts</h4>
@@ -172,18 +177,16 @@
         <div class="event-section">
           <h4 class ="event-title"><b>Sense2Vec</b></h4>
             <p>
-              Another tool from the creators of spaCy and Prodigy, that had the potential to assist in our labeling of drugs and ADRs was Sense2Vec. Sense2Vec is a novel method for word sense disambiguation in neural word embeddings that utilizes supervised NLP labels instead of unsupervised clustering. Sense2Vec can disambiguate different parts of speech, sentiment, named entities, and syntactic roles of words, as well as demonstrate subjective and qualitative examples of disambiguated embeddings. We were able to add and utilize the new side effect vectors (same as our new patterns) and pick them out with regularity but struggled with multi-word phrases Tried to train on drug names, but results were less than satisfactory.            
+              Another tool from the creators of spaCy and Prodigy, that had the potential to assist in our labeling of drugs and ADRs was Sense2Vec. Sense2Vec is a novel method for word sense disambiguation in neural word embeddings that utilizes supervised NLP labels instead of unsupervised clustering. Sense2Vec can disambiguate different parts of speech, sentiment, named entities, and syntactic roles of words, as well as demonstrate subjective and qualitative examples of disambiguated embeddings. We were able to add and utilize the new side effect vectors (which were the same as our new patterns) and pick single word ADRs out with regularity but struggled with multi-word phrases. We also attempted drug name vectors, but beyond very common drugs the results were less than satisfactory.            
             </p>
         </div>
         <div class="event-section">
-          <h4 class ="event-title"><b>Remedying Class Imbalances</b></h4>
+          <h4 class ="event-title"><b>Remedying Class Imbalances with OpenAI's gpt-3.5-turbo API</b></h4>
             <ul>
-              <li>OpenAI's gpt-3.5-turbo model for generating comments and classifying those comments as well to augment training data</li>
-                <ul>
-                  <li>Address class imbalances: Useful when trying to predict something that does not occur very often.</li>
-                  <li>Diversify training data: Create diverse perspectives that may not be present in the original dataset. Countering biased data.</li>
-                  <li>Increase annotation efficiency: Reduce manual annotation workload by using effective prompt engineering.</li>
-                </ul>
+              <li>Useful in creating examples that don't naturally occur very often in the data.</li>
+              <li>Able to generate similar perspectives to examples provided that may not be present in the original dataset.</li>
+              <li>Potential to counter biased data and recognize anomalies.</li>
+              <li>Reduce manual annotation workload through the usage of effective prompt engineering.</li>
             </ul>
         </div>
         <div class="event-section">
@@ -194,16 +197,8 @@
               Some were correctly classified, but overall, the model results were underwhelming.
             </p>
             <img src="visualizations/gpt2-train.png" alt="GPT-2 Training" class="padding">
-            <p>Our final pipeline's structure emerged from these tests:</p>
-        </div>
-        <div class="event-section">
-          <ol>
-            <li>Text Classification</li>
-            <li>Named Entity Recognition</li>
-          </ol>        
-        </div>
-
-        
+            <p>Our final pipeline's structure begins to emerge during this testing phase, but we knew we needed to revamp and improve our models as well as find a way to not only label the drugs and ADRs but also link them together.</p>
+        </div>     
       </div> 
 
 	    <div class="event" id="event-5">
@@ -270,7 +265,7 @@
                     </ul>
                   <li>Named Entity Recognition:</li>
                   <ul>
-                    <li>Aidan and Jackson: 0.38 -> <b>0.58</b></li>
+                    <li>Aidan and Jackson: 0.38* -> <b>0.58</b></li>
                   </ul>
               </ul>            
             </p>
@@ -290,11 +285,20 @@
             <p>
               For Named Entity Recognition (NER), we used Flair's SequenceTagger with stacked embeddings, including GloVe and Flair embeddings, providing different embeddings for the same word depending on its contextual use. We incorporated word dropout and locked dropout to prevent overfitting, as well as a bidirectional Long Short-Term Memory (biLSTM) RNN to maintain short-term memory throughout the input sequence processing. We trained the model using 5 epochs with validation cycles, CrossEntropyLoss with class weights, the AdamW optimizer, and a linear learning rate scheduler, employing the ViterbiLoss function.            
             </p>
+            <h4>Flair Training Metrics (Relaxed Annotations)</h4>
+            <p>In these classification reports (left is with only GloVe embeddings; right is GloVe embeddings AND Flair embeddings), we see pretty stellar results with accuracies of <b>0.73</b> and <b>0.78</b> respectively. However, we needed a better annotation strategy between the two raters and better training metrics other than a classification report to understand whether our model was fitting correctly.</p>
             <div class="image-container">
               <img src="visualizations/flairjustglove.png" alt="NER Visualization">
               <img src="visualizations/flairembedplusglove.png" alt="NER Visualization">
             </div>
+            <h4>Flair Training Metrics (Strict Annotations)</h4>
+            <p>With regards to the changes needed for our annotations, one of the major questions we needed to ask ourselves was whether we should annotate all ADR-like words as ADR when they occur or only when they occur in an sentence using the word in the context of an ADR? To test this, we decided to do a round of annotations where we used the latter method, which we called the <em>strict</em> method, only marking a word as an ADR if it was mentioned in a sentence as an ADR.</p>
+            <img src="visualizations/strictflairtrain.png" alt="Flair Training" class="padding">
+            <p>The problem with the strict labeling style is that by being so selective with labeling ADRs in the text we were unable to provide enough examples of ADRs in the training data for the model to train on as a majority of the words that could be ADRs but were marked as not teaches the model not to label those words at all. In turn, the model was underfit, unable to learn from the training dataset at all. Along with this, the accuracy, precision, recall, and f1-score all plateaud showing no improvement.</p>
+            <h4>Flair Training Metrics (Relaxed + Strict Annotations)</h4>
+            <p>To resolve some of these issues, we decided to combine the two annotated datasets, 1/2 strict 1/2 relaxed, hoping to provide a variety of examples in the training data to the model.</p>
             <img src="visualizations/flairtrainviz.png" alt="Flair Training" class="padding">
+            <p>As you can see, our model was able to fit to the training data and showed improvement in all other metrics. Leading us to be confident in it's ability to label our data effectively.</p>
         </div>
         <div class="event-section">
           <h3 class ="event-title"><b>spaCy Dependency Parser</b></h3>   
@@ -307,6 +311,7 @@
             </p>
         </div> 
       </div>
+
       <div class="event" id="event-7">
         <div class="event-section"> 
           <h3 class ="event-title"><b>Docker Containers for Data Storage and Reproducibility</b></h3>
