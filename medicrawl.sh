@@ -13,7 +13,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: medicrawl
-      image: aidan2b/adr-detection:test
+      image: aidan2b/adr-detection:latest
       imagePullPolicy: Always
       command: ["/bin/sh", "-c"]
       env:
