@@ -159,7 +159,7 @@ shinyServer(function(input, output, session) {
       blank <- d2$y
     }
     plot_ly(adr_counts(), x = ~occurrences, y = ~reorder(drug, occurrences), type = "bar",
-            marker = list(color = ~occurrences, colorscale = "Viridis")) %>%
+            marker = list(color = ~occurrences, colorscale = "Viridis"), source = "C") %>%
       layout(xaxis = list(title = "Occurrences"),
              yaxis = list(title = "Drug"),
              title = paste0("Top drugs associated with ", blank),

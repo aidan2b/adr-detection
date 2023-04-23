@@ -12,7 +12,6 @@ from torch import nn
 from torch.utils.data import Dataset, DataLoader
 import torch.nn.functional as F
 import tqdm as notebook_tqdm
-import nltk
 import numpy as np
 from flair.models import SequenceTagger
 from flair.data import Sentence
@@ -20,7 +19,23 @@ import spacy
 from collections import Counter
 import requests
 import json
+import nltk
+from nltk.corpus import wordnet
 
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+
+def get_wordnet_pos(treebank_tag):
+    if treebank_tag.startswith('J'):
+        return wordnet.ADJ
+    elif treebank_tag.startswith('V'):
+        return wordnet.VERB
+    elif treebank_tag.startswith('N'):
+        return wordnet.NOUN
+    elif treebank_tag.startswith('R'):
+        return wordnet.ADV
+    else:
+        return wordnet.NOUN
 
 class RedditPull:
     def __init__(self, medication):
@@ -28,8 +43,8 @@ class RedditPull:
 
     def reddit_pull(self):
         reddit = praw.Reddit(
-            client_id='nRPrGU-9AWMxwpq2LHU_lA',
-            client_secret='YtQF-062bFkCyCY4YDne1FJmX3uM8A',
+            client_id=os.environ['REDDIT_CLIENT_ID'],
+            client_secret=os.environ['REDDIT_CLIENT_SECRET'],
             user_agent='test-app'
         )
 
@@ -345,12 +360,15 @@ class ADRLinker:
         # create an empty dictionary to store the drug-ADR pairs
         drug_adr_dict = {}
 
+        lemmatizer = nltk.stem.WordNetLemmatizer()
+
         # loop over each row in the 'drug_adr_pairs' column
         for pairs in self.drug_labeled['drug_adr_pairs']:
             # update the drug-ADR dictionary with the new pairs
             for pair in pairs:
                 drug = pair['drug']
-                adr = pair['adr']
+                adr_token, adr_pos = nltk.pos_tag([pair['adr']])[0]
+                adr = lemmatizer.lemmatize(pair['adr'], pos=get_wordnet_pos(adr_pos))
                 
                 if drug not in drug_adr_dict:
                     drug_adr_dict[drug] = []
