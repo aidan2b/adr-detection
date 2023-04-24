@@ -22,9 +22,6 @@ spec:
               key: SHINYAPPS_SECRET
       args:
         - |
-          cp -r /shiny_app/server.R /data/server.R
-          cp -r /shiny_app/ui.R /data/ui.R
-
           # Deploy to shinyapps.io
           export PATH=$PATH:/usr/bin/R
           R -e "install.packages(c('rsconnect', 'RcppTOML', 'crosstalk', 'here', 'lazyeval', 'plotly', 'png', 'reticulate','MASS'), repos = 'https://cran.rstudio.com/')"
