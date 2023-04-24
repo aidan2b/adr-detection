@@ -45,7 +45,7 @@ spec:
             # Copy the output files to the shared volume on initial run
             # cp -r /shiny_app/linked_data.csv /data/linked_data.csv
             cp -r /shiny_app/server.R /data/server.R
-            # cp -r /shiny_app/ui.R /data/ui.R
+            cp -r /shiny_app/ui.R /data/ui.R
             
             # Append the output files to the shared volume on subsequent runs
             tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
