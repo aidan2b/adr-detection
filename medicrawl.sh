@@ -2,13 +2,14 @@
 CONFIGMAP_NAME="medicrawl-config"
 KEY="medications"
 
-for medication in $(kubectl get configmap $CONFIGMAP_NAME -o jsonpath="{.data.$KEY}" | tr '\n' ' ')
-do
-  cat <<EOF | kubectl apply -f -
+# Get the list of medications
+medications=$(kubectl get configmap $CONFIGMAP_NAME -o jsonpath="{.data.$KEY}" | tr '\n' ',')
+
+cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
-  name: medicrawl-pod-$medication
+  name: medicrawl-pod
 spec:
   restartPolicy: Never
   containers:
@@ -17,8 +18,8 @@ spec:
       imagePullPolicy: Always
       command: ["/bin/sh", "-c"]
       env:
-        - name: MEDICATION_NAME
-          value: "$medication"
+        - name: MEDICATIONS
+          value: "$medications"
         - name: REDDIT_CLIENT_ID
           valueFrom:
             secretKeyRef:
@@ -31,13 +32,27 @@ spec:
               key: REDDIT_CLIENT_SECRET
       args:
         - |
-          # Run the pipeline script
-          python run_pipeline.py
+          # Loop through the medications
+          for medication in \$(echo \$MEDICATIONS | tr ',' ' '); do
+            export MEDICATION_NAME="\$medication"
 
-          cp -r /shiny_app/faers.csv /data/faers.csv
-          cp -r /shiny_app/linked_data.csv /data/linked_data.csv
-          
-          # tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
+            # Print the start of processing for the medication
+            echo "Starting processing for medication: \$MEDICATION_NAME"
+            
+            # Run the pipeline script
+            python run_pipeline.py
+            
+            # Copy the output files to the shared volume on initial run
+            # cp -r /shiny_app/linked_data.csv /data/linked_data.csv
+            # cp -r /shiny_app/server.R /data/server.R
+            # cp -r /shiny_app/ui.R /data/ui.R
+            
+            # Append the output files to the shared volume on subsequent runs
+            tail -n +2 /shiny_app/linked_data.csv >> /data/linked_data.csv
+
+            # Print the end of processing for the medication
+            echo "Finished processing for medication: \$MEDICATION_NAME"
+          done
       resources:
         limits:
           memory: 12Gi
@@ -65,4 +80,3 @@ spec:
                   - NVIDIA-GeForce-RTX-3090
                   - Tesla-T4
 EOF
-done
