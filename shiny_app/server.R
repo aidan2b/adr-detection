@@ -124,12 +124,12 @@ shinyServer(function(input, output, session) {
     d1 <- event_data("plotly_click", source = "A")
     if (is.null(d1)){
       result2 <- result2 %>% dplyr::filter(adr == "fatigue") %>%
-        arrange(desc(occurrences))
-        head(20)
+        arrange(desc(occurrences)) %>%
+        dplyr::slice(1:20)
     } else {
       result2 <- result2 %>% dplyr::filter(adr == d1$y) %>%
-        arrange(desc(occurrences))
-        head(20)
+        arrange(desc(occurrences)) %>%
+        dplyr::slice(1:20)
     }
     print(result2)
     print(d1)

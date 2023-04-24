@@ -4,7 +4,12 @@ metadata:
   name: medicrawl-config
 data:
   medications: |
-    wellbutrin
+    benicar
+    buspar
+    glucophage
+    inderal
+    remeron
+
 
 
     
