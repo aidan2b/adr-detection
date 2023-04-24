@@ -125,9 +125,11 @@ shinyServer(function(input, output, session) {
     if (is.null(d1)){
       result2 <- result2 %>% dplyr::filter(adr == "fatigue") %>%
         arrange(desc(occurrences))
+        head(20)
     } else {
       result2 <- result2 %>% dplyr::filter(adr == d1$y) %>%
         arrange(desc(occurrences))
+        head(20)
     }
     print(result2)
     print(d1)
