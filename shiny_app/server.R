@@ -107,11 +107,20 @@ shinyServer(function(input, output, session) {
     result
   })
   
+  # Observe plotly_click event on the adr_plot
+  observeEvent(event_data("plotly_click", source = "C"), {
+    d2 <- event_data("plotly_click", source = "C")
+    if (!is.null(d2)) {
+      updateSelectInput(session, "drug", selected = d2$y)
+    }
+  })
+
   adr_counts <- reactive({
     result2 <- fetched_data() %>%
       mutate(adrs = gsub("'", "\"", adrs)) %>%
       mutate(adrs = map(adrs, ~ fromJSON(.x))) %>%
       unnest(adrs)
+    
     d1 <- event_data("plotly_click", source = "A")
     if (is.null(d1)){
       result2 <- result2 %>% dplyr::filter(adr == "fatigue") %>%

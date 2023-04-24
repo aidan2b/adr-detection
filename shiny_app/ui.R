@@ -31,6 +31,12 @@ custom_css <- function() {
 fluidPage(
   custom_css(),
   tags$h1("Adverse Drug Reaction (ADR) Detection"),
+  tags$ul(
+    tags$li("Type or select a medication from the dropdown to compare ADRs in Reddit comments with FDA's FAERS data."),
+    tags$li("Feel free to deselect ADRs that may be related to the disease the medication is treating or aren't relevant to your search criteria."),
+    tags$li("Click on an ADR for a medication in the bar chart to discover which medications are most commonly associated with that ADR."),
+    tags$li("You can also click on a medication in the ADR bar chart to view Reddit and FAERS results for that specific medication. Happy exploring!")
+  ),
   
   tags$div(class = "panel",
            fluidRow(
