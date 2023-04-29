@@ -18,4 +18,4 @@ The pipeline consists of several steps:
 
 5. Aggregation and output: The pipeline creates a summary of the linked drug-ADR pairs, counting the number of occurrences for each pair. The results are saved in a CSV file, which is then pushed to ShinyApp where comparison between Reddit and FAERS can be analyzed for insights.
 
-
+![Preview](https://github.com/aidan2b/adr-detection/blob/main/presentation/adr-detection-tool-preview.png?raw=true)
