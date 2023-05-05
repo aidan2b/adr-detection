@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: process-csv-pod
+spec:
+  restartPolicy: Never
+  containers:
+    - name: process-csv
+      image: python:3.8-slim
+      imagePullPolicy: Always
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          pip install pandas
+          
+          # Remove duplicates from the 'drug' column in the linked_data.csv file
+          python -c "
+          import pandas as pd
+          file_path = '/data/linked_data.csv'
+          df = pd.read_csv(file_path)
+          df_unique = df.drop_duplicates(subset='drug', keep='first')
+          df_unique.to_csv(file_path, index=False)
+          "
+      resources:
+        limits:
+          memory: 12Gi
+          cpu: 2
+        requests:
+          memory: 12Gi
+          cpu: 2
+      volumeMounts:
+        - mountPath: /data
+          name: adr-detection-pvc
+  volumes:
+    - name: adr-detection-pvc
+      persistentVolumeClaim:
+        claimName: adr-detection-pvc

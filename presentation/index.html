@@ -16,17 +16,18 @@
       <div class="timeline-node" data-target="event-5">PIPELINE</div>
       <div class="timeline-node" data-target="event-6">EVALUATION</div>
       <div class="timeline-node" data-target="event-7">DEPLOY</div>
+      <div class="timeline-node" data-target="event-8">CONCLUSION</div>
       <div class="demo-node" data-target="demo">DEMO</div>
     </div>
     <div class="event-container">
       <div class="event" id="event-1"> 
         <div class="event-section">
           <h2 class ="event-title">The Usefulness of Social Media for Understanding Adverse Drug Reactions</h2>
-          <p>The rapid expansion and ubiquity of social media platforms have generated vast amounts of user-generated content, offering unprecedented opportunities for the exploration of various research questions. In the realm of pharmacovigilance, investigating the degree to which adverse medication reactions are shared on social media beyond official reporting channels is of particular interest. This study aims to identify potential unacknowledged adverse drug reactions (ADRs) that may be absent from the FDA's Adverse Event Reporting System (FAERS) and determine whether significant outliers exist, while ascertaining the reliability of social media as a data source for pharmacovigilance.</p>
+          <p>The rapid expansion and ubiquity of social media platforms have generated vast amounts of user-generated content, offering unprecedented opportunities for the exploration of various research questions. In the realm of pharmacovigilance, investigating the degree to which adverse medication reactions are shared on social media beyond official reporting channels is of particular interest. This study aims to identify both similarities and differences in reported adverse drug reactions (ADRs) between social media and the FDA's Adverse Event Reporting System (FAERS), to determine whether observed differences are meaningful for healthcare providers, pharmaceutical companies, and public health researchers, and to ascertain the reliability of social media as a data source for pharmacovigilance.</p>
         </div>
         
         <div class="event-section">
-          <p>To accomplish this, we will conduct a comparative analysis of the reporting rates of ADRs for the most prescribed medications in the United States, comparing data extracted from social media platforms with that from FAERS. Our measurable objectives include collecting ADR data from both sources, developing ADR extraction methods for social media, comparing social media ADR rates to FAERS baselines, and identifying unrecognized ADRs and significant outliers. Due to constraints, our analysis will be limited to a specific number of medications and will consider Reddit-specific limitations, such as the platform's younger demographic and longer comments. Additionally, we will account for differences in data collection methods and potential social media biases.</p>
+          <p>To accomplish this, we will conduct a comparative analysis of the reporting rates of ADRs for the most prescribed medications in the United States, comparing data extracted from social media platforms with that from FAERS. Our measurable objectives include collecting ADR data from both sources, developing ADR extraction methods for social media, comparing social media ADR rates to FAERS baselines, and identifying similarities as well as significant differences between them. Due to constraints, our analysis will be limited to a specific number of medications and will consider Reddit-specific limitations, such as the platform's younger demographic and longer comments. Additionally, we will account for differences in data collection methods and potential social media biases.</p>
         </div>
         
         <div class="event-section">
@@ -37,7 +38,7 @@
       <div class="event" id="event-2"> 
         <div class="event-section">
           <h2 class ="event-title">Data Sources</h2>
-          <p>The initial data sources for this study are the FDA's Adverse Event Reporting System (FAERS) and Reddit, as they provide rich and diverse perspectives on adverse drug reactions (ADRs). FAERS is the standard source of information on ADRs reported to the FDA, with voluntary reporting from healthcare providers, patients, and pharmaceutical companies. Reddit, on the other hand, serves as a platform for communities to discuss various diseases and their treatments, offering detailed reports of side effects and potentially unreported ADRs. Utilizing the respective APIs for each data source allows for targeted searches of specific medications.</p>
+          <p>The initial data sources for this study are the FDA's Adverse Event Reporting System (FAERS) and Reddit, as they provide rich and diverse perspectives on adverse drug reactions (ADRs). FAERS is the standard source of information on ADRs reported to the FDA, with voluntary reporting from healthcare providers, patients, and mandatory reporting from pharmaceutical companies. Reddit, on the other hand, serves as a platform where communities can discuss various diseases and their treatments, offering detailed reports of side effects and potentially unreported ADRs. Utilizing the respective APIs for each data source allows for targeted searches of specific medications.</p>
         </div>
         
         <div class="event-section">
@@ -48,7 +49,7 @@
           <h2 class ="event-title">Exploratory Data Analysis</h2>
           <p>Sentiment analysis is a valuable tool for identifying the underlying tone and sentiment of user-generated content, which we thought could enable us to uncover potential ADRs that may not be evident through traditional data mining techniques.
              After using NLTK's SentimentIntensityAnalyzer on Reddit comment content, we were able to determine polarity scores and assign sentiment labels. Following this, we created visualizations using Seaborn count plots and box plots (pictured below are results for Lipitor). We then attempted basic topic modeling of negative Reddit comments using Latent Dirichlet Allocation (LDA). 
-             However, we were not able to gain anything useful from this data that would answer our question about which <em>specific</em> ADRs were more common, however, we were still curious of different ways that sentiment analysis could be done on our data.</p>
+             We were not able to gain many useful insights from this data that would answer our question about which specific ADRs were more common. However, we were still curious about different ways that sentiment analysis could be done on our data.</p>
           <div class="image-container">
             <img src="visualizations/sent_analysis.png" alt="Sentiment Analysis">
             <img src="visualizations/sent_analysis_dist.png" alt="Sentiment Analysis Distribution">
@@ -82,19 +83,19 @@
 	    <div class="event" id="event-3">
         <div class="event-section">
           <h2 class ="event-title"><b>Pivot to Deep Learning</b></h2>
-            <p>Recognizing the complexity of our problem, we decided to explore neural networks and deep learning methods under the guidance of our mentor. This required a transformation in our approach, which involved narrowing our scope from multiple medications to a single medication for building a robust model. Subsequently, we aimed to develop a pipeline that could be applied to other drugs.</p>
+            <p>Recognizing the complexity of our problem and with the guidance of our mentor, we decided to explore neural networks and deep learning methods. This required a transformation in our approach, which involved narrowing our scope from multiple medications to a single medication for building a robust model. Subsequently, we aimed to develop a pipeline that could be applied to other drugs.</p>
         </div>
         <div class="event-section">  
           <h2 class ="event-title"><b>spaCy NLP Library Compatibility w/ Prodigy</b></h2>
             <p>The spaCy library is a powerful and widely-used natural language processing (NLP) library designed for efficient and high-performance text processing tasks. It offers pre-trained models that are developed on large and diverse datasets, ensuring versatility and applicability across various domains. One of the key strengths of spaCy is its fine-tunability, which enables us to achieve higher accuracy and better performance by adapting the pre-trained models to specific tasks or domains.</p>         
             <p>Prodigy, an annotation tool developed by the creators of spaCy, is designed to streamline and optimize the annotation process. Prodigy offers the ability to suggest new annotations based on patterns defined by the user, significantly reducing the time and effort required for manual annotation. Furthermore, the tool supports multiple users, allowing us to asynchronously annotate documents and collaborate more effectively.</p>
-            <p>Another advantage of Prodigy is its seamless integration with Google Cloud Platform (GCP), which enables us to scale our model training and deployment to handle large volumes of data. This integration ensures that our NLP pipeline can be easily adapted to meet the demands of various projects and workloads.</p>
+            <p>Another advantage of Prodigy is its ability to be cloud hosted, in our case using Google Cloud Platform (GCP), which enabled us to scale our model training and deployment to handle large volumes of data. This integration ensures that our NLP pipeline can be easily adapted to meet the demands of various projects and workloads.</p>
         </div>
         <div class="event-section">  
           <h3 class ="event-title"><b>Inter-rater Reliability</b></h3> 
             <div class="stage-container">
               <div class="stage-text">
-                <p>We redefined our key performance indicators to include Cohen's Kappa calculations, ensuring inter-rater reliability (IRR) between annotator pairs. IRR is essential for maintaining consistency and accuracy in annotation tasks, minimizing subjective bias and variability among annotators, and ultimately enhancing the quality of training data and overall model performance. Cohen's Kappa, a statistical measure that quantifies the level of agreement between two annotators while accounting for chance agreement, served as a valuable metric. Kappa values range from -1 to 1, with 1 indicating perfect agreement and values above 0.6 generally considered acceptable.</p>
+                <p>We redefined our key performance indicators to include checks of the inter-rater reliability (IRR) between annotator pairs. IRR is essential for maintaining consistency and accuracy in annotation tasks, minimizing subjective bias and variability among annotators, and ultimately enhancing the quality of training data and overall model performance. Cohen's kappa, a statistical measure that quantifies the level of agreement between two annotators while accounting for chance agreement, served as the key metric. Kappa values range from -1 to 1, with 1 indicating perfect agreement and values above 0.6 generally being considered acceptable.</p>
               </div>
               <div class="stage-image">
                 <img src="visualizations/irr.png" alt="Inter-rater Reliability Scale">
@@ -145,20 +146,21 @@
         </div>
         <div class="event-section">
           <h2 class ="event-title"><b>Choosing a Medication</b></h2>
-            <p>We opted for Ocrevus (ocrelizumab) as the subject of our study, owing to its recent FDA approval as a "first-in-class" multiple sclerosis (MS) medication. We also decided to utilize the Medical Dictionary for Regulatory Activities (MedDRA) terminology of side effects to serve as patterns for the Prodigy tool, with the aim of enhancing our annotation process.</p>
+            <p>We opted for Ocrevus (ocrelizumab) as the initial drug of our study, owing to its recent FDA approval as a "first-in-class" multiple sclerosis (MS) medication. We also decided to utilize the Medical Dictionary for Regulatory Activities (MedDRA) terminology of side effects to serve as patterns for the Prodigy tool, with the aim of enhancing our annotation process.</p>
         </div>
         <div>
           <h2>Initial annotation attempts</h2>
           <p>
             NER:
             <ul>
-              <li>Our initial attempt was unsuccessful due to ambiguous annotation rules. Consequently, we transitioned to the Span Categorization (SpanCat) method, hypothesizing that the challenges encountered could be attributed to the NER approach.</li>
+              <li>The named entity recognition approach (NER) to annotation involved labeling drugs as well as associated adverse side effects within Reddit posts.  Our first attempt was unsuccessful due to ambiguous annotation rules. Consequently, we transitioned to the span categorization approach to annotation, hypothesizing that our initial challenges could be attributed to the NER approach.</li>
             </ul>
-            SpanCat:
+            The span categorization (SpanCat) approach to annotation of Reddit posts involved labeling drugs, their associated adverse side effects, and ADR phrases directly connecting a drug to its undesired side effect.  For our annotations, we paired up: Aidan was paired with Jackson, while Zach was paired with Taylor.  Cohen’s kappa was computed for each pair of annotators to check to see if each pair was agreeing sufficiently well on the number of ADRs in each Reddit post.  The results were as follows:   
             <ul>
               <li>Zach and Taylor's Cohen's Kappa: <b>.46</b></li>
               <li>Aidan and Jackson's Cohen's Kappa: <b>.34</b></li>
             </ul>
+            These kappas did not hit the 0.6 standard mentioned previously for Cohen’s kappa, but we made modifications (as explained in subsequent sections below) to greatly improve the IRR results.
           </p>
         </div>
       </div>
@@ -171,7 +173,7 @@
 
         <div>
           <h3 class ="event-title">Annotation Updates</h3>
-          <p>To expedite the annotation process, we updated our patterns file by incorporating resources such as the ADR Lexicon V 1.1 from HLP Cedars-Sinai, SIDER, CHV, COSTART, and DIEGO_Lab for ADRs, and Drugs@FDA Data Files for drug names and active ingredients. Integrating these resources into our annotation process enabled us to increase annotation speed and improve the quality of our training data, thereby enhancing the overall performance of our model.</p>
+          <p>To expedite the annotation process, we discussed annotation guidelines and updated our patterns file by incorporating resources such as the ADR Lexicon V 1.1 from HLP Cedars-Sinai, SIDER, CHV, COSTART, and DIEGO_Lab for ADRs, and Drugs@FDA Data Files for drug names and active ingredients. Integrating these resources into our annotation process enabled us to increase annotation speed and improve the quality of our training data, thereby enhancing the overall performance of our model.</p>
           <h3>IRR improvements</h3>
           <p>SpanCat (from previous SpanCat):</p>
           <ul>
@@ -188,7 +190,7 @@
         <div class="event-section">
           <h2 class ="event-title"><b>Sense2Vec</b></h2>
             <p>
-              Another tool from the creators of spaCy and Prodigy, that had the potential to assist in our labeling of drugs and ADRs was Sense2Vec. Sense2Vec is a novel method for word sense disambiguation in neural word embeddings that utilizes supervised NLP labels instead of unsupervised clustering. Sense2Vec can disambiguate different parts of speech, sentiment, named entities, and syntactic roles of words, as well as demonstrate subjective and qualitative examples of disambiguated embeddings. We were able to add and utilize the new side effect vectors (which were the same as our new patterns) and pick single word ADRs out with regularity but struggled with multi-word phrases. We also attempted drug name vectors, but beyond very common drugs the results were less than satisfactory.            
+              Another tool from the creators of spaCy and Prodigy, that had the potential to assist in our labeling of drugs and ADRs was Sense2Vec. Sense2Vec is a novel method for word sense disambiguation in neural word embeddings that utilizes supervised NLP labels instead of unsupervised clustering. Sense2Vec can disambiguate different parts of speech, sentiment, named entities, and syntactic roles of words, as well as demonstrate subjective and qualitative examples of disambiguated embeddings. We were not able to add and utilize the new side effect and drug vectors because beyond very general words or phrases the results were less than satisfactory.            
             </p>
         </div>
         
@@ -229,6 +231,9 @@
                 <p>
                   To augment text classification training data, we employed OpenAI's GPT-3.5-turbo model for generating and classifying comments, addressing class imbalances and diversifying the training data to counteract biases and improve annotation efficiency.            
                 </p>
+                <p>
+                  We also performed hyperparameter optimization using the Optuna library, attempting to improve model performance. Using Google Colab, we ran 10 trial cycles optimizing learning rate, batch size, max length and number of epochs, with the objective of maximizing validation accuracy. In the course of this optimization, our best cycle was the first cycle with 0.87 validation accuracy.
+                </p>
               </div>
             </div>
             <h3>Stage 2: Flair NER</h3>
@@ -241,7 +246,7 @@
                   We incorporated word dropout and locked dropout to prevent overfitting, as well as a bidirectional Long Short-Term Memory (biLSTM) RNN to maintain short-term memory throughout the input sequence processing. 
                 </p>
                 <p>
-                  We trained the model using 5 epochs with validation cycles, CrossEntropyLoss with class weights, the AdamW optimizer, and a linear learning rate scheduler, employing the ViterbiLoss function.            
+                  We trained the model using 25 epochs with validation cycles with the ViterbiLoss function.            
                 </p>
               </div>
             </div>
@@ -278,7 +283,7 @@
             <div class="image-container">
               <img src="visualizations/robeta-nolongtext-nogpt.png" width=1200px alt="RoBERTa Training" class="padding">
             </div>
-            <p>In the following classification reports, we see the results of the addition of a long text modifier added to the RoBERTa model (left) as well as same modified-RoBERTa but adding GPT-generated comments to the training data (right). This process entails segmenting the textual content of comments into a series of strings, each comprising 150-200 tokens, prior to being input into the tokenizer. As the text is fed into the RoBERTa tokenizer, it is processed item by item to prevent truncation, which may occur due to the model's maximum sequence length constraint of 512 tokens. Consequently, the entire comment can be tokenized and encoded without omission, ensuring the preservation of the full comment.</p>
+            <p>In the following classification reports, we see the results of the addition of a long text modifier added to the RoBERTa model (left) as well as the same modified-RoBERTa but adding GPT-generated comments to the training data (right). This process entails segmenting the textual content of comments into a series of strings, each comprising 150-200 tokens, prior to being input into the tokenizer. As the text is fed into the RoBERTa tokenizer, it is processed item by item to prevent truncation, which may occur due to the model's maximum sequence length constraint of 512 tokens. Consequently, the entire comment can be tokenized and encoded without omission, ensuring the preservation of the full comment.</p>
             <div class="image-container">
               <img src="visualizations/roberta-longtext-nogpt.png" alt="RoBERTa Training" class="padding">
               <img src="visualizations/roberta-longtext-gpt.png" alt="RoBERTa Training" class="padding">
@@ -297,13 +302,13 @@
               <img src="visualizations/flairembedplusglove.png" width="1100" alt="NER Visualization">
             </div>
             <h4>Flair Training Metrics (Strict Annotations)</h4>
-            <p>With regards to the changes needed for our annotations, one of the major questions we needed to ask ourselves was whether we should annotate all ADR-like words as ADR when they occur or only when they occur in an sentence using the word in the context of an ADR? To test this, we decided to do a round of annotations where we used the latter method, which we called the <em>strict</em> method, only marking a word as an ADR if it was mentioned in a sentence as an ADR.</p>
+            <p>With regards to the changes needed for our annotations, one of the major questions we needed to ask ourselves was whether we should annotate all ADR-like words as ADR when they occur or only when they occur in a sentence using the word in the context of an ADR? To test this, we decided to do a round of annotations where we used the latter method, which we called the <em>strict</em> method, only marking a word as an ADR if it was mentioned in a sentence as an ADR.</p>
             <img src="visualizations/strictflairtrain.png" alt="Flair Training" class="padding">
-            <p>The problem with the strict labeling style is that by being so selective with labeling ADRs in the text we were unable to provide enough examples of ADRs in the training data for the model to train on as a majority of the words that could be ADRs but were marked as not teaches the model not to label those words at all. In turn, the model was underfit, unable to learn from the training dataset at all. Along with this, the accuracy, precision, recall, and f1-score all plateaud showing no improvement.</p>
+            <p>The problem with the strict labeling style is that by being so selective with labeling ADRs in the text we were unable to provide enough examples of ADRs in the training data for the model to train on as a majority of the words that could be ADRs but were marked as not teaches the model not to label those words at all. In turn, the model was underfit, unable to learn from the training dataset at all. Along with this, the accuracy, precision, recall, and f1-score all plateaued showing no improvement.</p>
             <h4>Flair Training Metrics (Relaxed + Strict Annotations)</h4>
             <p>To resolve some of these issues, we decided to combine the two annotated datasets, 1/2 strict 1/2 relaxed, hoping to provide a variety of examples in the training data to the model.</p>
             <img src="visualizations/flairtrainviz.png" alt="Flair Training" class="padding">
-            <p>As you can see, our model was able to fit to the training data and showed improvement in all other metrics. Leading us to be confident in it's ability to label our data effectively.</p>
+            <p>As you can see, our model was able to fit to the training data and showed improvement in all other metrics. Leading us to be confident in its ability to label our data effectively.</p>
         </div>
         <div class="event-section">
           <h3 class ="event-title"><b>spaCy Dependency Parser</b></h3>   
@@ -332,6 +337,33 @@
           <p>Our project utilized the Nautilus HyperCluster, a valuable resource provided by the University of Missouri and the National Research Platform, which offers extensive remote storage, CPU, and GPU capabilities for our data processing tasks.</p>
           <p>Initially, our workflow consisted of creating a single pod to execute a pipeline for an individual medication and deploying a Shiny App to display the results. However, this approach proved time-consuming for users when analyzing medications sequentially. To address this issue, we developed an enhanced workflow incorporating Medicrawl.sh, a custom script that generates a pod capable of extracting 1000 comments for each medication listed (up to a maximum of 5 to optimize resource utilization) in a ConfigMap file. These comments are subsequently appended to CSV files stored in a Persistent Volume Claim (PVC).</p>
           <p>To further streamline our deployment process, we integrated GitHub automation into our workflow. By initiating the "Deploy Shinyapp" workflow, we establish a connection to the self-hosted runner, which in turn executes the pod on Nautilus, retrieves the CSVs from the PVC, and facilitates the construction and deployment of the Shiny App. This refined approach has significantly enhanced the efficiency and effectiveness of our data processing and analysis tasks.</p>
+        </div>      
+      </div>
+
+      <div class="event" id="event-8">
+        <div class="event-section"> 
+          <h2 class ="event-title"><b>Conclusion</b></h2>
+        </div>
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Does our work answer our research questions?</b></h3>
+          <ul>
+            <li>Our project showed that social media can be considered a beneficial data source for pharmacovigilance provided that a significant amount of data can be gathered and analyzed.</li>
+            <li>There are many similarities between the ADRs identified from Reddit and those officially reported to FAERS for most drugs. There are noticeable differences, however — e.g., Tylenol was claimed to cause autism by multiple Reddit posts but was not a top ADR for Tylenol in the FAERS data</li>
+            <li>In what ways are any observed differences meaningful for healthcare providers, pharmaceutical companies, and public health researchers?</li>
+            <ul>
+              <li>Healthcare providers want to know what ADRs people are discussing with each other on social media so they can provide perspective to patients about prescriptions being considered for treatment</li>
+              <li>While ADRs are not officially verified in either data set (Reddit or FAERS), pharmaceutical companies would like to be aware of their drugs' possible ADRs regardless</li>
+              <li>Increased amounts of data related to ADRs could help inform the research of the FDA, EMA, and other such entities</li>
+            </ul>
+          </ul>
+        </div>        
+        <div class="event-section"> 
+          <h3 class ="event-title"><b>Tying it all together</b></h3>
+          <ul>
+            <li>Our approach can provide cost-effective, efficient and rapid identification of safety concerns for medications out on the market</li>
+            <li>The pipeline we created is robust and modular, and was constructed out of mostly open-source components available to everyday consumers</li>
+            <li>Overall, we demonstrated social media’s great potential as a source of more rapid and current reports of adverse drug reactions. We also showed that there are numerous potential adverse drug reactions for commonly prescribed medications that are heavily discussed on social media but are not officially reported to regulators</li>
+          </ul>
         </div>      
       </div>
 
