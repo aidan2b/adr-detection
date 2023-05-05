@@ -291,7 +291,12 @@
             <p>
               It is essential to note that the proportion of comments exceeding 200 tokens in length is relatively insignificant. As a result, the application of this technique is primarily limited to exceptionally lengthy comments. The observed improvement in performance is likely attributable to factors unrelated to the modification for handling long text. The incorporation of GPT-generated comments served to balance the class distribution, providing more affirmative class examples for RoBERTa's fine-tuning process. This ultimately contributed to the enhanced performance observed in the model.</p>
             <img src="visualizations/robertatrainviz.png" alt="RoBERTa Training" class="padding">
-        </div>
+            <p>We also performed hyperparameter optimization using the Optuna library, attempting to improve model performance. Using Google Colab, we ran 10 trial cycles optimizing learning rate, batch size, max length and number of epochs, with the objective of maximizing validation accuracy. In the course of this optimization, our best cycle was the first cycle. with 0.87 validation accuracy</p>
+            <div class="image-container">
+              <img src="visualizations/optuna1.png" width="1100" alt="NER Visualization">
+              <img src="visualizations/optuna2.png" width="1100" alt="NER Visualization">
+            </div>
+          </div>
         <div class="event-section">
           <h3 class ="event-title"><b>Flair NER</b></h3>
             <p>For Named Entity Recognition (NER), we used Flair's SequenceTagger with stacked embeddings, including GloVe and Flair embeddings, providing different embeddings for the same word depending on its contextual use. We incorporated word dropout and locked dropout to prevent overfitting, as well as a bidirectional Long Short-Term Memory (biLSTM) RNN to maintain short-term memory throughout the input sequence processing. We trained the model using 5 epochs with validation cycles, CrossEntropyLoss with class weights, the AdamW optimizer, and a linear learning rate scheduler, employing the ViterbiLoss function.</p>
