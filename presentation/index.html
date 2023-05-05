@@ -159,7 +159,7 @@
               <li>Zach and Taylor's Cohen's Kappa: <b>.46</b></li>
               <li>Aidan and Jackson's Cohen's Kappa: <b>.34</b></li>
             </ul>
-            These kappas did not hit the 0.6 standard mentioned previously for Cohen’s kappa, but we made modifications (as explained in subsequent sections below) to greatly improve the IRR results.
+            These kappas did not hit the 0.5+ standard mentioned previously for Cohen’s kappa, but we made modifications (as explained in subsequent sections below) to greatly improve the IRR results.
           </p>
         </div>
       </div>
@@ -230,9 +230,6 @@
                 <p>
                   To augment text classification training data, we employed OpenAI's GPT-3.5-turbo model for generating and classifying comments, addressing class imbalances and diversifying the training data to counteract biases and improve annotation efficiency.            
                 </p>
-                <p>
-                  We also performed hyperparameter optimization using the Optuna library, attempting to improve model performance. Using Google Colab, we ran 10 trial cycles optimizing learning rate, batch size, max length and number of epochs, with the objective of maximizing validation accuracy. In the course of this optimization, our best cycle was the first cycle with 0.87 validation accuracy.
-                </p>
               </div>
             </div>
             <h3>Stage 2: Flair NER</h3>
@@ -271,7 +268,7 @@
                 </ul>
               <li>Named Entity Recognition:</li>
                 <ul>
-                  <li>Aidan and Jackson: 0.38* -> <b>0.58</b></li>
+                  <li>Aidan and Jackson: 0.38 -> <b>0.58</b></li>
                 </ul>
             </ul>            
         </div>
@@ -339,7 +336,7 @@
         <div class="event-section"> 
           <h3 class ="event-title"><b>Nautilus HyperCluster</b></h3>
           <p>Our project utilized the Nautilus HyperCluster, a valuable resource provided by the University of Missouri and the National Research Platform, which offers extensive remote storage, CPU, and GPU capabilities for our data processing tasks.</p>
-          <p>Initially, our workflow consisted of creating a single pod to execute a pipeline for an individual medication and deploying a Shiny App to display the results. However, this approach proved time-consuming for users when analyzing medications sequentially. To address this issue, we developed an enhanced workflow incorporating Medicrawl.sh, a custom script that generates a pod capable of extracting 1000 comments for each medication listed (up to a maximum of 5 to optimize resource utilization) in a ConfigMap file. These comments are subsequently appended to CSV files stored in a Persistent Volume Claim (PVC).</p>
+          <p>Initially, our workflow consisted of creating a single pod to execute a pipeline for an individual medication and deploying a Shiny App to display the results. However, this approach proved time-consuming for users when analyzing medications sequentially. To address this issue, we developed an enhanced workflow incorporating Medicrawl.sh, a custom script that generates a pod capable of extracting 1000 comments for each medication listed in a ConfigMap file. These comments are subsequently appended to CSV files stored in a Persistent Volume Claim (PVC).</p>
           <p>To further streamline our deployment process, we integrated GitHub automation into our workflow. By initiating the "Deploy Shinyapp" workflow, we establish a connection to the self-hosted runner, which in turn executes the pod on Nautilus, retrieves the CSVs from the PVC, and facilitates the construction and deployment of the Shiny App. This refined approach has significantly enhanced the efficiency and effectiveness of our data processing and analysis tasks.</p>
         </div>      
       </div>
